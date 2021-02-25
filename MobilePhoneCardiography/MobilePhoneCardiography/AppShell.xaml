@@ -91,6 +91,9 @@
         <Tab Title="About" Icon="icon_about.png">
             <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />
         </Tab>
+        <Tab Title="Record" Icon="icon_about.png">
+            <ShellContent ContentTemplate="{DataTemplate local:RecordView}" />
+        </Tab>
         
     </FlyoutItem>
 
