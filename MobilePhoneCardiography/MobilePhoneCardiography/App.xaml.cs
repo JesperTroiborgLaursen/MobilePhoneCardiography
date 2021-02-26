@@ -14,7 +14,11 @@ namespace MobilePhoneCardiography
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
+            DependencyService.Register<MockDataStoreUser>();
+            DependencyService.Register<MockDataStoreMeasurement>();
             MainPage = new AppShell();
+
+
         }
 
         protected override void OnStart()

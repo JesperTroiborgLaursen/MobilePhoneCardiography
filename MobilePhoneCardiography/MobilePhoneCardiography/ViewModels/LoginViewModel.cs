@@ -8,17 +8,24 @@ namespace MobilePhoneCardiography.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        public Command LoginCommand { get; }
+        public Command LoginSPCommand { get; }
+        public Command LoginPBCommand { get; }
 
         public LoginViewModel()
         {
-            LoginCommand = new Command(OnLoginClicked);
+            LoginSPCommand = new Command(OnLoginSPClicked);
+            LoginPBCommand = new Command(OnLoginPBClicked);
         }
 
-        private async void OnLoginClicked(object obj)
+        private async void OnLoginPBClicked(object obj)
         {
             // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-            await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+            await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
+        }
+        private async void OnLoginSPClicked(object obj)
+        {
+            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
+            await Shell.Current.GoToAsync($"//{nameof(LoginSPView)}");
         }
     }
 }

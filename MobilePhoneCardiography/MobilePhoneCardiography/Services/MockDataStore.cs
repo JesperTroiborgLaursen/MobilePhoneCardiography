@@ -23,18 +23,18 @@ namespace MobilePhoneCardiography.Services
             };
         }
 
-        public async Task<bool> AddItemAsync(Item item)
+        public async Task<bool> AddItemAsync(Item measurement)
         {
-            items.Add(item);
+            items.Add(measurement);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Item item)
+        public async Task<bool> UpdateItemAsync(Item user)
         {
-            var oldItem = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
+            var oldItem = items.Where((Item arg) => arg.Id == user.Id).FirstOrDefault();
             items.Remove(oldItem);
-            items.Add(item);
+            items.Add(user);
 
             return await Task.FromResult(true);
         }

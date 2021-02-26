@@ -5,6 +5,7 @@
        Title="MobilePhoneCardiography"
        x:Class="MobilePhoneCardiography.AppShell">
 
+
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
     
@@ -81,25 +82,35 @@
         FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element    
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
-    <FlyoutItem Title="About" Icon="icon_about.png">
-        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+    
+    <FlyoutItem Title="Login" Icon="user.svg" FlyoutItemIsVisible="False">
+        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Browse" Icon="icon_feed.png">
-        <Tab Title="Browse" Icon="icon_feed.png">
-            <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
+    <FlyoutItem Title="Healthcare Professional Login" Icon="" FlyoutItemIsVisible="False">
+        <ShellContent Route="LoginSPView" ContentTemplate="{DataTemplate local:LoginSPView}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Measurement" Icon="icon_feed.png">
+
+        <Tab Title="Patients" Icon="icon_user.png">
+            <ShellContent Route="PatientsView" ContentTemplate="{DataTemplate local:PatientsView}" />
         </Tab>
-        <Tab Title="About" Icon="icon_about.png">
-            <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />
+
+        <Tab Title="Measure" Icon="icon_new.png">
+            <ShellContent Route="MeasureView" ContentTemplate="{DataTemplate local:MeasureView}" />
         </Tab>
-        <Tab Title="Record" Icon="icon_about.png">
-            <ShellContent ContentTemplate="{DataTemplate local:RecordView}" />
+        
+        <Tab Title="Recordings" Icon="">
+            <ShellContent Route="RecordingsView" ContentTemplate="{DataTemplate local:RecordingsView}" />
         </Tab>
+
         
     </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
     </MenuItem>
+    
 
     <!--
         TabBar lets you define content that won't show up in a flyout menu. When this content is active
@@ -113,12 +124,7 @@
         <ShellContent Title="About" Icon="icon_about.png" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
         <ShellContent Title="Browse" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
     </TabBar>-->
-
-    <TabBar>
-        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
-    </TabBar>
-
-
+    
 
     <!-- Optional Templates 
     // These may be provided inline as below or as separate classes.

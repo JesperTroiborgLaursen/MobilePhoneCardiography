@@ -8,14 +8,14 @@ using Xamarin.Forms.Xaml;
 
 namespace MobilePhoneCardiography.Views
 {
-    public partial class NewItemPage : ContentPage
+    public partial class LoginSPView : ContentPage
     {
-        public Item Item { get; set; }
+        public Item User { get; set; }
 
-        public NewItemPage()
+        public LoginSPView()
         {
             InitializeComponent();
-            BindingContext = new NewItemViewModel();
+            BindingContext = new LoginSPViewModel();
         }
     }
 }

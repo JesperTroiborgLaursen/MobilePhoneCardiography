@@ -10,7 +10,7 @@ namespace MobilePhoneCardiography.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        private Item _selectedItem;
+        private Item _selectedUser;
 
         public ObservableCollection<Item> Items { get; }
         public Command LoadItemsCommand { get; }
@@ -19,7 +19,6 @@ namespace MobilePhoneCardiography.ViewModels
 
         public ItemsViewModel()
         {
-            Title = "Browse";
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
@@ -54,31 +53,31 @@ namespace MobilePhoneCardiography.ViewModels
         public void OnAppearing()
         {
             IsBusy = true;
-            SelectedItem = null;
+            SelectedUser = null;
         }
 
-        public Item SelectedItem
+        public Item SelectedUser
         {
-            get => _selectedItem;
+            get => _selectedUser;
             set
             {
-                SetProperty(ref _selectedItem, value);
+                SetProperty(ref _selectedUser, value);
                 OnItemSelected(value);
             }
         }
 
         private async void OnAddItem(object obj)
         {
-            await Shell.Current.GoToAsync(nameof(NewItemPage));
+            await Shell.Current.GoToAsync(nameof(LoginSPView));
         }
 
-        async void OnItemSelected(Item item)
+        async void OnItemSelected(Item user)
         {
-            if (item == null)
+            if (user == null)
                 return;
 
             // This will push the ItemDetailPage onto the navigation stack
-            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
+            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={user.Id}");
         }
     }
 }

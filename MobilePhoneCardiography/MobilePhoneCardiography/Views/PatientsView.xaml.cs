@@ -5,9 +5,9 @@ using Xamarin.Forms.Xaml;
 
 namespace MobilePhoneCardiography.Views
 {
-    public partial class RecordView : ContentPage
+    public partial class PatientsView : ContentPage
     {
-        public RecordView()
+        public PatientsView()
         {
             InitializeComponent();
         }
