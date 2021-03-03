@@ -8,8 +8,8 @@ namespace MobilePhoneCardiography.Services
     {
         Task<bool> AddItemAsync(T measurement);
         Task<bool> UpdateItemAsync(T user);
-        Task<bool> DeleteItemAsync(string id);
-        Task<T> GetItemAsync(string id);
+        Task<bool> DeleteItemAsync(int id);
+        Task<T> GetItemAsync(int id);
         Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false);
     }
 }

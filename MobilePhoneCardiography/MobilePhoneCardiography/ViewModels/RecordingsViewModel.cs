@@ -23,7 +23,7 @@ namespace MobilePhoneCardiography.ViewModels
         public RecordingsViewModel()
         {
             Title = "Recordings";
-            OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://aka.ms/xamarin-quickstart"));
+
             NewRecordingCommand = new Command(OnNewRecordingClicked);
 
             Measurements = new ObservableCollection<Measurement>();
@@ -34,7 +34,6 @@ namespace MobilePhoneCardiography.ViewModels
             AddMeasurementCommand = new Command(OnAddMeasurement);
         }
 
-        public ICommand OpenWebCommand { get; }
 
         public ICommand NewRecordingCommand { get; }
 
@@ -93,8 +92,9 @@ namespace MobilePhoneCardiography.ViewModels
             if (measurement == null)
                 return;
 
-            // This will push the ItemDetailPage onto the navigation stack
-            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={measurement.Id}");
+            // This will push the MeasurementDetailView onto the navigation stack
+            //await Shell.Current.GoToAsync($"{nameof(MeasurementDetailView)}?{nameof(MeasurementDetailViewModel.ItemId)}={measurement.Id}");
+            await Shell.Current.GoToAsync($"{nameof(MeasurementDetailView)}?{nameof(MeasurementDetailViewModel.ItemId)}={measurement.Id}");
         }
     }
 }

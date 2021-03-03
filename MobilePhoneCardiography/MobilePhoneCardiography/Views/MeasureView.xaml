@@ -23,11 +23,11 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="10" x:DataType="models:Measurement">
-                        <Label Text="{Binding Username}" 
+                        <Label Text="{Binding StartTime}" 
                                LineBreakMode="NoWrap" 
                                Style="{DynamicResource ListItemTextStyle}" 
                                FontSize="16" />
-                        <Label Text="{Binding Password}" 
+                        <Label Text="{Binding ProbabilityPercentage}" 
                                LineBreakMode="NoWrap"
                                Style="{DynamicResource ListItemDetailTextStyle}"
                                FontSize="13" />

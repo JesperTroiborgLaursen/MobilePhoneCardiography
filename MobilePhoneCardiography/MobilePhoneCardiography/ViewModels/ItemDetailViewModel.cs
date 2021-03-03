@@ -43,7 +43,7 @@ namespace MobilePhoneCardiography.ViewModels
         {
             try
             {
-                var item = await DataStore.GetItemAsync(itemId);
+                var item = await DataStore.GetItemAsync(Convert.ToInt16(itemId));
                 Id = item.Id;
                 Text = item.Text;
                 Description = item.Description;
