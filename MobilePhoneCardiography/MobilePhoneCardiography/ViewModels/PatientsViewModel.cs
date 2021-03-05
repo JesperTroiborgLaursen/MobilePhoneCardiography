@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace MobilePhoneCardiography.ViewModels
 {
-    public class AboutViewModel : BaseViewModel
+    public class PatientsViewModel : BaseViewModel
     {
-        public AboutViewModel()
+        public PatientsViewModel()
         {
             Title = "About";
             OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://aka.ms/xamarin-quickstart"));

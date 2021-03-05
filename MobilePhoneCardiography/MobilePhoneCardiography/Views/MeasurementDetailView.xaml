@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:MobilePhoneCardiography.Models;assembly=MobilePhoneCardiography"
+             xmlns:viewModels="clr-namespace:MobilePhoneCardiography.ViewModels;assembly=MobilePhoneCardiography"
              x:Class="MobilePhoneCardiography.Views.MeasurementDetailView"
              Title="{Binding Title}">
 
@@ -11,12 +12,46 @@
         <Label Text="Probability Percentage:" FontSize="Medium" />
         <Label Text="{Binding ProbabilityPercentage}" FontSize="Small"/>
     </StackLayout>-->
+    <ContentPage.BindingContext>
+        <viewModels:MeasurementDetailViewModel />
+    </ContentPage.BindingContext>
+    <StackLayout>
+        <Frame BorderColor="Azure" Padding="5">
+            <StackLayout BackgroundColor="AliceBlue" Orientation="Horizontal" Spacing="20" Padding="15">
+                <StackLayout Orientation="Vertical">
+                    <Label HeightRequest="40" Text="Date" FontSize="Medium" />
+                    <Label Text="{Binding StartTime}" FontSize="Small"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="AmountOfSamples" FontSize="Medium" />
+                    <Label Text="{Binding AmountOfSamples}" FontSize="Small"/>
+                    </StackLayout>
+                <StackLayout>
+                    <Label Text="Probability Percentage" FontSize="Medium" />
+                    <Label Text="{Binding ProbabilityPercentage}" FontSize="Small"/>
+                    </StackLayout>
+                <StackLayout>
+                    <Label Text="ID of Health Proffesional" FontSize="Medium" />
+                    <Label Text="{Binding HealthProffesionalID}" FontSize="Small"/>
+                </StackLayout>
 
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="Username:" FontSize="Medium" />
-        <Label Text="{Binding Text}" FontSize="Small"/>
-        <Label Text="AmountOfSamples:" FontSize="Medium" />
-        <Label Text="{Binding Description}" FontSize="Small"/>
+            </StackLayout>
+        </Frame>
+        <StackLayout>
+            <Image HeightRequest="400" Aspect="Fill" VerticalOptions="CenterAndExpand" HorizontalOptions="Fill" Source="https://image.freepik.com/free-vector/sound-wave-with-imitation-sound-audio-identification-technology_106065-64.jpg">
+            </Image>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Play"></Button>
+            <Button Text="Stop"></Button>
+            <Button Text="Rewind"></Button>
+            <Button Text="Forward"></Button>
+        </StackLayout>
+        <StackLayout>
+            <Label FontSize="Medium" HorizontalTextAlignment="Center" Text="Playback Tempo"></Label>
+            <Slider Value="1.0" MinimumTrackColor="LightBlue" MaximumTrackColor="AliceBlue" Minimum="0.05" Maximum="2.0">
+            </Slider>
+        </StackLayout>
     </StackLayout>
     
 </ContentPage>

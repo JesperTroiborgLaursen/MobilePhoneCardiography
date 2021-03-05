@@ -12,8 +12,6 @@ namespace MobilePhoneCardiography
         public App()
         {
             InitializeComponent();
-
-            DependencyService.Register<MockDataStore>();
             DependencyService.Register<MockDataStoreUser>();
             DependencyService.Register<MockDataStoreMeasurement>();
             MainPage = new AppShell();

@@ -10,7 +10,7 @@ namespace MobilePhoneCardiography.Views
 {
     public partial class LoginSPView : ContentPage
     {
-        public Item User { get; set; }
+        public User User { get; set; }
 
         public LoginSPView()
         {

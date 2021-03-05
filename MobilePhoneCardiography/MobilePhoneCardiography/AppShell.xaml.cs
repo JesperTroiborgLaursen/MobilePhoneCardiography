@@ -11,7 +11,6 @@ namespace MobilePhoneCardiography
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
             Routing.RegisterRoute(nameof(MeasurementDetailView), typeof(MeasurementDetailView));
             Routing.RegisterRoute(nameof(LoginSPView), typeof(LoginSPView));
         }

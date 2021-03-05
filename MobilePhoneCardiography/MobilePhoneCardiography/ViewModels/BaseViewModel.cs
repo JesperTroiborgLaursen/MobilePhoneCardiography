@@ -10,7 +10,6 @@ namespace MobilePhoneCardiography.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
         public IDataStore<User> DataStoreUser => DependencyService.Get<IDataStore<User>>();
         public IDataStore<Measurement> DataStoreUserMeasurement => DependencyService.Get<IDataStore<Measurement>>();
 
