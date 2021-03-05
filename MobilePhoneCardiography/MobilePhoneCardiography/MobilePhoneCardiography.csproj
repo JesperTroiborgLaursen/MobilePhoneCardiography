@@ -6,6 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\PatientsView.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\PatientsView.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
@@ -14,9 +22,6 @@
   <ItemGroup>
     <Compile Update="Views\MeasurementDetailView.xaml.cs">
       <DependentUpon>MeasurementDetailView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\PatientsView.xaml.cs">
-      <DependentUpon>PatientsView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\LoginSPView.xaml.cs">
       <DependentUpon>LoginSPView.xaml</DependentUpon>
@@ -27,5 +32,9 @@
     <Compile Update="Views\MeasureView.xaml.cs">
       <DependentUpon>MeasureView.xaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 </Project>
