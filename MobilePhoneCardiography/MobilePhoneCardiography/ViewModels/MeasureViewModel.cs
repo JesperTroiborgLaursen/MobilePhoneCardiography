@@ -13,6 +13,7 @@ namespace MobilePhoneCardiography.ViewModels
     public class MeasureViewModel : BaseViewModel
 
     {
+
         private Measurement _selectedMeasurement;
 
         public ObservableCollection<Measurement> Measurements { get; }
