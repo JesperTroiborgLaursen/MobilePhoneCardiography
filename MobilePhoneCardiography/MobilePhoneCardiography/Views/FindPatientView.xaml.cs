@@ -15,7 +15,7 @@ namespace MobilePhoneCardiography.Views
         public FindPatientView()
         {
             InitializeComponent();
-            BindingContext = new LoginSPViewModel();
+            BindingContext = new FindPatientViewModel();
         }
     }
 }

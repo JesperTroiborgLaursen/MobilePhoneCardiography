@@ -11,6 +11,7 @@ namespace MobilePhoneCardiography.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<User> DataStoreUser => DependencyService.Get<IDataStore<User>>();
+        public IDataStore<Patient> DataStorePatient => DependencyService.Get<IDataStore<Patient>>();
         public IDataStore<Measurement> DataStoreUserMeasurement => DependencyService.Get<IDataStore<Measurement>>();
 
         bool isBusy = false;

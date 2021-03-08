@@ -14,8 +14,8 @@ namespace MobilePhoneCardiography.Services
         {
             patients = new List<Patient>()
             {
-                new Patient{ SocSec = "123456-7890", FirstName = "John", LastName= "Doe" },
-                new Patient{ SocSec = "223456-7890", FirstName = "Jim", LastName= "Smith" }
+                new Patient{ SocSec = "1234567890", FirstName = "John", LastName= "Doe" },
+                new Patient{ SocSec = "2234567890", FirstName = "Jim", LastName= "Smith" }
             };
         }
 
@@ -35,7 +35,7 @@ namespace MobilePhoneCardiography.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(int socSec)
+        public async Task<bool> DeleteItemAsync(long socSec)
         {
             var oldPatient = patients.Where((Patient arg) => Convert.ToInt16(arg.SocSec) == socSec).FirstOrDefault();
             patients.Remove(oldPatient);
@@ -43,7 +43,7 @@ namespace MobilePhoneCardiography.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<Patient> GetItemAsync(int socSec)
+        public async Task<Patient> GetItemAsync(long socSec)
         {
             return await Task.FromResult(patients.FirstOrDefault(s => Convert.ToInt16(s.SocSec) == socSec));
         }

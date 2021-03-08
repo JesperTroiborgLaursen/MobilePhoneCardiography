@@ -39,7 +39,7 @@ namespace MobilePhoneCardiography.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(int id)
+        public async Task<bool> DeleteItemAsync(long id)
         {
             var oldUser = users.Where((User arg) => Convert.ToInt16(arg.Id) == id).FirstOrDefault();
             users.Remove(oldUser);
@@ -47,7 +47,7 @@ namespace MobilePhoneCardiography.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<User> GetItemAsync(int id)
+        public async Task<User> GetItemAsync(long id)
         {
             return await Task.FromResult(users.FirstOrDefault(s => Convert.ToInt16(s.Id) == id));
         }

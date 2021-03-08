@@ -40,7 +40,7 @@ namespace MobilePhoneCardiography.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(int id)
+        public async Task<bool> DeleteItemAsync(long id)
         {
             var oldMeasurement = measurements.Where((Measurement arg) => arg.Id == id).FirstOrDefault();
             measurements.Remove(oldMeasurement);
@@ -48,7 +48,7 @@ namespace MobilePhoneCardiography.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<Measurement> GetItemAsync(int id)
+        public async Task<Measurement> GetItemAsync(long id)
         {
             return await Task.FromResult(measurements.FirstOrDefault(s => s.Id == id));
         }

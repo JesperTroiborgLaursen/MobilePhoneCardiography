@@ -3,11 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobilePhoneCardiography.Views.FindPatientView"
              Shell.PresentationMode="ModalAnimated"
-             Title="New Item"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:viewModels="clr-namespace:MobilePhoneCardiography.ViewModels;assembly=MobilePhoneCardiography"
-             xmlns:views="clr-namespace:MobilePhoneCardiography.Views;assembly=MobilePhoneCardiography"
-             ios:Page.UseSafeArea="true">
+             xmlns:views="clr-namespace:MobilePhoneCardiography.Views;assembly=MobilePhoneCardiography">
 
     <ContentPage.BindingContext>
         <viewModels:FindPatientViewModel/>
@@ -17,21 +15,32 @@
     <ContentPage.Content>
 
         <StackLayout>
-            <StackLayout VerticalOptions="Fill">
+            <Frame Margin="0,50,0,0">
+            <Frame BorderColor="Gainsboro" BackgroundColor="AliceBlue" >
+            <StackLayout VerticalOptions="Center">
+                
                 <Label Text="Social Security Number" FontSize="Medium" />
-                <Entry Text="{Binding}" FontSize="Medium" />
-                <Entry Text="Social Security Number" FontSize="Medium" />
-                <Entry Text="Social Security Number" FontSize="Medium" />
+                <Entry Text="{Binding SocSecSearch, Mode=OneWay}" FontSize="Medium" IsEnabled="False"/>
+                <Label Text="First Name" FontSize="Medium" />
+                <Entry Text="{Binding FirstName, Mode=OneWay}" FontSize="Medium" IsEnabled="False"/>
+                <Label Text="Last Name" FontSize="Medium" />
+                <Entry Text="{Binding LastName, Mode=OneWay}" FontSize="Medium" IsEnabled="False"/>
+
             </StackLayout>
-            
-            <StackLayout Spacing="3" Padding="15">
+            </Frame>
+            </Frame>
+            <Frame>
+                <Label Text="Please confirm with the patient if this information is correct, and if he/she consent with the usage of his/hers data"/>
+            </Frame>
+            <StackLayout VerticalOptions="CenterAndExpand" Spacing="3" Padding="15">
                 <Label Text="Social Security Number" FontSize="Medium" />
-                <Entry Text="{Binding FirstName, Mode=TwoWay}" FontSize="Medium" />
+                <Entry Text="{Binding SocSecSearch, Mode=TwoWay}" FontSize="Medium" />
                 <!--<Label Text="" FontSize="Medium" />
                 <Editor Text="{Binding LastName, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />-->
-                <StackLayout Orientation="Vertical">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                     <Button Text="Find Patient" Command="{Binding FindPatientCommand}" HorizontalOptions="FillAndExpand"></Button>
-                    <!--<Button Text="Forgot AmountOfSamples?" Command="{Binding ForgotPWCommand}" HorizontalOptions="FillAndExpand"></Button>-->
+                    <Button Text="Confirm" Command="{Binding ForgotPWCommand}" IsVisible="False"/>
+                    <Button Text="Cancel" Command="{Binding ForgotPWCommand}" IsVisible="False"/>
                 </StackLayout>
             </StackLayout>
         </StackLayout>
