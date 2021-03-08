@@ -17,6 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\FindPatientView.xaml.cs">
+      <DependentUpon>FindPatientView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\MeasurementDetailView.xaml.cs">
       <DependentUpon>MeasurementDetailView.xaml</DependentUpon>
     </Compile>

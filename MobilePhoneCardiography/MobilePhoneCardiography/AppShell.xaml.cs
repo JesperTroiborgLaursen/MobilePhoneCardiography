@@ -13,6 +13,7 @@ namespace MobilePhoneCardiography
             InitializeComponent();
             Routing.RegisterRoute(nameof(MeasurementDetailView), typeof(MeasurementDetailView));
             Routing.RegisterRoute(nameof(LoginSPView), typeof(LoginSPView));
+            Routing.RegisterRoute(nameof(FindPatientView), typeof(FindPatientView));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

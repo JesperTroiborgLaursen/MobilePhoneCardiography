@@ -93,7 +93,7 @@
     <FlyoutItem Title="Measurement" Icon="icon_feed.png">
 
         <Tab Title="Patients" Icon="icon_user.png">
-            <ShellContent Route="PatientsView" ContentTemplate="{DataTemplate local:PatientsView}" />
+            <ShellContent Route="FindPatientsView" ContentTemplate="{DataTemplate local:FindPatientView}" />
         </Tab>
 
         <Tab Title="Measure" Icon="icon_new.png">
