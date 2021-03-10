@@ -23,9 +23,6 @@
     <Compile Update="Views\MeasurementDetailView.xaml.cs">
       <DependentUpon>MeasurementDetailView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\PatientsView.xaml.cs">
-      <DependentUpon>PatientsView.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\LoginSPView.xaml.cs">
       <DependentUpon>LoginSPView.xaml</DependentUpon>
     </Compile>

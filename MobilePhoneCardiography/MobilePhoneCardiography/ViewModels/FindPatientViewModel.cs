@@ -17,14 +17,25 @@ namespace MobilePhoneCardiography.ViewModels
         private string _socSecSearch;
         private bool confirmVisible;
         private bool cancelVisible;
-        private bool findPatientVisible;
+        private bool findPatientVisible = true;
+        private bool consentVisible;
 
         public FindPatientViewModel()
         {
             FindPatientCommand = new Command(OnSearch, ValidateBlankEntry);
-            ForgotPWCommand = new Command(OnForgotPW);
+            CancelCommand = new Command(Cancel);
+            ConfirmCommand = new Command(Confirm);
             this.PropertyChanged +=
                 (_, __) => FindPatientCommand.ChangeCanExecute();
+        }
+
+        private async void Confirm()
+        {
+
+            //Load Measurements for patient
+
+            //Change view to recordings view
+            await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
         }
 
         private bool ValidateBlankEntry()
@@ -74,9 +85,13 @@ namespace MobilePhoneCardiography.ViewModels
             set => SetProperty(ref findPatientVisible, value);
         }
 
-        public Command FindPatientCommand { get; }
-        public Command ForgotPWCommand { get; }
+        public bool ConsentVisible
+        {
+            get => consentVisible;
+            set => SetProperty(ref consentVisible, value);
+        }
 
+        public Command FindPatientCommand { get; }
         public Command ConfirmCommand{ get; }
         public Command CancelCommand{ get; }
 
@@ -95,15 +110,18 @@ namespace MobilePhoneCardiography.ViewModels
                 CancelVisible = false;
             }
         }
-        private async void OnForgotPW()
+
+        private void Cancel()
         {
-            // This will pop the current page off the navigation stack
-            await Shell.Current.GoToAsync("..");
+            SocSecSearch = "";
+            FirstName = "";
+            LastName = "";
+            ToggleButtons();
         }
 
         private async void OnSearch()
         {
-
+            ConsentVisible = true;
             ToggleButtons();
             //User newUser = new User()
             //{

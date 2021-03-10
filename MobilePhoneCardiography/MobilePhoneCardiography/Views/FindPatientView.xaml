@@ -30,7 +30,7 @@
             </Frame>
             </Frame>
             <Frame>
-                <Label Text="Please confirm with the patient if this information is correct, and if he/she consent with the usage of his/hers data"/>
+                <Label Text="Please confirm with the patient if this information is correct, and if he/she consent with the usage of his/hers data" IsVisible="{Binding ConsentVisible}"/>
             </Frame>
             <StackLayout VerticalOptions="CenterAndExpand" Spacing="3" Padding="15">
                 <Label Text="Social Security Number" FontSize="Medium" />
@@ -38,9 +38,9 @@
                 <!--<Label Text="" FontSize="Medium" />
                 <Editor Text="{Binding LastName, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />-->
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                    <Button Text="Find Patient" Command="{Binding FindPatientCommand}" HorizontalOptions="FillAndExpand"></Button>
-                    <Button Text="Confirm" Command="{Binding ForgotPWCommand}" IsVisible="False"/>
-                    <Button Text="Cancel" Command="{Binding ForgotPWCommand}" IsVisible="False"/>
+                    <Button Text="Find Patient" Command="{Binding FindPatientCommand}" HorizontalOptions="FillAndExpand" IsVisible="{Binding FindPatientVisible}"></Button>
+                    <Button Text="Confirm" Command="{Binding ConfirmCommand}" IsVisible="{Binding ConfirmVisible}"/>
+                    <Button Text="Cancel" Command="{Binding CancelCommand}" IsVisible="{Binding CancelVisible}"/>
                 </StackLayout>
             </StackLayout>
         </StackLayout>

@@ -37,7 +37,7 @@ namespace MobilePhoneCardiography.Services
 
         public async Task<bool> DeleteItemAsync(long socSec)
         {
-            var oldPatient = patients.Where((Patient arg) => Convert.ToInt16(arg.SocSec) == socSec).FirstOrDefault();
+            var oldPatient = patients.Where((Patient arg) => Convert.ToInt64(arg.SocSec) == socSec).FirstOrDefault();
             patients.Remove(oldPatient);
 
             return await Task.FromResult(true);
@@ -45,7 +45,7 @@ namespace MobilePhoneCardiography.Services
 
         public async Task<Patient> GetItemAsync(long socSec)
         {
-            return await Task.FromResult(patients.FirstOrDefault(s => Convert.ToInt16(s.SocSec) == socSec));
+            return await Task.FromResult(patients.FirstOrDefault(s => Convert.ToInt64(s.SocSec) == socSec));
         }
 
         public async Task<IEnumerable<Patient>> GetItemsAsync(bool forceRefresh = false)
