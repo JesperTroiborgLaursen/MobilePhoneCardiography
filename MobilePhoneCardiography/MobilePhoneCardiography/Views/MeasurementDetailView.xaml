@@ -15,7 +15,48 @@
     <ContentPage.BindingContext>
         <viewModels:MeasurementDetailViewModel />
     </ContentPage.BindingContext>
-    <StackLayout>
+
+    <Frame BackgroundColor="AliceBlue">
+        <StackLayout>
+            <StackLayout BackgroundColor="AliceBlue" Orientation="Horizontal" Spacing="20" Padding="15">
+                <StackLayout Orientation="Vertical">
+                    <Label HeightRequest="40" Text="Date" FontSize="Medium" />
+                    <Label Text="{Binding StartTime}" FontSize="Small"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Length" FontSize="Medium" />
+                    <Label Text="{Binding AmountOfSamples}" FontSize="Small"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Risk" FontSize="Medium" />
+                    <Label Text="{Binding ProbabilityPercentage}" FontSize="Small"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="ID of Health Proffesional" FontSize="Medium" />
+                    <Label Text="{Binding HealthProffesionalID}" FontSize="Small"/>
+                </StackLayout>
+
+            </StackLayout>
+            <Frame VerticalOptions="FillAndExpand">
+
+            </Frame>
+          
+            <StackLayout>
+                <Label FontSize="Medium" HorizontalTextAlignment="Center" Text="Playback Tempo"/>
+                <Slider   Value="1.0" MinimumTrackColor="LightBlue" MaximumTrackColor="AliceBlue" Minimum="0.05" Maximum="2.0"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Text="Play"/>
+                <Button Text="Stop"/>
+                <Button Text="Rewind"/>
+                <Button Text="Forward"/>
+            </StackLayout>
+            
+
+        </StackLayout>
+    </Frame>
+
+<!--<StackLayout>
         <Frame BorderColor="Azure" Padding="5">
             <StackLayout BackgroundColor="AliceBlue" Orientation="Horizontal" Spacing="20" Padding="15">
                 <StackLayout Orientation="Vertical">
@@ -52,6 +93,6 @@
             <Slider   Value="1.0" MinimumTrackColor="LightBlue" MaximumTrackColor="AliceBlue" Minimum="0.05" Maximum="2.0">
             </Slider>
         </StackLayout>
-    </StackLayout>
+    </StackLayout>-->
     
 </ContentPage>
