@@ -19,6 +19,7 @@ namespace MobilePhoneCardiography.ViewModels
         private bool cancelVisible;
         private bool findPatientVisible = true;
         private bool consentVisible;
+        private string consentFrameOpacity = "0";
 
         public FindPatientViewModel()
         {
@@ -90,10 +91,17 @@ namespace MobilePhoneCardiography.ViewModels
             get => consentVisible;
             set => SetProperty(ref consentVisible, value);
         }
+        public string ConsentFrameOpacity
+        {
+            get => consentFrameOpacity;
+            set => SetProperty(ref consentFrameOpacity, value);
+        }
 
         public Command FindPatientCommand { get; }
         public Command ConfirmCommand{ get; }
         public Command CancelCommand{ get; }
+
+
 
         private void ToggleButtons()
         {
@@ -116,12 +124,15 @@ namespace MobilePhoneCardiography.ViewModels
             SocSecSearch = "";
             FirstName = "";
             LastName = "";
+            ConsentVisible = false;
+            ConsentFrameOpacity = "0";
             ToggleButtons();
         }
 
         private async void OnSearch()
         {
             ConsentVisible = true;
+            ConsentFrameOpacity = "100";
             ToggleButtons();
             //User newUser = new User()
             //{

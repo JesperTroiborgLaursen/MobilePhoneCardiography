@@ -16,27 +16,23 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
+
+
     <Frame BackgroundColor="AliceBlue">
         <StackLayout>
-            <StackLayout BackgroundColor="AliceBlue" Orientation="Horizontal" Spacing="20" Padding="15">
-                    <StackLayout Orientation="Vertical">
-                        <Label HeightRequest="40" Text="Date" FontSize="Medium" />
-                        <Label Text="{Binding StartTime}" FontSize="Small"/>
+            <StackLayout BackgroundColor="AliceBlue" Orientation="Vertical">
+                <Grid Column="2">
+                    <StackLayout Grid.Column="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                        <Entry Text="Social Security Number" FontSize="Medium" IsEnabled="False" />
+                        <Label Text="{Binding StartTime}" FontSize="Small" IsEnabled="False"/>
                     </StackLayout>
-                    <StackLayout>
-                        <Label Text="Length" FontSize="Medium" />
-                        <Label Text="{Binding AmountOfSamples}" FontSize="Small"/>
+                    <StackLayout Grid.Column="1" HorizontalOptions="FillAndExpand">
+                        <Entry Text="Name" FontSize="Medium" IsEnabled="False"/>
+                        <Label Text="{Binding AmountOfSamples}" FontSize="Small" IsEnabled="False"/>
                     </StackLayout>
-                    <StackLayout>
-                        <Label Text="Risk" FontSize="Medium" />
-                        <Label Text="{Binding ProbabilityPercentage}" FontSize="Small"/>
-                    </StackLayout>
-                    <StackLayout>
-                        <Label Text="ID of Health Proffesional" FontSize="Medium" />
-                        <Label Text="{Binding HealthProffesionalID}" FontSize="Small"/>
-                    </StackLayout>
-
+                </Grid>
             </StackLayout>
+
             <Frame VerticalOptions="FillAndExpand">
 
             </Frame>
