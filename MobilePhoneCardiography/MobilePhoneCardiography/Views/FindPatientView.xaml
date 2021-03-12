@@ -20,11 +20,11 @@
             <StackLayout VerticalOptions="Center">
                 
                 <Label Text="Social Security Number" FontSize="Medium" />
-                <Entry Text="{Binding SocSecSearch, Mode=OneWay}" FontSize="Medium" IsEnabled="False"/>
+                <Entry Text="{Binding SocSec, Mode=OneWay}" FontSize="Medium" IsEnabled="False" AutomationId="SocSec"/>
                 <Label Text="First Name" FontSize="Medium" />
-                <Entry Text="{Binding FirstName, Mode=OneWay}" FontSize="Medium" IsEnabled="False"/>
+                <Entry Text="{Binding FirstName, Mode=OneWay}" FontSize="Medium" IsEnabled="False" AutomationId="FirstName"/>
                 <Label Text="Last Name" FontSize="Medium" />
-                <Entry Text="{Binding LastName, Mode=OneWay}" FontSize="Medium" IsEnabled="False"/>
+                <Entry Text="{Binding LastName, Mode=OneWay}" FontSize="Medium" IsEnabled="False" AutomationId="LastName"/>
 
             </StackLayout>
             </Frame>
@@ -34,13 +34,13 @@
             </Frame>
             <StackLayout VerticalOptions="CenterAndExpand" Spacing="3" Padding="15">
                 <Label Text="Social Security Number" FontSize="Medium" />
-                <Entry Text="{Binding SocSecSearch, Mode=TwoWay}" FontSize="Medium" />
+                <Entry Text="{Binding SocSecSearch, Mode=TwoWay}" FontSize="Medium" AutomationId="SocSecSearch" />
                 <!--<Label Text="" FontSize="Medium" />
                 <Editor Text="{Binding LastName, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />-->
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                    <Button Text="Find Patient" Command="{Binding FindPatientCommand}" HorizontalOptions="FillAndExpand" IsVisible="{Binding FindPatientVisible}"></Button>
-                    <Button Text="Confirm" Command="{Binding ConfirmCommand}" IsVisible="{Binding ConfirmVisible}"/>
-                    <Button Text="Cancel" Command="{Binding CancelCommand}" IsVisible="{Binding CancelVisible}"/>
+                    <Button Text="Find Patient" Command="{Binding FindPatientCommand}" HorizontalOptions="FillAndExpand" AutomationId="FindPatientButton" IsVisible="{Binding FindPatientVisible}"></Button>
+                    <Button Text="Confirm" Command="{Binding ConfirmCommand}" AutomationId="ConfirmButton" IsVisible="{Binding ConfirmVisible}"/>
+                    <Button Text="Cancel" Command="{Binding CancelCommand}" AutomationId="CancelButton" IsVisible="{Binding CancelVisible}"/>
                 </StackLayout>
             </StackLayout>
         </StackLayout>
