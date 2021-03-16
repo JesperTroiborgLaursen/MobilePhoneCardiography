@@ -155,6 +155,8 @@ namespace MobilePhoneCardiography.Models.Json
         }
 
         public string id { get; set; }
+        public string PatientID { get; set; }
+        public DateTime date { get; set; }
         public event PropertyChangingEventHandler PropertyChanging;
     }
 }

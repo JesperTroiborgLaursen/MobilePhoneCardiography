@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 
@@ -83,5 +84,7 @@ namespace MobilePhoneCardiography.Models.Json
         // Ved ikke om den her skal være her
         public event PropertyChangingEventHandler PropertyChanging;
         public string id { get; set; }
+        public string PatientID { get; set; }
+        public DateTime date { get; set; }
     }
 }
