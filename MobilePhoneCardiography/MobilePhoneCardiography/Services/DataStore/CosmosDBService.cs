@@ -20,14 +20,20 @@ using MobilePhoneCardiography.Models.Json;
 using NUnit.Framework;
 =======
 using Microsoft.Azure.Documents.Linq;
+using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Models.Json;
+<<<<<<< HEAD
 >>>>>>> CosmosDB branch added
+=======
+using User = Microsoft.Azure.Documents.User;
+>>>>>>> iUser
 
 
 namespace MobilePhoneCardiography.Services.DataStore
 {
     public class CosmosDBService
     {
+<<<<<<< HEAD
 <<<<<<< HEAD
         
 <<<<<<< HEAD
@@ -54,6 +60,9 @@ namespace MobilePhoneCardiography.Services.DataStore
 =======
 =======
         private IJsonDatabase iDatabase = new JsonMeasurement();
+=======
+        private JsonProfessionalUser iDatabase = new JsonMeasurement();
+>>>>>>> iUser
         private static DateTime selectedDate;
 
 >>>>>>> Ændret i Services. CosmosDBService
@@ -62,19 +71,20 @@ namespace MobilePhoneCardiography.Services.DataStore
         {
             selectedDate = date;
             // Forsøger at lave det sådan, at man kan vælge hvilken database man skriver til så vi kun har en enkelt klasse.
-            iDatabase = DatabaseChoice(databaseChoice);
+            //iDatabase = DatabaseChoice(databaseChoice);
         }
 
         static DocumentClient docClient = null;
-
+        private IUser iUser;
         private static string databaseName;
         static readonly string collectionName = "Items";
 
         // Valg at iDatabase
-        private IJsonDatabase DatabaseChoice(EnumDatabase databaseChoice)
-        {
+        //private IJsonDatabase DatabaseChoice(EnumDatabase databaseChoice)
+        //{
             
 
+<<<<<<< HEAD
             int i = (int) databaseChoice;
 >>>>>>> CosmosDB branch added
 
@@ -122,6 +132,33 @@ namespace MobilePhoneCardiography.Services.DataStore
                 }
             }
         }
+=======
+        //    int i = (int) databaseChoice;
+
+        //    switch (i)
+        //    {
+        //        case 0:
+        //        {
+        //            databaseName = "Patient";
+        //            return iDatabase = new JsonPatientId();
+        //        }
+        //        case 1:
+        //        {
+        //                databaseName = "ProfessionalUser";
+        //                return iDatabase = new JsonProfessionalUser();
+        //        }
+        //        case 2:
+        //        {
+        //                databaseName = "Measurement";
+        //                return iDatabase = new JsonMeasurement();
+        //        }
+        //        default:
+        //        {
+        //            return null;
+        //        }
+        //    }
+        //}
+>>>>>>> iUser
 
 
        
@@ -170,6 +207,7 @@ namespace MobilePhoneCardiography.Services.DataStore
         /// private IJsonDatabase iDatabase;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         #region GetFromDatabase
 
         public async Task<List<JsonProfessionalUser>> GetLogin(IUser iUser)
@@ -207,8 +245,35 @@ namespace MobilePhoneCardiography.Services.DataStore
             
             todos = new List<JsonPatientId>();
 =======
+=======
+        #region GetFromDatabase
 
+        public async Task<IJsonProffessoinalUser> GetLogin(IUser iUser)
+        {
 
+            // Dette er hvad vi søger efter
+            this.iUser = iUser;
+>>>>>>> iUser
+
+            // Dette 
+            var todos = new JsonProfessionalUser();
+
+            if (!await Initialize())
+                return todos;
+
+            var todoQuery = docClient.CreateDocumentQuery<IJsonProffessoinalUser>(
+                    UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
+                    new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
+                .Where(todo => todo._healthProfID == iUser.Username).Where(todo => todo._userPW == iUser.Password)
+                .AsDocumentQuery();
+
+            while (todoQuery.HasMoreResults)
+            {
+                var queryResults = await todoQuery.ExecuteNextAsync<IJsonProffessoinalUser>();
+            }
+
+            return todos;
+        }
 
         public async static Task<List<IJsonDatabase>> GetToDoItems()
         {
@@ -249,8 +314,12 @@ namespace MobilePhoneCardiography.Services.DataStore
             var todoQuery = docClient.CreateDocumentQuery<IJsonDatabase>(
                     UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
                     new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
+<<<<<<< HEAD
                 .Where(todo => todo.PatientID == "1234").Where(todo => todo.date ==selectedDate)
 >>>>>>> Ændret i Services. CosmosDBService
+=======
+                .Where(todo => todo.PatientID == "1234").Where(todo => todo.date == selectedDate)
+>>>>>>> iUser
                 .AsDocumentQuery();
 
             while (todoQuery.HasMoreResults)
@@ -260,10 +329,13 @@ namespace MobilePhoneCardiography.Services.DataStore
             }
 
             return todos;
-
         }
 
+
+        #endregion
+
         // </GetToDoItems>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -271,6 +343,9 @@ namespace MobilePhoneCardiography.Services.DataStore
 =======
         
 >>>>>>> Ændret i Services. CosmosDBService
+=======
+
+>>>>>>> iUser
         // <GetCompletedToDoItems>        
         /// <summary> 
         /// </summary>
@@ -317,6 +392,7 @@ namespace MobilePhoneCardiography.Services.DataStore
         // </CompleteToDoItem>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         #region InsertToDatabase
 
 =======
@@ -326,6 +402,10 @@ namespace MobilePhoneCardiography.Services.DataStore
         /// </summary>
         /// <returns></returns>
 >>>>>>> CosmosDB branch added
+=======
+        #region InsertToDatabase
+
+>>>>>>> iUser
         public async static Task InsertToDoItem(IJsonDatabase item)
         {
             if (!await Initialize())
@@ -349,7 +429,17 @@ namespace MobilePhoneCardiography.Services.DataStore
 >>>>>>> CosmosDB branch added
 =======
 
+<<<<<<< HEAD
 >>>>>>> Ændret i Services. CosmosDBService
+=======
+        #endregion
+        // <InsertToDoItem>        
+        /// <summary> 
+        /// </summary>
+        /// <returns></returns>
+
+
+>>>>>>> iUser
         // </InsertToDoItem>  
 
         // <DeleteToDoItem>        

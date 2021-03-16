@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 namespace MobilePhoneCardiography.Models.Json
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     public class JsonProfessionalUser : IJsonProffessoinalUser, INotifyPropertyChanging 
     {
         public event PropertyChangedEventHandler PropertyChanged; 
@@ -24,6 +25,9 @@ namespace MobilePhoneCardiography.Models.Json
        private string _userPW;
 =======
     public class JsonProfessionalUser : IJsonDatabase, INotifyPropertyChanging 
+=======
+    public class JsonProfessionalUser : IJsonProffessoinalUser, INotifyPropertyChanging 
+>>>>>>> iUser
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -115,6 +119,7 @@ namespace MobilePhoneCardiography.Models.Json
         // Ved ikke om den her skal være her
         public event PropertyChangingEventHandler PropertyChanging;
 <<<<<<< HEAD
+<<<<<<< HEAD
       
 =======
         public string id { get; set; }
@@ -124,5 +129,8 @@ namespace MobilePhoneCardiography.Models.Json
         public string PatientID { get; set; }
         public DateTime date { get; set; }
 >>>>>>> Ændret i Services. CosmosDBService
+=======
+      
+>>>>>>> iUser
     }
 }
