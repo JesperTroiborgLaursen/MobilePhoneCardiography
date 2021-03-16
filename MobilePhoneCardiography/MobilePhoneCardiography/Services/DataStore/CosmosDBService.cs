@@ -7,8 +7,12 @@ using Microsoft.Azure.Documents.Client;
 using System;
 using System.Diagnostics;
 <<<<<<< HEAD
+<<<<<<< HEAD
 using System.Linq;
 using Microsoft.Azure.Cosmos.Linq;
+=======
+using System.Linq;
+>>>>>>> Ændret i Services. CosmosDBService
 using Microsoft.Azure.Documents.Linq;
 using Microsoft.Azure.Documents.SystemFunctions;
 using MobilePhoneCardiography.Models;
@@ -24,6 +28,7 @@ namespace MobilePhoneCardiography.Services.DataStore
 {
     public class CosmosDBService
     {
+<<<<<<< HEAD
         
 <<<<<<< HEAD
         private static DateTime selectedDate;
@@ -47,11 +52,17 @@ namespace MobilePhoneCardiography.Services.DataStore
         {
             int i = (int)databaseChoice;
 =======
+=======
+        private IJsonDatabase iDatabase = new JsonMeasurement();
+        private static DateTime selectedDate;
+
+>>>>>>> Ændret i Services. CosmosDBService
         // Det er ikke ligegyldigt hvilken database vi skriver til, vi laver dependency injection og vælger
-        public CosmosDBService(EnumDatabase databaseChoice )
+        public CosmosDBService(EnumDatabase databaseChoice, DateTime date )
         {
+            selectedDate = date;
             // Forsøger at lave det sådan, at man kan vælge hvilken database man skriver til så vi kun har en enkelt klasse.
-           iDatabase = DatabaseChoice(databaseChoice);
+            iDatabase = DatabaseChoice(databaseChoice);
         }
 
         static DocumentClient docClient = null;
@@ -62,6 +73,8 @@ namespace MobilePhoneCardiography.Services.DataStore
         // Valg at iDatabase
         private IJsonDatabase DatabaseChoice(EnumDatabase databaseChoice)
         {
+            
+
             int i = (int) databaseChoice;
 >>>>>>> CosmosDB branch added
 
@@ -195,7 +208,7 @@ namespace MobilePhoneCardiography.Services.DataStore
             todos = new List<JsonPatientId>();
 =======
 
-        private IJsonDatabase iDatabase = new JsonPatientId();
+
 
         public async static Task<List<IJsonDatabase>> GetToDoItems()
         {
@@ -205,6 +218,7 @@ namespace MobilePhoneCardiography.Services.DataStore
             if (!await Initialize())
                 return todos;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
             var todoQuery = docClient.CreateDocumentQuery<JsonPatientId>(
                     UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
@@ -231,24 +245,32 @@ namespace MobilePhoneCardiography.Services.DataStore
                 UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
                 new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
                 .Where(todo => todo.ProbabilityPercentage == false)
+=======
+            var todoQuery = docClient.CreateDocumentQuery<IJsonDatabase>(
+                    UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
+                    new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
+                .Where(todo => todo.PatientID == "1234").Where(todo => todo.date ==selectedDate)
+>>>>>>> Ændret i Services. CosmosDBService
                 .AsDocumentQuery();
-            
 
             while (todoQuery.HasMoreResults)
             {
-                var queryResults = await todoQuery.ExecuteNextAsync<ToDoItem>();
-
+                var queryResults = await todoQuery.ExecuteNextAsync<IJsonDatabase>();
                 todos.AddRange(queryResults);
             }
-            */
+
             return todos;
 
         }
 
         // </GetToDoItems>
+<<<<<<< HEAD
 
 
 >>>>>>> CosmosDB branch added
+=======
+        
+>>>>>>> Ændret i Services. CosmosDBService
         // <GetCompletedToDoItems>        
         /// <summary> 
         /// </summary>
@@ -314,6 +336,7 @@ namespace MobilePhoneCardiography.Services.DataStore
                 item);
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         #endregion
         // <InsertToDoItem>        
@@ -324,6 +347,9 @@ namespace MobilePhoneCardiography.Services.DataStore
 
 =======
 >>>>>>> CosmosDB branch added
+=======
+
+>>>>>>> Ændret i Services. CosmosDBService
         // </InsertToDoItem>  
 
         // <DeleteToDoItem>        

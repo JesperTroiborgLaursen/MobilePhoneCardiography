@@ -1,9 +1,14 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿using System;
 using System.ComponentModel;
 =======
 ﻿using System.ComponentModel;
 >>>>>>> CosmosDB branch added
+=======
+﻿using System;
+using System.ComponentModel;
+>>>>>>> Ændret i Services. CosmosDBService
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 
@@ -113,6 +118,11 @@ namespace MobilePhoneCardiography.Models.Json
       
 =======
         public string id { get; set; }
+<<<<<<< HEAD
 >>>>>>> CosmosDB branch added
+=======
+        public string PatientID { get; set; }
+        public DateTime date { get; set; }
+>>>>>>> Ændret i Services. CosmosDBService
     }
 }

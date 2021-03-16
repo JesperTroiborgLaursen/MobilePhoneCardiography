@@ -76,6 +76,11 @@ namespace MobilePhoneCardiography.Models.Json
        
 =======
         public string id { get; set; }
+<<<<<<< HEAD
 >>>>>>> CosmosDB branch added
+=======
+        public string PatientID, { get; set; }
+        public DateTime date { get; set; }
+>>>>>>> Ændret i Services. CosmosDBService
     }
 }
