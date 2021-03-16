@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace MobilePhoneCardiography.Models.Json
 {
-    public class JsonProfessionalUser : IJsonDatabase, INotifyPropertyChanging 
+    public class JsonProfessionalUser : IJsonProffessoinalUser, INotifyPropertyChanging 
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -83,8 +83,6 @@ namespace MobilePhoneCardiography.Models.Json
 
         // Ved ikke om den her skal være her
         public event PropertyChangingEventHandler PropertyChanging;
-        public string id { get; set; }
-        public string PatientID { get; set; }
-        public DateTime date { get; set; }
+      
     }
 }

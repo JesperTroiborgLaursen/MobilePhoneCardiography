@@ -8,14 +8,16 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.Azure.Documents.Linq;
+using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Models.Json;
+using User = Microsoft.Azure.Documents.User;
 
 
 namespace MobilePhoneCardiography.Services.DataStore
 {
     public class CosmosDBService
     {
-        private IJsonDatabase iDatabase = new JsonMeasurement();
+        private JsonProfessionalUser iDatabase = new JsonMeasurement();
         private static DateTime selectedDate;
 
         // Det er ikke ligegyldigt hvilken database vi skriver til, vi laver dependency injection og vælger
@@ -23,44 +25,44 @@ namespace MobilePhoneCardiography.Services.DataStore
         {
             selectedDate = date;
             // Forsøger at lave det sådan, at man kan vælge hvilken database man skriver til så vi kun har en enkelt klasse.
-            iDatabase = DatabaseChoice(databaseChoice);
+            //iDatabase = DatabaseChoice(databaseChoice);
         }
 
         static DocumentClient docClient = null;
-
+        private IUser iUser;
         private static string databaseName;
         static readonly string collectionName = "Items";
 
         // Valg at iDatabase
-        private IJsonDatabase DatabaseChoice(EnumDatabase databaseChoice)
-        {
+        //private IJsonDatabase DatabaseChoice(EnumDatabase databaseChoice)
+        //{
             
 
-            int i = (int) databaseChoice;
+        //    int i = (int) databaseChoice;
 
-            switch (i)
-            {
-                case 0:
-                {
-                    databaseName = "Patient";
-                    return iDatabase = new JsonPatientId();
-                }
-                case 1:
-                {
-                        databaseName = "ProfessionalUser";
-                        return iDatabase = new JsonProfessionalUser();
-                }
-                case 2:
-                {
-                        databaseName = "Measurement";
-                        return iDatabase = new JsonMeasurement();
-                }
-                default:
-                {
-                    return null;
-                }
-            }
-        }
+        //    switch (i)
+        //    {
+        //        case 0:
+        //        {
+        //            databaseName = "Patient";
+        //            return iDatabase = new JsonPatientId();
+        //        }
+        //        case 1:
+        //        {
+        //                databaseName = "ProfessionalUser";
+        //                return iDatabase = new JsonProfessionalUser();
+        //        }
+        //        case 2:
+        //        {
+        //                databaseName = "Measurement";
+        //                return iDatabase = new JsonMeasurement();
+        //        }
+        //        default:
+        //        {
+        //            return null;
+        //        }
+        //    }
+        //}
 
 
        
@@ -104,8 +106,33 @@ namespace MobilePhoneCardiography.Services.DataStore
         /// <returns></returns>
         /// private IJsonDatabase iDatabase;
 
+        #region GetFromDatabase
 
+        public async Task<IJsonProffessoinalUser> GetLogin(IUser iUser)
+        {
 
+            // Dette er hvad vi søger efter
+            this.iUser = iUser;
+
+            // Dette 
+            var todos = new JsonProfessionalUser();
+
+            if (!await Initialize())
+                return todos;
+
+            var todoQuery = docClient.CreateDocumentQuery<IJsonProffessoinalUser>(
+                    UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
+                    new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
+                .Where(todo => todo._healthProfID == iUser.Username).Where(todo => todo._userPW == iUser.Password)
+                .AsDocumentQuery();
+
+            while (todoQuery.HasMoreResults)
+            {
+                var queryResults = await todoQuery.ExecuteNextAsync<IJsonProffessoinalUser>();
+            }
+
+            return todos;
+        }
 
         public async static Task<List<IJsonDatabase>> GetToDoItems()
         {
@@ -117,7 +144,7 @@ namespace MobilePhoneCardiography.Services.DataStore
             var todoQuery = docClient.CreateDocumentQuery<IJsonDatabase>(
                     UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
                     new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
-                .Where(todo => todo.PatientID == "1234").Where(todo => todo.date ==selectedDate)
+                .Where(todo => todo.PatientID == "1234").Where(todo => todo.date == selectedDate)
                 .AsDocumentQuery();
 
             while (todoQuery.HasMoreResults)
@@ -127,11 +154,13 @@ namespace MobilePhoneCardiography.Services.DataStore
             }
 
             return todos;
-
         }
 
+
+        #endregion
+
         // </GetToDoItems>
-        
+
         // <GetCompletedToDoItems>        
         /// <summary> 
         /// </summary>
@@ -177,11 +206,8 @@ namespace MobilePhoneCardiography.Services.DataStore
         }
         // </CompleteToDoItem>
 
+        #region InsertToDatabase
 
-        // <InsertToDoItem>        
-        /// <summary> 
-        /// </summary>
-        /// <returns></returns>
         public async static Task InsertToDoItem(IJsonDatabase item)
         {
             if (!await Initialize())
@@ -191,6 +217,13 @@ namespace MobilePhoneCardiography.Services.DataStore
                 UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
                 item);
         }
+
+        #endregion
+        // <InsertToDoItem>        
+        /// <summary> 
+        /// </summary>
+        /// <returns></returns>
+
 
         // </InsertToDoItem>  
 

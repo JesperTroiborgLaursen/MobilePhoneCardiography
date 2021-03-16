@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace MobilePhoneCardiography.Models
+﻿namespace MobilePhoneCardiography.Models
 {
-    public class User : IUser
+    public interface IUser
     {
         public string Id { get; set; }
         public string Username { get; set; }
