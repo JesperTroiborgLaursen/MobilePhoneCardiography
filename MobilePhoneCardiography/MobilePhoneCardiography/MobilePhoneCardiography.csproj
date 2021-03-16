@@ -13,6 +13,7 @@
   <ItemGroup>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> NuGetPackage added (se logbog for specifikke)
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.17.0" />
@@ -27,6 +28,8 @@
 >>>>>>> CosmosDB branch added
 =======
 >>>>>>> NuGetPackage added (se logbog for specifikke)
+=======
+>>>>>>> Test push
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
     <PackageReference Include="System.Linq" Version="4.3.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />  
