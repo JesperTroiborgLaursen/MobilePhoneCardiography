@@ -6,6 +6,7 @@ using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using System;
 using System.Diagnostics;
+using System.Linq;
 using Microsoft.Azure.Documents.Linq;
 using MobilePhoneCardiography.Models.Json;
 
@@ -14,12 +15,15 @@ namespace MobilePhoneCardiography.Services.DataStore
 {
     public class CosmosDBService
     {
-        
+        private IJsonDatabase iDatabase = new JsonMeasurement();
+        private static DateTime selectedDate;
+
         // Det er ikke ligegyldigt hvilken database vi skriver til, vi laver dependency injection og vælger
-        public CosmosDBService(EnumDatabase databaseChoice )
+        public CosmosDBService(EnumDatabase databaseChoice, DateTime date )
         {
+            selectedDate = date;
             // Forsøger at lave det sådan, at man kan vælge hvilken database man skriver til så vi kun har en enkelt klasse.
-           iDatabase = DatabaseChoice(databaseChoice);
+            iDatabase = DatabaseChoice(databaseChoice);
         }
 
         static DocumentClient docClient = null;
@@ -30,6 +34,8 @@ namespace MobilePhoneCardiography.Services.DataStore
         // Valg at iDatabase
         private IJsonDatabase DatabaseChoice(EnumDatabase databaseChoice)
         {
+            
+
             int i = (int) databaseChoice;
 
             switch (i)
@@ -99,7 +105,7 @@ namespace MobilePhoneCardiography.Services.DataStore
         /// private IJsonDatabase iDatabase;
 
 
-        private IJsonDatabase iDatabase = new JsonPatientId();
+
 
         public async static Task<List<IJsonDatabase>> GetToDoItems()
         {
@@ -108,29 +114,24 @@ namespace MobilePhoneCardiography.Services.DataStore
             if (!await Initialize())
                 return todos;
 
-            /*
-             //This method was used to put the items to completed in the app.
-                var todoQuery = docClient.CreateDocumentQuery<ToDoItem>(
-                UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
-                new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
-                .Where(todo => todo.ProbabilityPercentage == false)
+            var todoQuery = docClient.CreateDocumentQuery<IJsonDatabase>(
+                    UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
+                    new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
+                .Where(todo => todo.PatientID == "1234").Where(todo => todo.date ==selectedDate)
                 .AsDocumentQuery();
-            
 
             while (todoQuery.HasMoreResults)
             {
-                var queryResults = await todoQuery.ExecuteNextAsync<ToDoItem>();
-
+                var queryResults = await todoQuery.ExecuteNextAsync<IJsonDatabase>();
                 todos.AddRange(queryResults);
             }
-            */
+
             return todos;
 
         }
 
         // </GetToDoItems>
-
-
+        
         // <GetCompletedToDoItems>        
         /// <summary> 
         /// </summary>
@@ -190,6 +191,7 @@ namespace MobilePhoneCardiography.Services.DataStore
                 UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
                 item);
         }
+
         // </InsertToDoItem>  
 
         // <DeleteToDoItem>        
