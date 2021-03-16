@@ -1,10 +1,15 @@
+<<<<<<< HEAD
 ﻿using System;
 using System.ComponentModel;
+=======
+﻿using System.ComponentModel;
+>>>>>>> CosmosDB branch added
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 
 namespace MobilePhoneCardiography.Models.Json
 {
+<<<<<<< HEAD
     public class JsonProfessionalUser : IJsonProffessoinalUser, INotifyPropertyChanging 
     {
         public event PropertyChangedEventHandler PropertyChanged; 
@@ -12,6 +17,13 @@ namespace MobilePhoneCardiography.Models.Json
        private string _firstName;
        private string _lastName;
        private string _userPW;
+=======
+    public class JsonProfessionalUser : IJsonDatabase, INotifyPropertyChanging 
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        string _healthProfID;
+>>>>>>> CosmosDB branch added
 
         [JsonProperty("healthProfID")]
         public string HealthProfID
@@ -27,7 +39,11 @@ namespace MobilePhoneCardiography.Models.Json
                 HandlePropertyChanged();
             }
         }
+<<<<<<< HEAD
        
+=======
+        string _firstName;
+>>>>>>> CosmosDB branch added
         [JsonProperty("firstName")]
         public string FirstName
         {
@@ -43,7 +59,11 @@ namespace MobilePhoneCardiography.Models.Json
             }
         }
 
+<<<<<<< HEAD
      
+=======
+        string _lastName;
+>>>>>>> CosmosDB branch added
         [JsonProperty("lastName")]
         public string LastName
         {
@@ -59,7 +79,11 @@ namespace MobilePhoneCardiography.Models.Json
             }
         }
 
+<<<<<<< HEAD
        
+=======
+        string _userPW;
+>>>>>>> CosmosDB branch added
         [JsonProperty("userPW")]
         public string UserPW
         {
@@ -85,6 +109,10 @@ namespace MobilePhoneCardiography.Models.Json
 
         // Ved ikke om den her skal være her
         public event PropertyChangingEventHandler PropertyChanging;
+<<<<<<< HEAD
       
+=======
+        public string id { get; set; }
+>>>>>>> CosmosDB branch added
     }
 }

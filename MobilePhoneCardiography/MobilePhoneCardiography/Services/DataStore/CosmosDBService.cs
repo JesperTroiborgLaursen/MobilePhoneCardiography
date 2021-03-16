@@ -6,6 +6,7 @@ using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using System;
 using System.Diagnostics;
+<<<<<<< HEAD
 using System.Linq;
 using Microsoft.Azure.Cosmos.Linq;
 using Microsoft.Azure.Documents.Linq;
@@ -13,6 +14,10 @@ using Microsoft.Azure.Documents.SystemFunctions;
 using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Models.Json;
 using NUnit.Framework;
+=======
+using Microsoft.Azure.Documents.Linq;
+using MobilePhoneCardiography.Models.Json;
+>>>>>>> CosmosDB branch added
 
 
 namespace MobilePhoneCardiography.Services.DataStore
@@ -20,6 +25,7 @@ namespace MobilePhoneCardiography.Services.DataStore
     public class CosmosDBService
     {
         
+<<<<<<< HEAD
         private static DateTime selectedDate;
 
         // Det er ikke ligegyldigt hvilken database vi skriver til, vi laver dependency injection og vælger
@@ -40,10 +46,29 @@ namespace MobilePhoneCardiography.Services.DataStore
         private string DatabaseChoice(EnumDatabase databaseChoice)
         {
             int i = (int)databaseChoice;
+=======
+        // Det er ikke ligegyldigt hvilken database vi skriver til, vi laver dependency injection og vælger
+        public CosmosDBService(EnumDatabase databaseChoice )
+        {
+            // Forsøger at lave det sådan, at man kan vælge hvilken database man skriver til så vi kun har en enkelt klasse.
+           iDatabase = DatabaseChoice(databaseChoice);
+        }
+
+        static DocumentClient docClient = null;
+
+        private static string databaseName;
+        static readonly string collectionName = "Items";
+
+        // Valg at iDatabase
+        private IJsonDatabase DatabaseChoice(EnumDatabase databaseChoice)
+        {
+            int i = (int) databaseChoice;
+>>>>>>> CosmosDB branch added
 
             switch (i)
             {
                 case 0:
+<<<<<<< HEAD
                     {
                         return collectionName = "Patient";
                     }
@@ -63,6 +88,31 @@ namespace MobilePhoneCardiography.Services.DataStore
         }
         
 
+=======
+                {
+                    databaseName = "Patient";
+                    return iDatabase = new JsonPatientId();
+                }
+                case 1:
+                {
+                        databaseName = "ProfessionalUser";
+                        return iDatabase = new JsonProfessionalUser();
+                }
+                case 2:
+                {
+                        databaseName = "Measurement";
+                        return iDatabase = new JsonMeasurement();
+                }
+                default:
+                {
+                    return null;
+                }
+            }
+        }
+
+
+       
+>>>>>>> CosmosDB branch added
         static async Task<bool> Initialize()
         {
             if (docClient != null)
@@ -83,6 +133,10 @@ namespace MobilePhoneCardiography.Services.DataStore
                     new DocumentCollection { Id = collectionName },
                     new RequestOptions { OfferThroughput = 400 }
                 );
+<<<<<<< HEAD
+=======
+
+>>>>>>> CosmosDB branch added
             }
             catch (Exception ex)
             {
@@ -102,6 +156,7 @@ namespace MobilePhoneCardiography.Services.DataStore
         /// <returns></returns>
         /// private IJsonDatabase iDatabase;
 
+<<<<<<< HEAD
         #region GetFromDatabase
 
         public async Task<List<JsonProfessionalUser>> GetLogin(IUser iUser)
@@ -138,10 +193,19 @@ namespace MobilePhoneCardiography.Services.DataStore
             List<JsonPatientId> todos;
             
             todos = new List<JsonPatientId>();
+=======
+
+        private IJsonDatabase iDatabase = new JsonPatientId();
+
+        public async static Task<List<IJsonDatabase>> GetToDoItems()
+        {
+            var todos = new List<IJsonDatabase>();
+>>>>>>> CosmosDB branch added
 
             if (!await Initialize())
                 return todos;
 
+<<<<<<< HEAD
             var todoQuery = docClient.CreateDocumentQuery<JsonPatientId>(
                     UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
                     new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
@@ -160,6 +224,31 @@ namespace MobilePhoneCardiography.Services.DataStore
         #endregion
         // </GetToDoItems>
 
+=======
+            /*
+             //This method was used to put the items to completed in the app.
+                var todoQuery = docClient.CreateDocumentQuery<ToDoItem>(
+                UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
+                new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
+                .Where(todo => todo.ProbabilityPercentage == false)
+                .AsDocumentQuery();
+            
+
+            while (todoQuery.HasMoreResults)
+            {
+                var queryResults = await todoQuery.ExecuteNextAsync<ToDoItem>();
+
+                todos.AddRange(queryResults);
+            }
+            */
+            return todos;
+
+        }
+
+        // </GetToDoItems>
+
+
+>>>>>>> CosmosDB branch added
         // <GetCompletedToDoItems>        
         /// <summary> 
         /// </summary>
@@ -205,8 +294,16 @@ namespace MobilePhoneCardiography.Services.DataStore
         }
         // </CompleteToDoItem>
 
+<<<<<<< HEAD
         #region InsertToDatabase
 
+=======
+
+        // <InsertToDoItem>        
+        /// <summary> 
+        /// </summary>
+        /// <returns></returns>
+>>>>>>> CosmosDB branch added
         public async static Task InsertToDoItem(IJsonDatabase item)
         {
             if (!await Initialize())
@@ -216,6 +313,7 @@ namespace MobilePhoneCardiography.Services.DataStore
                 UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
                 item);
         }
+<<<<<<< HEAD
 
         #endregion
         // <InsertToDoItem>        
@@ -224,6 +322,8 @@ namespace MobilePhoneCardiography.Services.DataStore
         /// <returns></returns>
 
 
+=======
+>>>>>>> CosmosDB branch added
         // </InsertToDoItem>  
 
         // <DeleteToDoItem>        

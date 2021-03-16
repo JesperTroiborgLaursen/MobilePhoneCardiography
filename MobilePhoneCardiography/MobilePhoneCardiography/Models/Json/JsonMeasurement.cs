@@ -155,8 +155,11 @@ namespace MobilePhoneCardiography.Models.Json
         }
 
         public string id { get; set; }
+<<<<<<< HEAD
         public string PatientID { get; set; }
         public DateTime date { get; set; }
+=======
+>>>>>>> CosmosDB branch added
         public event PropertyChangingEventHandler PropertyChanging;
     }
 }
