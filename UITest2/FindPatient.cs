@@ -41,6 +41,6 @@ namespace UITest2
 
             //Assert
             Assert.That(socSec, Is.EqualTo("1234567890"));
-        }
+        } 
     }
 }
