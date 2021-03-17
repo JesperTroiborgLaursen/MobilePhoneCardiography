@@ -141,6 +141,7 @@ namespace MobilePhoneCardiography.ViewModels
                 Id = Guid.NewGuid().ToString(),
                 SocSec = SocSecSearch
             };
+<<<<<<< HEAD
 
             var validatePatient = await controllerDatabase.ValidatePatient(newPatient);
 
@@ -159,6 +160,22 @@ namespace MobilePhoneCardiography.ViewModels
             }
             //TODOS Hvad skal der ske så
            
+=======
+
+            var validatePatient = await controllerDatabase.ValidatePatient(newPatient);
+
+            if (validatePatient == true)
+            {
+                SocSec = newPatient.SocSec;
+                FirstName = newPatient.FirstName;
+                LastName = newPatient.LastName;
+
+            }
+            //await DataStoreUser.AddItemAsync(newUser);
+
+            // This will pop the current page off the navigation stack
+            await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
+>>>>>>> Implementering af Get SSN
         }
     }
 }

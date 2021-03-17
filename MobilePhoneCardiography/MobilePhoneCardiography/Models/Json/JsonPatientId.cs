@@ -8,10 +8,14 @@ using Newtonsoft.Json;
 namespace MobilePhoneCardiography.Models.Json
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     public class JsonPatientId : IJsonPatient, INotifyPropertyChanging
 =======
     public class JsonPatientId : IJsonDatabase, INotifyPropertyChanging
 >>>>>>> CosmosDB branch added
+=======
+    public class JsonPatientId : IJsonPatient, INotifyPropertyChanging
+>>>>>>> Implementering af Get SSN
     {
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -73,6 +77,7 @@ namespace MobilePhoneCardiography.Models.Json
         // Ved ikke om den her skal være her
         public event PropertyChangingEventHandler PropertyChanging;
 <<<<<<< HEAD
+<<<<<<< HEAD
        
 =======
         public string id { get; set; }
@@ -87,5 +92,8 @@ namespace MobilePhoneCardiography.Models.Json
 >>>>>>> iUser
         public DateTime date { get; set; }
 >>>>>>> Ændret i Services. CosmosDBService
+=======
+       
+>>>>>>> Implementering af Get SSN
     }
 }

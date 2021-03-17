@@ -75,7 +75,10 @@ namespace MobilePhoneCardiography.ViewModels
                 // This will pop the current page off the navigation stack
                 await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
             }
+<<<<<<< HEAD
 
+=======
+>>>>>>> Implementering af Get SSN
             //TODO WHAT WILL HAPPEN IF ITS WRONG???
 
 

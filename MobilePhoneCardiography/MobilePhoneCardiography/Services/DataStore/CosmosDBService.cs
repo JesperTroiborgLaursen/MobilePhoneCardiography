@@ -35,6 +35,7 @@ namespace MobilePhoneCardiography.Services.DataStore
     {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         
 <<<<<<< HEAD
         private static DateTime selectedDate;
@@ -63,6 +64,9 @@ namespace MobilePhoneCardiography.Services.DataStore
 =======
         private JsonProfessionalUser iDatabase = new JsonMeasurement();
 >>>>>>> iUser
+=======
+        
+>>>>>>> Implementering af Get SSN
         private static DateTime selectedDate;
 
 >>>>>>> Ændret i Services. CosmosDBService
@@ -70,16 +74,17 @@ namespace MobilePhoneCardiography.Services.DataStore
         public CosmosDBService(EnumDatabase databaseChoice, DateTime date )
         {
             selectedDate = date;
-            // Forsøger at lave det sådan, at man kan vælge hvilken database man skriver til så vi kun har en enkelt klasse.
-            //iDatabase = DatabaseChoice(databaseChoice);
+            DatabaseChoice(databaseChoice);
         }
+            // Forsøger at lave det sådan, at man kan vælge hvilken database man skriver til så vi kun har en enkelt klasse.
 
         static DocumentClient docClient = null;
         private IUser iUser;
-        private static string databaseName;
-        static readonly string collectionName = "Items";
+        private static string databaseName = "HeartRecords";
+        private static string collectionName;
 
         // Valg at iDatabase
+<<<<<<< HEAD
         //private IJsonDatabase DatabaseChoice(EnumDatabase databaseChoice)
         //{
             
@@ -87,11 +92,19 @@ namespace MobilePhoneCardiography.Services.DataStore
 <<<<<<< HEAD
             int i = (int) databaseChoice;
 >>>>>>> CosmosDB branch added
+=======
+        private string DatabaseChoice(EnumDatabase databaseChoice)
+        {
+            int i = (int)databaseChoice;
+>>>>>>> Implementering af Get SSN
 
             switch (i)
             {
                 case 0:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Implementering af Get SSN
                     {
                         return collectionName = "Patient";
                     }
@@ -109,6 +122,7 @@ namespace MobilePhoneCardiography.Services.DataStore
                     }
             }
         }
+<<<<<<< HEAD
         
 
 =======
@@ -163,6 +177,11 @@ namespace MobilePhoneCardiography.Services.DataStore
 
        
 >>>>>>> CosmosDB branch added
+=======
+
+
+
+>>>>>>> Implementering af Get SSN
         static async Task<bool> Initialize()
         {
             if (docClient != null)
@@ -184,9 +203,12 @@ namespace MobilePhoneCardiography.Services.DataStore
                     new RequestOptions { OfferThroughput = 400 }
                 );
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> CosmosDB branch added
+=======
+>>>>>>> Implementering af Get SSN
             }
             catch (Exception ex)
             {
@@ -275,14 +297,22 @@ namespace MobilePhoneCardiography.Services.DataStore
             return todos;
         }
 
-        public async static Task<List<IJsonDatabase>> GetToDoItems()
+        private IPatient iPatient;
+        public async Task<IJsonPatient> GetSSN(IPatient iPatient)
         {
+<<<<<<< HEAD
             var todos = new List<IJsonDatabase>();
 >>>>>>> CosmosDB branch added
+=======
+            this.iPatient = iPatient;
+
+            var todos = new JsonPatientId();
+>>>>>>> Implementering af Get SSN
 
             if (!await Initialize())
                 return todos;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             var todoQuery = docClient.CreateDocumentQuery<JsonPatientId>(
@@ -320,12 +350,17 @@ namespace MobilePhoneCardiography.Services.DataStore
 =======
                 .Where(todo => todo.PatientID == "1234").Where(todo => todo.date == selectedDate)
 >>>>>>> iUser
+=======
+            var todoQuery = docClient.CreateDocumentQuery<IJsonPatient>(
+                    UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
+                    new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
+                .Where(todo => todo.PatientId == iPatient.SocSec)
+>>>>>>> Implementering af Get SSN
                 .AsDocumentQuery();
 
             while (todoQuery.HasMoreResults)
             {
-                var queryResults = await todoQuery.ExecuteNextAsync<IJsonDatabase>();
-                todos.AddRange(queryResults);
+                var queryResults = await todoQuery.ExecuteNextAsync<IJsonPatient>();
             }
 
             return todos;

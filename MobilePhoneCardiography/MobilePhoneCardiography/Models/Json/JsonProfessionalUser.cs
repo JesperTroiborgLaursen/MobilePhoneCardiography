@@ -31,8 +31,15 @@ namespace MobilePhoneCardiography.Models.Json
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+<<<<<<< HEAD
         string _healthProfID;
 >>>>>>> CosmosDB branch added
+=======
+        public string _healthProfID { get; set; }
+        public string _firstName { get; set; }
+        public string _lastName { get; set;}
+        public string _userPW { get; set;}
+>>>>>>> Implementering af Get SSN
 
         [JsonProperty("healthProfID")]
         public string HealthProfID
@@ -49,10 +56,14 @@ namespace MobilePhoneCardiography.Models.Json
             }
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
        
 =======
         string _firstName;
 >>>>>>> CosmosDB branch added
+=======
+       
+>>>>>>> Implementering af Get SSN
         [JsonProperty("firstName")]
         public string FirstName
         {
@@ -69,10 +80,14 @@ namespace MobilePhoneCardiography.Models.Json
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
      
 =======
         string _lastName;
 >>>>>>> CosmosDB branch added
+=======
+     
+>>>>>>> Implementering af Get SSN
         [JsonProperty("lastName")]
         public string LastName
         {
@@ -89,10 +104,14 @@ namespace MobilePhoneCardiography.Models.Json
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
        
 =======
         string _userPW;
 >>>>>>> CosmosDB branch added
+=======
+       
+>>>>>>> Implementering af Get SSN
         [JsonProperty("userPW")]
         public string UserPW
         {
