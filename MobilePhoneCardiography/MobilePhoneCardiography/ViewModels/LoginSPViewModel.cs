@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
+using MobilePhoneCardiography.Services.DataStore;
 using MobilePhoneCardiography.Views;
 using Xamarin.Forms;
 
@@ -12,9 +13,12 @@ namespace MobilePhoneCardiography.ViewModels
     {
         private string _username;
         private string _password;
-
+        private ControllerDatabase controllerDatabase;
         public LoginSPViewModel()
         {
+            controllerDatabase = new ControllerDatabase(new CosmosDBService(EnumDatabase.Professionel, DateTime.Now));
+
+
             LoginCommand = new Command(OnLogin, ValidateSave);
             ForgotPWCommand = new Command(OnForgotPW);
             this.PropertyChanged +=
@@ -50,17 +54,31 @@ namespace MobilePhoneCardiography.ViewModels
 
         private async void OnLogin()
         {
-            User newUser = new User()
+            IUser newUser = new User()
             {
                 Id = Guid.NewGuid().ToString(),
                 Username = Username,
                 Password = Password
             };
+       
+            //await DataStoreUser.AddItemAsync(newUser);
+            //TODO VI HAR TESTER VORES DATABASE KONTAKT HER
 
-            await DataStoreUser.AddItemAsync(newUser);
+         
+            //await cosmosDbService.GetLogin(iUser);
 
-            // This will pop the current page off the navigation stack
-            await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
+
+            var validateLogin = await controllerDatabase.ValidateLogin(newUser);
+
+            if (validateLogin == true)
+            {
+                // This will pop the current page off the navigation stack
+                await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
+            }
+            //TODO WHAT WILL HAPPEN IF ITS WRONG???
+
+
+         
         }
     }
 }
