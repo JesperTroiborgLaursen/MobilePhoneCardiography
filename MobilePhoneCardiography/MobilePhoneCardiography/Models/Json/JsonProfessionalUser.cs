@@ -9,7 +9,10 @@ namespace MobilePhoneCardiography.Models.Json
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        string _healthProfID;
+        public string _healthProfID { get; set; }
+        public string _firstName { get; set; }
+        public string _lastName { get; set;}
+        public string _userPW { get; set;}
 
         [JsonProperty("healthProfID")]
         public string HealthProfID
@@ -25,7 +28,7 @@ namespace MobilePhoneCardiography.Models.Json
                 HandlePropertyChanged();
             }
         }
-        string _firstName;
+       
         [JsonProperty("firstName")]
         public string FirstName
         {
@@ -41,7 +44,7 @@ namespace MobilePhoneCardiography.Models.Json
             }
         }
 
-        string _lastName;
+     
         [JsonProperty("lastName")]
         public string LastName
         {
@@ -57,7 +60,7 @@ namespace MobilePhoneCardiography.Models.Json
             }
         }
 
-        string _userPW;
+       
         [JsonProperty("userPW")]
         public string UserPW
         {

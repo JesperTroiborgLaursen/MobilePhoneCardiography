@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MobilePhoneCardiography.Services.DataStore;
 using MobilePhoneCardiography.Views;
 using Xamarin.Forms;
 
@@ -20,9 +21,10 @@ namespace MobilePhoneCardiography.ViewModels
         private bool findPatientVisible = true;
         private bool consentVisible;
         private string consentFrameOpacity = "0";
-
+        private ControllerDatabase controllerDatabase;
         public FindPatientViewModel()
         {
+            controllerDatabase = new ControllerDatabase(new CosmosDBService(EnumDatabase.Patient,DateTime.Now));
             FindPatientCommand = new Command(OnSearch, ValidateBlankEntry);
             CancelCommand = new Command(Cancel);
             ConfirmCommand = new Command(Confirm);
@@ -134,24 +136,25 @@ namespace MobilePhoneCardiography.ViewModels
             ConsentVisible = true;
             ConsentFrameOpacity = "100";
             ToggleButtons();
-            //User newUser = new User()
-            //{
-            //    Id = Guid.NewGuid().ToString(),
-            //    Username = FirstName,
-            //    Password = LastName
-            //};
-            var patient= await DataStorePatient.GetItemAsync(Convert.ToInt64(SocSecSearch));
+            IPatient newPatient = new Patient()
+            {
+                Id = Guid.NewGuid().ToString(),
+                SocSec = SocSecSearch
+            };
 
-            SocSec = patient.SocSec;
-            FirstName = patient.FirstName;
-            LastName = patient.LastName;
+            var validatePatient = await controllerDatabase.ValidatePatient(newPatient);
 
+            if (validatePatient == true)
+            {
+                SocSec = newPatient.SocSec;
+                FirstName = newPatient.FirstName;
+                LastName = newPatient.LastName;
 
-
+            }
             //await DataStoreUser.AddItemAsync(newUser);
 
-            //// This will pop the current page off the navigation stack
-            //await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
+            // This will pop the current page off the navigation stack
+            await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
         }
     }
 }

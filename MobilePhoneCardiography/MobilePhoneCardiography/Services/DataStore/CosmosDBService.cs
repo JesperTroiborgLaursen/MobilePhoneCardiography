@@ -17,55 +17,50 @@ namespace MobilePhoneCardiography.Services.DataStore
 {
     public class CosmosDBService
     {
-        private JsonProfessionalUser iDatabase = new JsonMeasurement();
+        
         private static DateTime selectedDate;
 
         // Det er ikke ligegyldigt hvilken database vi skriver til, vi laver dependency injection og vælger
         public CosmosDBService(EnumDatabase databaseChoice, DateTime date )
         {
             selectedDate = date;
-            // Forsøger at lave det sådan, at man kan vælge hvilken database man skriver til så vi kun har en enkelt klasse.
-            //iDatabase = DatabaseChoice(databaseChoice);
+            DatabaseChoice(databaseChoice);
         }
+            // Forsøger at lave det sådan, at man kan vælge hvilken database man skriver til så vi kun har en enkelt klasse.
 
         static DocumentClient docClient = null;
         private IUser iUser;
-        private static string databaseName;
-        static readonly string collectionName = "Items";
+        private static string databaseName = "HeartRecords";
+        private static string collectionName;
 
         // Valg at iDatabase
-        //private IJsonDatabase DatabaseChoice(EnumDatabase databaseChoice)
-        //{
-            
+        private string DatabaseChoice(EnumDatabase databaseChoice)
+        {
+            int i = (int)databaseChoice;
 
-        //    int i = (int) databaseChoice;
-
-        //    switch (i)
-        //    {
-        //        case 0:
-        //        {
-        //            databaseName = "Patient";
-        //            return iDatabase = new JsonPatientId();
-        //        }
-        //        case 1:
-        //        {
-        //                databaseName = "ProfessionalUser";
-        //                return iDatabase = new JsonProfessionalUser();
-        //        }
-        //        case 2:
-        //        {
-        //                databaseName = "Measurement";
-        //                return iDatabase = new JsonMeasurement();
-        //        }
-        //        default:
-        //        {
-        //            return null;
-        //        }
-        //    }
-        //}
+            switch (i)
+            {
+                case 0:
+                    {
+                        return collectionName = "Patient";
+                    }
+                case 1:
+                    {
+                        return collectionName = "ProfessionalUser";
+                    }
+                case 2:
+                    {
+                        return collectionName = "Measurement"; 
+                    }
+                default:
+                    {
+                        return null;
+                    }
+            }
+        }
 
 
-       
+
         static async Task<bool> Initialize()
         {
             if (docClient != null)
@@ -86,7 +81,6 @@ namespace MobilePhoneCardiography.Services.DataStore
                     new DocumentCollection { Id = collectionName },
                     new RequestOptions { OfferThroughput = 400 }
                 );
-
             }
             catch (Exception ex)
             {
@@ -134,23 +128,25 @@ namespace MobilePhoneCardiography.Services.DataStore
             return todos;
         }
 
-        public async static Task<List<IJsonDatabase>> GetToDoItems()
+        private IPatient iPatient;
+        public async Task<IJsonPatient> GetSSN(IPatient iPatient)
         {
-            var todos = new List<IJsonDatabase>();
+            this.iPatient = iPatient;
+
+            var todos = new JsonPatientId();
 
             if (!await Initialize())
                 return todos;
 
-            var todoQuery = docClient.CreateDocumentQuery<IJsonDatabase>(
+            var todoQuery = docClient.CreateDocumentQuery<IJsonPatient>(
                     UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
                     new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
-                .Where(todo => todo.PatientID == "1234").Where(todo => todo.date == selectedDate)
+                .Where(todo => todo.PatientId == iPatient.SocSec)
                 .AsDocumentQuery();
 
             while (todoQuery.HasMoreResults)
             {
-                var queryResults = await todoQuery.ExecuteNextAsync<IJsonDatabase>();
-                todos.AddRange(queryResults);
+                var queryResults = await todoQuery.ExecuteNextAsync<IJsonPatient>();
             }
 
             return todos;

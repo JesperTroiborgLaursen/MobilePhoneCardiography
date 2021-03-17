@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace MobilePhoneCardiography.Models
+﻿namespace MobilePhoneCardiography.Models
 {
-    public class Patient : IPatient
+    public interface IPatient
     {
         public string Id { get; set; }
         public string SocSec { get; set; }
