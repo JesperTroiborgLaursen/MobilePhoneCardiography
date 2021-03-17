@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BusinessLogic\BusinessLogic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Views\FindPatientView.xaml.cs">
       <DependentUpon>FindPatientView.xaml</DependentUpon>
     </Compile>
