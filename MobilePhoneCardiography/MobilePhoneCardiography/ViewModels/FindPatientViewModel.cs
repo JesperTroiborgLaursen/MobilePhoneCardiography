@@ -35,6 +35,16 @@ namespace MobilePhoneCardiography.ViewModels
 
             //Load Measurements for patient
 
+
+            //Clear entries
+            SocSecSearch = "";
+            SocSec = "";
+            FirstName = "";
+            LastName = "";
+            ConsentVisible = false;
+            ConsentFrameOpacity = "0";
+            ToggleButtons();
+
             //Change view to recordings view
             await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
         }
@@ -122,6 +132,7 @@ namespace MobilePhoneCardiography.ViewModels
         private void Cancel()
         {
             SocSecSearch = "";
+            SocSec = "";
             FirstName = "";
             LastName = "";
             ConsentVisible = false;
