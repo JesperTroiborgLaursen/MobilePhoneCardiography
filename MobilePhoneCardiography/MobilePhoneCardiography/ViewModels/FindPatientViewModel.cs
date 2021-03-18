@@ -150,11 +150,14 @@ namespace MobilePhoneCardiography.ViewModels
                 FirstName = newPatient.FirstName;
                 LastName = newPatient.LastName;
 
-            }
-            //await DataStoreUser.AddItemAsync(newUser);
+                //await DataStoreUser.AddItemAsync(newUser);
 
-            // This will pop the current page off the navigation stack
-            await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
+                // This will pop the current page off the navigation stack
+                await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
+
+            }
+            //TODOS Hvad skal der ske så
+           
         }
     }
 }

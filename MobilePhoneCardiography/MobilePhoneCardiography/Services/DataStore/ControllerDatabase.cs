@@ -16,8 +16,6 @@ namespace MobilePhoneCardiography.Services.DataStore
         {
             var todos = await cosmosDbService.GetLogin(user);
 
-            
-
             if (todos != null&&todos._userPW == user.Password &&todos._firstName == user.Username) return true;
             else return false;
 
