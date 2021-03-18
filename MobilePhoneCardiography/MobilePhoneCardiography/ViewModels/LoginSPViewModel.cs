@@ -75,6 +75,7 @@ namespace MobilePhoneCardiography.ViewModels
                 // This will pop the current page off the navigation stack
                 await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
             }
+
             //TODO WHAT WILL HAPPEN IF ITS WRONG???
 
 
