@@ -170,12 +170,20 @@ namespace MobilePhoneCardiography.ViewModels
                 FirstName = newPatient.FirstName;
                 LastName = newPatient.LastName;
 
-            }
-            //await DataStoreUser.AddItemAsync(newUser);
+                //await DataStoreUser.AddItemAsync(newUser);
 
+<<<<<<< HEAD
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
 >>>>>>> Implementering af Get SSN
+=======
+                // This will pop the current page off the navigation stack
+                await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
+
+            }
+            //TODOS Hvad skal der ske så
+           
+>>>>>>> Downloaded NuggetPackages efter der opstod fejl
         }
     }
 }

@@ -45,6 +45,7 @@
       <Version>2.0.3</Version>
     </PackageReference>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1-beta1</Version>
     </PackageReference>
@@ -55,6 +56,11 @@
 >>>>>>> CosmosDB branch added
 =======
 >>>>>>> NuGetPackage added (se logbog for specifikke)
+=======
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1-beta1</Version>
+    </PackageReference>
+>>>>>>> Downloaded NuggetPackages efter der opstod fejl
     <PackageReference Include="NUnit" Version="3.13.1" />
     <PackageReference Include="System.Linq">
       <Version>4.3.0</Version>

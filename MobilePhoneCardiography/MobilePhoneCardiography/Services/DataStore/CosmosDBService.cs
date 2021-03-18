@@ -23,10 +23,14 @@ using Microsoft.Azure.Documents.Linq;
 using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Models.Json;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> CosmosDB branch added
 =======
 using User = Microsoft.Azure.Documents.User;
 >>>>>>> iUser
+=======
+
+>>>>>>> Downloaded NuggetPackages efter der opstod fejl
 
 
 namespace MobilePhoneCardiography.Services.DataStore
@@ -78,6 +82,7 @@ namespace MobilePhoneCardiography.Services.DataStore
         }
             // Forsøger at lave det sådan, at man kan vælge hvilken database man skriver til så vi kun har en enkelt klasse.
 
+
         static DocumentClient docClient = null;
         private IUser iUser;
         private static string databaseName = "HeartRecords";
@@ -122,6 +127,7 @@ namespace MobilePhoneCardiography.Services.DataStore
                     }
             }
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
         
 
@@ -182,6 +188,10 @@ namespace MobilePhoneCardiography.Services.DataStore
 
 
 >>>>>>> Implementering af Get SSN
+=======
+        
+
+>>>>>>> Downloaded NuggetPackages efter der opstod fejl
         static async Task<bool> Initialize()
         {
             if (docClient != null)
@@ -272,7 +282,6 @@ namespace MobilePhoneCardiography.Services.DataStore
 
         public async Task<IJsonProffessoinalUser> GetLogin(IUser iUser)
         {
-
             // Dette er hvad vi søger efter
             this.iUser = iUser;
 >>>>>>> iUser
@@ -366,9 +375,7 @@ namespace MobilePhoneCardiography.Services.DataStore
             return todos;
         }
 
-
         #endregion
-
         // </GetToDoItems>
 <<<<<<< HEAD
 <<<<<<< HEAD

@@ -76,9 +76,13 @@ namespace MobilePhoneCardiography.ViewModels
                 await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> Implementering af Get SSN
+=======
+
+>>>>>>> Downloaded NuggetPackages efter der opstod fejl
             //TODO WHAT WILL HAPPEN IF ITS WRONG???
 
 

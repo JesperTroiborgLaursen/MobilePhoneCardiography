@@ -156,6 +156,7 @@
     <PackageReference Include="NUnit">
       <Version>3.13.1</Version>
     </PackageReference>
+<<<<<<< HEAD
 =======
     <PackageReference Include="Microsoft.Azure.DocumentDB.Core">
       <Version>2.13.1</Version>
@@ -169,6 +170,8 @@
       <Version>2.0.3</Version>
     </PackageReference>
 >>>>>>> NuGetPackage added (se logbog for specifikke)
+=======
+>>>>>>> Downloaded NuggetPackages efter der opstod fejl
     <PackageReference Include="Refractored.MvvmHelpers">
       <Version>1.6.2</Version>
     </PackageReference>

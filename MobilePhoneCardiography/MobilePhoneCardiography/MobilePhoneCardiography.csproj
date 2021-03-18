@@ -14,12 +14,16 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> NuGetPackage added (se logbog for specifikke)
+=======
+>>>>>>> Downloaded NuggetPackages efter der opstod fejl
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.17.0" />
     <PackageReference Include="Microsoft.Azure.DocumentDB" Version="2.13.1" />
     <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.13.1" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
+<<<<<<< HEAD
 <<<<<<< HEAD
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1-beta1" />
     <PackageReference Include="NUnit" Version="3.13.1" />
@@ -30,6 +34,10 @@
 >>>>>>> NuGetPackage added (se logbog for specifikke)
 =======
 >>>>>>> Test push
+=======
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1-beta1" />
+    <PackageReference Include="NUnit" Version="3.13.1" />
+>>>>>>> Downloaded NuggetPackages efter der opstod fejl
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
     <PackageReference Include="System.Linq" Version="4.3.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />  

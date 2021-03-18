@@ -26,8 +26,6 @@ namespace MobilePhoneCardiography.Services.DataStore
             return false;
 =======
 
-            
-
             if (todos != null&&todos._userPW == user.Password &&todos._firstName == user.Username) return true;
             else return false;
 >>>>>>> Implementering af Get SSN
