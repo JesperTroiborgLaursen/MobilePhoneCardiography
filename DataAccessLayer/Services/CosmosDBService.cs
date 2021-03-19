@@ -19,26 +19,28 @@ using DTOs;
 
 namespace DataAccessLayer
 {
-    public class CosmosDBService
+    public class CosmosDBService : ICosmosDBService
     {
-            // Valg at iDatabase
- 
        
-        private static DateTime selectedDate;
+        #region PrivateProp
 
+        private static DateTime selectedDate;
         static DocumentClient docClient = null;
         private IUser iUser;
         private static string databaseName = "HeartRecords";
         private static string collectionName;
 
 
+
+        #endregion
+        #region SetUp_Constructor
         // Det er ikke ligegyldigt hvilken database vi skriver til, vi laver dependency injection og vælger
-        public CosmosDBService(EnumDatabase databaseChoice, DateTime date )
+        public CosmosDBService(EnumDatabase databaseChoice, DateTime date)
         {
             selectedDate = date;
             DatabaseChoice(databaseChoice);
         }
-            // Forsøger at lave det sådan, at man kan vælge hvilken database man skriver til så vi kun har en enkelt klasse.
+        // Forsøger at lave det sådan, at man kan vælge hvilken database man skriver til så vi kun har en enkelt klasse.
 
 
 
@@ -50,28 +52,28 @@ namespace DataAccessLayer
             {
                 case 0:
 
-                    {
-                        return collectionName = "Patient";
-                    }
+                {
+                    return collectionName = "Patient";
+                }
                 case 1:
-                    {
-                        return collectionName = "ProfessionalUser";
-                    }
+                {
+                    return collectionName = "ProfessionalUser";
+                }
                 case 2:
-                    {
-                        return collectionName = "Measurement"; 
-                    }
+                {
+                    return collectionName = "Measurement";
+                }
                 default:
-                    {
-                        return null;
-                    }
+                {
+                    return null;
+                }
             }
         }
 
-        
-            
-       
 
+
+        #endregion
+        #region InitializeCosmosDB
         static async Task<bool> Initialize()
         {
             if (docClient != null)
@@ -106,11 +108,13 @@ namespace DataAccessLayer
             return true;
         }
 
-      
 
+        
+
+        #endregion
         #region GetFromDatabase
-            
-            public async Task<List<JsonProfessionalUser>> GetLogin(IUser iUser)
+
+        public async Task<List<JsonProfessionalUser>> GetLogin(IUser iUser)
         {
             // Dette er hvad vi søger efter
             this.iUser = iUser;
@@ -118,7 +122,7 @@ namespace DataAccessLayer
             // Dette
             var todos = new List<JsonProfessionalUser>();
 
-           
+
             if (!await Initialize())
                 return todos;
 
@@ -140,9 +144,9 @@ namespace DataAccessLayer
         private IPatient iPatient;
         public async Task<List<JsonPatientId>> GetSSN(IPatient iPatient)
         {
-           
+
             List<JsonPatientId> todos;
-            
+
             todos = new List<JsonPatientId>();
 
 
@@ -163,29 +167,23 @@ namespace DataAccessLayer
 
             return todos;
         }
-
         #endregion
-
-
-        public async static Task<List<Object>> GetCompletedToDoItems()
+        #region NotYetImplementet
+        //TODO The Interface implementations, is just there to remove conflicts
+        Task ICosmosDBService.InsertToDoItem(object item)
         {
-            var todos = new List<Object>();
-
-            if (!await Initialize())
-                return todos;
-
-
-            return todos;
+            return InsertToDoItem(item);
         }
 
-        public async static Task CompleteToDoItem(Object item)
+        Task ICosmosDBService.DeleteToDoItem(object item)
         {
-
-            await UpdateToDoItem(item);
+            return DeleteToDoItem(item);
         }
-        
 
-
+        Task ICosmosDBService.UpdateToDoItem(object item)
+        {
+            return UpdateToDoItem(item);
+        }
 
         public async static Task InsertToDoItem(Object item)
         {
@@ -197,7 +195,7 @@ namespace DataAccessLayer
                 item);
         }
 
-      
+
 
         public async static Task DeleteToDoItem(Object item)
         {
@@ -217,7 +215,10 @@ namespace DataAccessLayer
             await docClient.ReplaceDocumentAsync(docUri, item);
         }
 
-    }
+        #endregion
 
- 
+
+
+
+    }
 }
