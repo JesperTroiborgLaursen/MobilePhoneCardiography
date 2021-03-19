@@ -15,19 +15,26 @@ namespace MobilePhoneCardiography.Services.DataStore
         public async Task<bool> ValidateLogin(IUser user)
         {
             var todos = await cosmosDbService.GetLogin(user);
+            
+            foreach (var VARIABLE in todos)
+            {
+                if (todos != null && VARIABLE.UserPW == user.Password && VARIABLE.HealthProfID == user.Username) return true;
+                
+            }
 
-            if (todos != null&&todos._userPW == user.Password &&todos._firstName == user.Username) return true;
-            else return false;
+            return false;
 
         }
 
         public async Task<bool> ValidatePatient(IPatient patient)
         {
             var todos = await cosmosDbService.GetSSN(patient);
+            foreach (var VARIABLE in todos)
+            {
+                if (VARIABLE != null&&VARIABLE.PatientId == patient.SocSec) return true;
 
-            if (todos != null&&todos.PatientId == patient.SocSec) return true;
-            else return false;
-
+            }
+            return false;
         }
 
         
