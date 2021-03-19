@@ -1,4 +1,5 @@
-﻿using MobilePhoneCardiography.Models;
+﻿
+using MobilePhoneCardiography.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -60,14 +61,7 @@ namespace MobilePhoneCardiography.ViewModels
                 Username = Username,
                 Password = Password
             };
-       
-            //await DataStoreUser.AddItemAsync(newUser);
-            //TODO VI HAR TESTER VORES DATABASE KONTAKT HER
-
-         
-            //await cosmosDbService.GetLogin(iUser);
-
-
+            
             var validateLogin = await controllerDatabase.ValidateLogin(newUser);
 
             if (validateLogin == true)
@@ -75,20 +69,8 @@ namespace MobilePhoneCardiography.ViewModels
                 // This will pop the current page off the navigation stack
                 await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
             }
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> Implementering af Get SSN
-=======
-
->>>>>>> Downloaded NuggetPackages efter der opstod fejl
->>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
             //TODO WHAT WILL HAPPEN IF ITS WRONG???
-
 
          
         }

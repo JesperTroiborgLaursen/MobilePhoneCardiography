@@ -4,66 +4,31 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
-using System;
 using System.Diagnostics;
-<<<<<<< HEAD
 using System.Linq;
 using Microsoft.Azure.Cosmos.Linq;
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-using System.Linq;
-using Microsoft.Azure.Cosmos.Linq;
-<<<<<<< HEAD
-=======
-using System.Linq;
->>>>>>> Ændret i Services. CosmosDBService
 using Microsoft.Azure.Documents.Linq;
 using Microsoft.Azure.Documents.SystemFunctions;
 using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Models.Json;
 using NUnit.Framework;
-=======
-=======
->>>>>>> FindPatient til databasen virker
->>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
-using Microsoft.Azure.Documents.Linq;
-using Microsoft.Azure.Documents.SystemFunctions;
-using MobilePhoneCardiography.Models;
-using MobilePhoneCardiography.Models.Json;
-<<<<<<< HEAD
-using NUnit.Framework;
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> CosmosDB branch added
-=======
 using User = Microsoft.Azure.Documents.User;
->>>>>>> iUser
-=======
-
->>>>>>> Downloaded NuggetPackages efter der opstod fejl
-=======
 using NUnit.Framework;
->>>>>>> FindPatient til databasen virker
->>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
-
 
 namespace MobilePhoneCardiography.Services.DataStore
 {
     public class CosmosDBService
     {
-<<<<<<< HEAD
-        
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        
-<<<<<<< HEAD
->>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
+            // Valg at iDatabase
+ 
+       
         private static DateTime selectedDate;
+
+        static DocumentClient docClient = null;
+        private IUser iUser;
+        private static string databaseName = "HeartRecords";
+        private static string collectionName;
+
 
         // Det er ikke ligegyldigt hvilken database vi skriver til, vi laver dependency injection og vælger
         public CosmosDBService(EnumDatabase databaseChoice, DateTime date )
@@ -74,69 +39,15 @@ namespace MobilePhoneCardiography.Services.DataStore
             // Forsøger at lave det sådan, at man kan vælge hvilken database man skriver til så vi kun har en enkelt klasse.
 
 
-        static DocumentClient docClient = null;
-        private IUser iUser;
-        private static string databaseName = "HeartRecords";
-        private static string collectionName;
 
-        // Valg at iDatabase
         private string DatabaseChoice(EnumDatabase databaseChoice)
         {
             int i = (int)databaseChoice;
-<<<<<<< HEAD
-=======
-=======
-=======
-        private IJsonDatabase iDatabase = new JsonMeasurement();
-=======
-        private JsonProfessionalUser iDatabase = new JsonMeasurement();
->>>>>>> iUser
-=======
-        
->>>>>>> Implementering af Get SSN
-        private static DateTime selectedDate;
-
->>>>>>> Ændret i Services. CosmosDBService
-        // Det er ikke ligegyldigt hvilken database vi skriver til, vi laver dependency injection og vælger
-        public CosmosDBService(EnumDatabase databaseChoice, DateTime date )
-        {
-            selectedDate = date;
-            DatabaseChoice(databaseChoice);
-        }
-            // Forsøger at lave det sådan, at man kan vælge hvilken database man skriver til så vi kun har en enkelt klasse.
-
-
-        static DocumentClient docClient = null;
-        private IUser iUser;
-        private static string databaseName = "HeartRecords";
-        private static string collectionName;
-
-        // Valg at iDatabase
-<<<<<<< HEAD
-        //private IJsonDatabase DatabaseChoice(EnumDatabase databaseChoice)
-        //{
-            
-
-<<<<<<< HEAD
-            int i = (int) databaseChoice;
->>>>>>> CosmosDB branch added
-=======
-        private string DatabaseChoice(EnumDatabase databaseChoice)
-        {
-            int i = (int)databaseChoice;
->>>>>>> Implementering af Get SSN
->>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
 
             switch (i)
             {
                 case 0:
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Implementering af Get SSN
->>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
+
                     {
                         return collectionName = "Patient";
                     }
@@ -154,76 +65,11 @@ namespace MobilePhoneCardiography.Services.DataStore
                     }
             }
         }
-<<<<<<< HEAD
+
         
-
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-        
-
-=======
-                {
-                    databaseName = "Patient";
-                    return iDatabase = new JsonPatientId();
-                }
-                case 1:
-                {
-                        databaseName = "ProfessionalUser";
-                        return iDatabase = new JsonProfessionalUser();
-                }
-                case 2:
-                {
-                        databaseName = "Measurement";
-                        return iDatabase = new JsonMeasurement();
-                }
-                default:
-                {
-                    return null;
-                }
-            }
-        }
-=======
-        //    int i = (int) databaseChoice;
-
-        //    switch (i)
-        //    {
-        //        case 0:
-        //        {
-        //            databaseName = "Patient";
-        //            return iDatabase = new JsonPatientId();
-        //        }
-        //        case 1:
-        //        {
-        //                databaseName = "ProfessionalUser";
-        //                return iDatabase = new JsonProfessionalUser();
-        //        }
-        //        case 2:
-        //        {
-        //                databaseName = "Measurement";
-        //                return iDatabase = new JsonMeasurement();
-        //        }
-        //        default:
-        //        {
-        //            return null;
-        //        }
-        //    }
-        //}
->>>>>>> iUser
-
-
+            
        
->>>>>>> CosmosDB branch added
-=======
 
-
-
->>>>>>> Implementering af Get SSN
-=======
-        
-
->>>>>>> Downloaded NuggetPackages efter der opstod fejl
->>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
         static async Task<bool> Initialize()
         {
             if (docClient != null)
@@ -244,16 +90,7 @@ namespace MobilePhoneCardiography.Services.DataStore
                     new DocumentCollection { Id = collectionName },
                     new RequestOptions { OfferThroughput = 400 }
                 );
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> CosmosDB branch added
-=======
->>>>>>> Implementering af Get SSN
->>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
             }
             catch (Exception ex)
             {
@@ -267,19 +104,11 @@ namespace MobilePhoneCardiography.Services.DataStore
             return true;
         }
 
-        // <GetToDoItems>        
-        /// <summary> 
-        /// </summary>
-        /// <returns></returns>
-        /// private IJsonDatabase iDatabase;
+      
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
         #region GetFromDatabase
-
-        public async Task<List<JsonProfessionalUser>> GetLogin(IUser iUser)
+            
+            public async Task<List<JsonProfessionalUser>> GetLogin(IUser iUser)
         {
             // Dette er hvad vi søger efter
             this.iUser = iUser;
@@ -309,84 +138,15 @@ namespace MobilePhoneCardiography.Services.DataStore
         private IPatient iPatient;
         public async Task<List<JsonPatientId>> GetSSN(IPatient iPatient)
         {
-            this.iPatient = iPatient;
-            List<JsonPatientId> todos;
-            
-            todos = new List<JsonPatientId>();
-=======
-=======
->>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
-        #region GetFromDatabase
-
-        public async Task<List<JsonProfessionalUser>> GetLogin(IUser iUser)
-        {
-            // Dette er hvad vi søger efter
-            this.iUser = iUser;
-<<<<<<< HEAD
-=======
->>>>>>> iUser
->>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
-
-            // Dette
-            var todos = new List<JsonProfessionalUser>();
-
            
-            if (!await Initialize())
-                return todos;
-
-            var todoQuery = docClient.CreateDocumentQuery<JsonProfessionalUser>(
-                    UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
-                    new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
-                .Where(todo => todo.HealthProfID == iUser.Username).Where(todo => todo.UserPW == iUser.Password)
-                .AsDocumentQuery();
-
-            while (todoQuery.HasMoreResults)
-            {
-                var queryResults = await todoQuery.ExecuteNextAsync<JsonProfessionalUser>();
-                todos.AddRange(queryResults);
-            }
-
-            return todos;
-        }
-
-        private IPatient iPatient;
-        public async Task<List<JsonPatientId>> GetSSN(IPatient iPatient)
-        {
-<<<<<<< HEAD
-            this.iPatient = iPatient;
             List<JsonPatientId> todos;
             
             todos = new List<JsonPatientId>();
-=======
-<<<<<<< HEAD
-            var todos = new List<IJsonDatabase>();
->>>>>>> CosmosDB branch added
-=======
-            this.iPatient = iPatient;
-<<<<<<< HEAD
 
-            var todos = new JsonPatientId();
->>>>>>> Implementering af Get SSN
-=======
-            List<JsonPatientId> todos;
-            
-            todos = new List<JsonPatientId>();
->>>>>>> FindPatient til databasen virker
->>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
 
             if (!await Initialize())
                 return todos;
 
-<<<<<<< HEAD
-            var todoQuery = docClient.CreateDocumentQuery<JsonPatientId>(
-                    UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
-                    new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
-                .Where(todo => todo.PatientId == iPatient.SocSec)
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
             var todoQuery = docClient.CreateDocumentQuery<JsonPatientId>(
                     UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
                     new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
@@ -403,67 +163,8 @@ namespace MobilePhoneCardiography.Services.DataStore
         }
 
         #endregion
-        // </GetToDoItems>
-
-=======
-            /*
-             //This method was used to put the items to completed in the app.
-                var todoQuery = docClient.CreateDocumentQuery<ToDoItem>(
-                UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
-                new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
-                .Where(todo => todo.ProbabilityPercentage == false)
-=======
-            var todoQuery = docClient.CreateDocumentQuery<IJsonDatabase>(
-                    UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
-                    new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
-<<<<<<< HEAD
-                .Where(todo => todo.PatientID == "1234").Where(todo => todo.date ==selectedDate)
->>>>>>> Ændret i Services. CosmosDBService
-=======
-                .Where(todo => todo.PatientID == "1234").Where(todo => todo.date == selectedDate)
->>>>>>> iUser
-=======
-            var todoQuery = docClient.CreateDocumentQuery<IJsonPatient>(
-=======
-            var todoQuery = docClient.CreateDocumentQuery<JsonPatientId>(
->>>>>>> FindPatient til databasen virker
-                    UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
-                    new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
-                .Where(todo => todo.PatientId == iPatient.SocSec)
->>>>>>> Implementering af Get SSN
->>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
-                .AsDocumentQuery();
-
-            while (todoQuery.HasMoreResults)
-            {
-                var queryResults = await todoQuery.ExecuteNextAsync<JsonPatientId>();
-                todos.AddRange(queryResults);
-            }
-
-            return todos;
-        }
-
-        #endregion
-        // </GetToDoItems>
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 
->>>>>>> CosmosDB branch added
-=======
-        
->>>>>>> Ændret i Services. CosmosDBService
-=======
-
->>>>>>> iUser
->>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
-        // <GetCompletedToDoItems>        
-        /// <summary> 
-        /// </summary>
-        /// <returns></returns>
         public async static Task<List<IJsonDatabase>> GetCompletedToDoItems()
         {
             var todos = new List<IJsonDatabase>();
@@ -471,60 +172,19 @@ namespace MobilePhoneCardiography.Services.DataStore
             if (!await Initialize())
                 return todos;
 
-            /*
-             //For the completed method
-             
-            var completedToDoQuery = docClient.CreateDocumentQuery<ToDoItem>(
-                UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
-                new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
-                .Where(todo => todo.ProbabilityPercentage == true)
-                .AsDocumentQuery();
-
-            while (completedToDoQuery.HasMoreResults)
-            {
-                var queryResults = await completedToDoQuery.ExecuteNextAsync<ToDoItem>();
-
-                todos.AddRange(queryResults);
-            }
-            */
 
             return todos;
         }
-        // </GetCompletedToDoItems>
-
-
-        // <CompleteToDoItem>        
-        /// <summary> 
-        /// </summary>
-        /// <returns></returns>
+        
         public async static Task CompleteToDoItem(IJsonDatabase item)
         {
-            //item.ProbabilityPercentage = true;
 
             await UpdateToDoItem(item);
         }
-        // </CompleteToDoItem>
+        
 
-<<<<<<< HEAD
-        #region InsertToDatabase
 
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-        #region InsertToDatabase
 
-=======
-
-        // <InsertToDoItem>        
-        /// <summary> 
-        /// </summary>
-        /// <returns></returns>
->>>>>>> CosmosDB branch added
-=======
-        #region InsertToDatabase
-
->>>>>>> iUser
->>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
         public async static Task InsertToDoItem(IJsonDatabase item)
         {
             if (!await Initialize())
@@ -534,44 +194,9 @@ namespace MobilePhoneCardiography.Services.DataStore
                 UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
                 item);
         }
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
+      
 
-        #endregion
-        // <InsertToDoItem>        
-        /// <summary> 
-        /// </summary>
-        /// <returns></returns>
-
-
-=======
->>>>>>> CosmosDB branch added
-=======
-
-<<<<<<< HEAD
->>>>>>> Ændret i Services. CosmosDBService
-=======
->>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
-        #endregion
-        // <InsertToDoItem>        
-        /// <summary> 
-        /// </summary>
-        /// <returns></returns>
-
-
-<<<<<<< HEAD
-=======
->>>>>>> iUser
->>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
-        // </InsertToDoItem>  
-
-        // <DeleteToDoItem>        
-        /// <summary> 
-        /// </summary>
-        /// <returns></returns>
         public async static Task DeleteToDoItem(IJsonDatabase item)
         {
             if (!await Initialize())
@@ -580,12 +205,7 @@ namespace MobilePhoneCardiography.Services.DataStore
             var docUri = UriFactory.CreateDocumentUri(databaseName, collectionName, item.id);
             await docClient.DeleteDocumentAsync(docUri);
         }
-        // </DeleteToDoItem>  
 
-        // <UpdateToDoItem>        
-        /// <summary> 
-        /// </summary>
-        /// <returns></returns>
         public async static Task UpdateToDoItem(IJsonDatabase item)
         {
             if (!await Initialize())
@@ -594,7 +214,7 @@ namespace MobilePhoneCardiography.Services.DataStore
             var docUri = UriFactory.CreateDocumentUri(databaseName, collectionName, item.id);
             await docClient.ReplaceDocumentAsync(docUri, item);
         }
-        // </UpdateToDoItem>  
+
     }
 
  
