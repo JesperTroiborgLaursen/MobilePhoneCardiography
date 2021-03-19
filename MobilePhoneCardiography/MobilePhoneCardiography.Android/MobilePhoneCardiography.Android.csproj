@@ -54,10 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-=======
 
->>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
     <PackageReference Include="Microsoft.Azure.Cosmos">
       <Version>3.17.0</Version>
     </PackageReference>
@@ -76,8 +73,7 @@
     <PackageReference Include="NUnit">
       <Version>3.13.1</Version>
     </PackageReference>
-<<<<<<< HEAD
-=======
+
 
     <PackageReference Include="Microsoft.Azure.DocumentDB.Core">
       <Version>2.13.1</Version>
@@ -90,7 +86,7 @@
       <Version>2.0.3</Version>
     </PackageReference>
 
->>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
+
     <PackageReference Include="Refractored.MvvmHelpers">
       <Version>1.6.2</Version>
     </PackageReference>
