@@ -1,4 +1,7 @@
-﻿namespace MobilePhoneCardiography.Models
+﻿using System;
+using System.IO;
+
+namespace DTOs
 {
     public interface IPatient
     {

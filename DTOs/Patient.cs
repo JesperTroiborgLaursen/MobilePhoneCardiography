@@ -1,6 +1,7 @@
 ﻿using System;
+using System.IO;
 
-namespace MobilePhoneCardiography.Models
+namespace DTOs
 {
     public class Patient : IPatient
     {

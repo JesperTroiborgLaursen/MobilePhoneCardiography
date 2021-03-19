@@ -17,21 +17,26 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
+=======
+>>>>>>> 3LagsDeling
     <PackageReference Include="Microsoft.Azure.Cosmos">
       <Version>3.17.0</Version>
     </PackageReference>
@@ -45,24 +50,28 @@
       <Version>2.0.3</Version>
     </PackageReference>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1-beta1</Version>
     </PackageReference>
 =======
 
+=======
+>>>>>>> 3LagsDeling
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1-beta1</Version>
     </PackageReference>
-
     <PackageReference Include="Microsoft.Azure.DocumentDB.Core">
       <Version>2.13.1</Version>
     </PackageReference>
-
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1-beta1</Version>
     </PackageReference>
+<<<<<<< HEAD
 
 >>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
+=======
+>>>>>>> 3LagsDeling
     <PackageReference Include="NUnit" Version="3.13.1" />
     <PackageReference Include="System.Linq">
       <Version>4.3.0</Version>
