@@ -7,10 +7,12 @@ using Microsoft.Azure.Documents.Client;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using Microsoft.Azure.Cosmos.Linq;
 using Microsoft.Azure.Documents.Linq;
+using Microsoft.Azure.Documents.SystemFunctions;
 using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Models.Json;
-
+using NUnit.Framework;
 
 
 namespace MobilePhoneCardiography.Services.DataStore
@@ -102,42 +104,45 @@ namespace MobilePhoneCardiography.Services.DataStore
 
         #region GetFromDatabase
 
-        public async Task<IJsonProffessoinalUser> GetLogin(IUser iUser)
+        public async Task<List<JsonProfessionalUser>> GetLogin(IUser iUser)
         {
             // Dette er hvad vi søger efter
             this.iUser = iUser;
 
-            // Dette 
-            var todos = new JsonProfessionalUser();
+            // Dette
+            var todos = new List<JsonProfessionalUser>();
 
+           
             if (!await Initialize())
                 return todos;
 
-            var todoQuery = docClient.CreateDocumentQuery<IJsonProffessoinalUser>(
+            var todoQuery = docClient.CreateDocumentQuery<JsonProfessionalUser>(
                     UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
                     new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
-                .Where(todo => todo._healthProfID == iUser.Username).Where(todo => todo._userPW == iUser.Password)
+                .Where(todo => todo.HealthProfID == iUser.Username).Where(todo => todo.UserPW == iUser.Password)
                 .AsDocumentQuery();
 
             while (todoQuery.HasMoreResults)
             {
-                var queryResults = await todoQuery.ExecuteNextAsync<IJsonProffessoinalUser>();
+                var queryResults = await todoQuery.ExecuteNextAsync<JsonProfessionalUser>();
+                todos.AddRange(queryResults);
             }
 
             return todos;
         }
 
         private IPatient iPatient;
-        public async Task<IJsonPatient> GetSSN(IPatient iPatient)
+        public async Task<List<JsonPatientId>> GetSSN(IPatient iPatient)
         {
             this.iPatient = iPatient;
-
-            var todos = new JsonPatientId();
+            List<JsonPatientId> todos;
+            
+            todos = new List<JsonPatientId>();
 
             if (!await Initialize())
                 return todos;
 
-            var todoQuery = docClient.CreateDocumentQuery<IJsonPatient>(
+            var todoQuery = docClient.CreateDocumentQuery<JsonPatientId>(
                     UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
                     new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
                 .Where(todo => todo.PatientId == iPatient.SocSec)
@@ -145,7 +150,8 @@ namespace MobilePhoneCardiography.Services.DataStore
 
             while (todoQuery.HasMoreResults)
             {
-                var queryResults = await todoQuery.ExecuteNextAsync<IJsonPatient>();
+                var queryResults = await todoQuery.ExecuteNextAsync<JsonPatientId>();
+                todos.AddRange(queryResults);
             }
 
             return todos;

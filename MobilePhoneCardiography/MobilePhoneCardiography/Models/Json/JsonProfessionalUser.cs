@@ -7,12 +7,11 @@ namespace MobilePhoneCardiography.Models.Json
 {
     public class JsonProfessionalUser : IJsonProffessoinalUser, INotifyPropertyChanging 
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public string _healthProfID { get; set; }
-        public string _firstName { get; set; }
-        public string _lastName { get; set;}
-        public string _userPW { get; set;}
+        public event PropertyChangedEventHandler PropertyChanged; 
+        private string _healthProfID;
+       private string _firstName;
+       private string _lastName;
+       private string _userPW;
 
         [JsonProperty("healthProfID")]
         public string HealthProfID
