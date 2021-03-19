@@ -10,6 +10,7 @@ using System.Diagnostics;
 <<<<<<< HEAD
 using System.Linq;
 using Microsoft.Azure.Cosmos.Linq;
+<<<<<<< HEAD
 =======
 using System.Linq;
 >>>>>>> Ændret i Services. CosmosDBService
@@ -19,9 +20,13 @@ using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Models.Json;
 using NUnit.Framework;
 =======
+=======
+>>>>>>> FindPatient til databasen virker
 using Microsoft.Azure.Documents.Linq;
+using Microsoft.Azure.Documents.SystemFunctions;
 using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Models.Json;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> CosmosDB branch added
@@ -31,6 +36,9 @@ using User = Microsoft.Azure.Documents.User;
 =======
 
 >>>>>>> Downloaded NuggetPackages efter der opstod fejl
+=======
+using NUnit.Framework;
+>>>>>>> FindPatient til databasen virker
 
 
 namespace MobilePhoneCardiography.Services.DataStore
@@ -280,47 +288,56 @@ namespace MobilePhoneCardiography.Services.DataStore
 =======
         #region GetFromDatabase
 
-        public async Task<IJsonProffessoinalUser> GetLogin(IUser iUser)
+        public async Task<List<JsonProfessionalUser>> GetLogin(IUser iUser)
         {
             // Dette er hvad vi søger efter
             this.iUser = iUser;
 >>>>>>> iUser
 
-            // Dette 
-            var todos = new JsonProfessionalUser();
+            // Dette
+            var todos = new List<JsonProfessionalUser>();
 
+           
             if (!await Initialize())
                 return todos;
 
-            var todoQuery = docClient.CreateDocumentQuery<IJsonProffessoinalUser>(
+            var todoQuery = docClient.CreateDocumentQuery<JsonProfessionalUser>(
                     UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
                     new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
-                .Where(todo => todo._healthProfID == iUser.Username).Where(todo => todo._userPW == iUser.Password)
+                .Where(todo => todo.HealthProfID == iUser.Username).Where(todo => todo.UserPW == iUser.Password)
                 .AsDocumentQuery();
 
             while (todoQuery.HasMoreResults)
             {
-                var queryResults = await todoQuery.ExecuteNextAsync<IJsonProffessoinalUser>();
+                var queryResults = await todoQuery.ExecuteNextAsync<JsonProfessionalUser>();
+                todos.AddRange(queryResults);
             }
 
             return todos;
         }
 
         private IPatient iPatient;
-        public async Task<IJsonPatient> GetSSN(IPatient iPatient)
+        public async Task<List<JsonPatientId>> GetSSN(IPatient iPatient)
         {
 <<<<<<< HEAD
             var todos = new List<IJsonDatabase>();
 >>>>>>> CosmosDB branch added
 =======
             this.iPatient = iPatient;
+<<<<<<< HEAD
 
             var todos = new JsonPatientId();
 >>>>>>> Implementering af Get SSN
+=======
+            List<JsonPatientId> todos;
+            
+            todos = new List<JsonPatientId>();
+>>>>>>> FindPatient til databasen virker
 
             if (!await Initialize())
                 return todos;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -361,6 +378,9 @@ namespace MobilePhoneCardiography.Services.DataStore
 >>>>>>> iUser
 =======
             var todoQuery = docClient.CreateDocumentQuery<IJsonPatient>(
+=======
+            var todoQuery = docClient.CreateDocumentQuery<JsonPatientId>(
+>>>>>>> FindPatient til databasen virker
                     UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
                     new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
                 .Where(todo => todo.PatientId == iPatient.SocSec)
@@ -369,7 +389,8 @@ namespace MobilePhoneCardiography.Services.DataStore
 
             while (todoQuery.HasMoreResults)
             {
-                var queryResults = await todoQuery.ExecuteNextAsync<IJsonPatient>();
+                var queryResults = await todoQuery.ExecuteNextAsync<JsonPatientId>();
+                todos.AddRange(queryResults);
             }
 
             return todos;

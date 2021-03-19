@@ -29,6 +29,7 @@ namespace MobilePhoneCardiography.Models.Json
     public class JsonProfessionalUser : IJsonProffessoinalUser, INotifyPropertyChanging 
 >>>>>>> iUser
     {
+<<<<<<< HEAD
         public event PropertyChangedEventHandler PropertyChanged;
 
 <<<<<<< HEAD
@@ -40,6 +41,13 @@ namespace MobilePhoneCardiography.Models.Json
         public string _lastName { get; set;}
         public string _userPW { get; set;}
 >>>>>>> Implementering af Get SSN
+=======
+        public event PropertyChangedEventHandler PropertyChanged; 
+        private string _healthProfID;
+       private string _firstName;
+       private string _lastName;
+       private string _userPW;
+>>>>>>> FindPatient til databasen virker
 
         [JsonProperty("healthProfID")]
         public string HealthProfID
