@@ -8,7 +8,7 @@ namespace MobilePhoneCardiography.Models.Json
     public class JsonMeasurement : IJsonDatabase, INotifyPropertyChanging
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
+        //TODO add a measurement interface
         string _measurementId;
 
         [JsonProperty("measurementId")]
@@ -155,16 +155,8 @@ namespace MobilePhoneCardiography.Models.Json
         }
 
         public string id { get; set; }
-<<<<<<< HEAD
-<<<<<<< HEAD
         public string PatientID { get; set; }
         public DateTime date { get; set; }
-=======
->>>>>>> CosmosDB branch added
-=======
-        public string PatientID { get; set; }
-        public DateTime date { get; set; }
->>>>>>> Ændret i Services. CosmosDBService
         public event PropertyChangingEventHandler PropertyChanging;
     }
 }
