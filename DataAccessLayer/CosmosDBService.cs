@@ -6,6 +6,7 @@ using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using System.Diagnostics;
 using System.Linq;
+using DataAccessLayer.Services;
 using Microsoft.Azure.Cosmos.Linq;
 using Microsoft.Azure.Documents.Linq;
 using Microsoft.Azure.Documents.SystemFunctions;
@@ -166,9 +167,9 @@ namespace DataAccessLayer
         #endregion
 
 
-        public async static Task<List<IJsonDatabase>> GetCompletedToDoItems()
+        public async static Task<List<Object>> GetCompletedToDoItems()
         {
-            var todos = new List<IJsonDatabase>();
+            var todos = new List<Object>();
 
             if (!await Initialize())
                 return todos;
@@ -176,8 +177,8 @@ namespace DataAccessLayer
 
             return todos;
         }
-        
-        public async static Task CompleteToDoItem(IJsonDatabase item)
+
+        public async static Task CompleteToDoItem(Object item)
         {
 
             await UpdateToDoItem(item);
@@ -186,7 +187,7 @@ namespace DataAccessLayer
 
 
 
-        public async static Task InsertToDoItem(IJsonDatabase item)
+        public async static Task InsertToDoItem(Object item)
         {
             if (!await Initialize())
                 return;
@@ -198,21 +199,21 @@ namespace DataAccessLayer
 
       
 
-        public async static Task DeleteToDoItem(IJsonDatabase item)
+        public async static Task DeleteToDoItem(Object item)
         {
             if (!await Initialize())
                 return;
 
-            var docUri = UriFactory.CreateDocumentUri(databaseName, collectionName, item.id);
+            var docUri = UriFactory.CreateDocumentUri(databaseName, collectionName, item.ToString());
             await docClient.DeleteDocumentAsync(docUri);
         }
 
-        public async static Task UpdateToDoItem(IJsonDatabase item)
+        public async static Task UpdateToDoItem(Object item)
         {
             if (!await Initialize())
                 return;
 
-            var docUri = UriFactory.CreateDocumentUri(databaseName, collectionName, item.id);
+            var docUri = UriFactory.CreateDocumentUri(databaseName, collectionName, item.ToString());
             await docClient.ReplaceDocumentAsync(docUri, item);
         }
 

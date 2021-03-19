@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace MobilePhoneCardiography.Models.Json
 {
-    public class JsonMeasurement : IJsonDatabase, INotifyPropertyChanging
+    public class JsonMeasurement : INotifyPropertyChanging
     {
         public event PropertyChangedEventHandler PropertyChanged;
         //TODO add a measurement interface

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using DataAccessLayer.Services;
+using DTOs;
 using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Services;
 using Xamarin.Forms;

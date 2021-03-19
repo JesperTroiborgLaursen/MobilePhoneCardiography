@@ -51,7 +51,7 @@ namespace BusinessLogic
 
         public void PlayRecording()
         {
-            _soundModifyLogic.PlayRecording(MeasureDTO.SoundStream);
+            _soundModifyLogic.PlayRecording(MeasureDTO.HeartSound);
         }
 
         public async Task RecordAudio()

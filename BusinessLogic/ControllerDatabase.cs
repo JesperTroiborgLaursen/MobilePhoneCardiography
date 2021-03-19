@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using DataAccessLayer;
+using DTOs;
 using MobilePhoneCardiography.Models;
 
 namespace MobilePhoneCardiography.Services.DataStore

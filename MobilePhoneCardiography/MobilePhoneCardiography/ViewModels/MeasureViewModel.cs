@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using BusinessLogic;
+using DTOs;
 using EventArgss;
 using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Views;

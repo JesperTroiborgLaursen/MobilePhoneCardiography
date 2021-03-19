@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using DataAccessLayer;
+using DTOs;
 using MobilePhoneCardiography.Services.DataStore;
 using MobilePhoneCardiography.Views;
 using Xamarin.Forms;

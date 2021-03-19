@@ -3,6 +3,7 @@ using MobilePhoneCardiography.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using DTOs;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
