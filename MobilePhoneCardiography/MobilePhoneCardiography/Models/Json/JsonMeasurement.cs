@@ -8,7 +8,11 @@ namespace MobilePhoneCardiography.Models.Json
     public class JsonMeasurement : IJsonDatabase, INotifyPropertyChanging
     {
         public event PropertyChangedEventHandler PropertyChanged;
+<<<<<<< HEAD
 
+=======
+        //TODO add a measurement interface
+>>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
         string _measurementId;
 
         [JsonProperty("measurementId")]

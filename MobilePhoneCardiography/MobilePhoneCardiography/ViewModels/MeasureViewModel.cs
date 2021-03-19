@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using BusinessLogic;
+using EventArgss;
 using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Views;
 using Xamarin.Essentials;
@@ -25,6 +27,9 @@ namespace MobilePhoneCardiography.ViewModels
 
         public ICommand NewRecordingCommand { get; }
 
+
+        public ICommand RecordAudioCommand { get; }
+
         public MeasureViewModel()
     {
         Title = "Measure";
@@ -37,7 +42,10 @@ namespace MobilePhoneCardiography.ViewModels
         MeasurementTapped = new Command<Measurement>(OnItemSelected);
 
         AddMeasurementCommand = new Command(OnAddMeasurement);
-        }
+
+        RecordAudioCommand = new Command(StartRecordTask);
+        _recorderControler = new RecorderController(HandleAnalyzeFinishedEvent);
+    }
 
 
 
@@ -98,6 +106,20 @@ namespace MobilePhoneCardiography.ViewModels
 
             // This will push the ItemDetailPage onto the navigation stack
             //await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={measurement.Id}");
+        }
+
+        private RecorderController _recorderControler;
+        private async void StartRecordTask()
+        {
+            await _recorderControler.RecordAudio();
+        }
+
+        public DTOs.Measurement MeasureDTO { get; set; }
+
+        private async void HandleAnalyzeFinishedEvent(object sender, AnalyzeFinishedEventArgs e)
+        {
+            MeasureDTO = e.DTO;
+            
         }
 
     }

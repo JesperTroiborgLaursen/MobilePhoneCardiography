@@ -11,16 +11,32 @@
   </ItemGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
+=======
+
+>>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.17.0" />
     <PackageReference Include="Microsoft.Azure.DocumentDB" Version="2.13.1" />
     <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.13.1" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
+<<<<<<< HEAD
+=======
+
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1-beta1" />
+    <PackageReference Include="NUnit" Version="3.13.1" />
+<PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.13.1" />
+
+>>>>>>> fa943cd6a32039f0d20ce94f77c7acec5e102bf3
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1-beta1" />
     <PackageReference Include="NUnit" Version="3.13.1" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
     <PackageReference Include="System.Linq" Version="4.3.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BusinessLogic\BusinessLogic.csproj" />
   </ItemGroup>
 
   <ItemGroup>
