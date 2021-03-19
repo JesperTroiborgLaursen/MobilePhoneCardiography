@@ -1,4 +1,4 @@
-﻿namespace MobilePhoneCardiography.Services
+﻿namespace DataAccessLayer.Services
 {
     public class APIKeys
     {

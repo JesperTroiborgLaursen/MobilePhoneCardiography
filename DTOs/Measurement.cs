@@ -16,8 +16,8 @@ namespace DTOs
         public Stream SoundStream { get; set; }
         public DateTime StartTime { get; set; }
         public int ProbabilityProcent { get; set; }
-        public int PatientID { get; set; }
-        public int HealthProfessionalID { get; set; }
+        public string PatientID { get; set; }
+        public string HealthProfessionalID { get; set; }
 
         public PlacementOfDeviceEnum PlacementEnum { get; set; }
         public Measurement(DateTime start)

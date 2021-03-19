@@ -14,8 +14,9 @@ using MobilePhoneCardiography.Models.Json;
 using NUnit.Framework;
 using User = Microsoft.Azure.Documents.User;
 using NUnit.Framework;
+using DTOs;
 
-namespace MobilePhoneCardiography.Services.DataStore
+namespace DataAccessLayer
 {
     public class CosmosDBService
     {
