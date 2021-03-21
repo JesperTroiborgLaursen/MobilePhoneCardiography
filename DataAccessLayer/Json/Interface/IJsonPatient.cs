@@ -2,8 +2,9 @@
 {
     public interface IJsonPatient
     {
-        string LastName { get; }
-        string FirstName { get; }
-        string PatientId { get; }
+        public string PatientId { get; set;}
+        public string FirstName { get; set;}
+        public string LastName { get; set;}
+
     }
 }

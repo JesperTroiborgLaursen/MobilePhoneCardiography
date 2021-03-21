@@ -25,6 +25,7 @@ namespace DataAccessLayer
         #region PrivateProp
 
         private static DateTime selectedDate;
+
         static DocumentClient docClient = null;
         private IUser iUser;
         private static string databaseName = "HeartRecords";
@@ -44,7 +45,7 @@ namespace DataAccessLayer
 
 
 
-        private string DatabaseChoice(EnumDatabase databaseChoice)
+        public string DatabaseChoice(EnumDatabase databaseChoice)
         {
             int i = (int)databaseChoice;
 
@@ -57,7 +58,7 @@ namespace DataAccessLayer
                 }
                 case 1:
                 {
-                    return collectionName = "ProfessionalUser";
+                    return collectionName = "ProfessionelUser";
                 }
                 case 2:
                 {

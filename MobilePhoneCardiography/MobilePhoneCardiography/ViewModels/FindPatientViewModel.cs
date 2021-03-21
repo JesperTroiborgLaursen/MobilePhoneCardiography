@@ -142,6 +142,7 @@ namespace MobilePhoneCardiography.ViewModels
             {
                 Id = Guid.NewGuid().ToString(),
                 SocSec = SocSecSearch
+
             };
 
 
@@ -155,12 +156,13 @@ namespace MobilePhoneCardiography.ViewModels
 
                 //await DataStoreUser.AddItemAsync(newUser);
 
-                // This will pop the current page off the navigation stack
-                //TODO DENNE SKAL IKKE VISES; ELLERS KAN MAN IKKE TJEKKE OM DET ER DEN KORREKTE PATIENT
-                await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
-
             }
-  
+            // This will pop the current page off the navigation stack
+            //TODO DENNE SKAL IKKE VISES; ELLERS KAN MAN IKKE TJEKKE OM DET ER DEN KORREKTE PATIENT
+           
+            //await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
+
+
         }
     }
 }

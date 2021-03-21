@@ -6,10 +6,10 @@ using MobilePhoneCardiography.Models;
 
 namespace MobilePhoneCardiography.Services.DataStore
 {
-    public class ControllerDatabase
+    public class ControllerDatabase : IControllerDatabase
     {
-        private CosmosDBService cosmosDbService;
-        public ControllerDatabase(CosmosDBService cosmosDb)
+        private ICosmosDBService cosmosDbService;
+        public ControllerDatabase(ICosmosDBService cosmosDb)
         {
             this.cosmosDbService = cosmosDb;
         }
@@ -33,7 +33,13 @@ namespace MobilePhoneCardiography.Services.DataStore
 
             foreach (var VARIABLE in todos)
             {
-                if (VARIABLE != null&&VARIABLE.PatientId == patient.SocSec) return true;
+                if (VARIABLE != null && VARIABLE.PatientId == patient.SocSec)
+                {
+                    patient.FirstName = VARIABLE.FirstName;
+                    patient.LastName = VARIABLE.LastName;
+                    return true;
+                }
+                  
 
             }
             return false;
