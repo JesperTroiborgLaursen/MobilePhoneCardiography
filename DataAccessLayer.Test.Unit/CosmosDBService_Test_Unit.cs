@@ -19,7 +19,6 @@ namespace DataAccessLayer.Test.Unit
         [TestCase(EnumDatabase.Professionel, "ProfessionelUser")]
         public void DatabaseChoiceInjection_CollectionNameSaved_TestIsCorrect(EnumDatabase choice, string result)
         {
-            
             uut = new CosmosDBService(choice, DateTime.Now);
             Assert.That(uut.DatabaseChoice(choice), Is.EqualTo(result));
         }

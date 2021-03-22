@@ -1,13 +1,13 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DataAccessLayer;
 using DTOs;
 using MobilePhoneCardiography.Models.Json;
 using MobilePhoneCardiography.Services.DataStore;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace DataAccessLayer.Test.Unit
+namespace BuisnessLogic.Test.Unit
 {
     public class ControllerDatabase_Test_Unit
     {
@@ -59,7 +59,7 @@ namespace DataAccessLayer.Test.Unit
             //Check Validate
             Assert.That(svar, Is.EqualTo(true));
 
-            //Check revieved calls:
+            //Check received calls:
             await cosmosDb.Received(1).GetSSN(patientCompare);
             await cosmosDb.Received(0).GetSSN(fakeUser);
             await cosmosDb.DidNotReceive().GetSSN(fakeUser);
@@ -105,6 +105,7 @@ namespace DataAccessLayer.Test.Unit
         }
 
         #endregion
+
         #region ValidateLogin
 
         [Test]

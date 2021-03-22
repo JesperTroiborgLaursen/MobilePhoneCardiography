@@ -18,11 +18,16 @@ namespace MobilePhoneCardiography.Services.DataStore
         {
             var todos = await cosmosDbService.GetLogin(user);
 
-            foreach (var VARIABLE in todos)
-            {
-                if (todos != null && VARIABLE.UserPW == user.Password && VARIABLE.HealthProfID == user.Username) return true;
+
+            //TODO Denne linje er under test
+            if (todos != null && todos[0].UserPW == user.Password && todos[0].HealthProfID == user.Username) return true;
+
+            //TODO Denne linje er væk fra test
+            //foreach (var VARIABLE in todos)
+            //{
+            //    if (todos != null && VARIABLE.UserPW == user.Password && VARIABLE.HealthProfID == user.Username) return true;
                 
-            }
+            //}
 
             return false;
         }
@@ -30,18 +35,24 @@ namespace MobilePhoneCardiography.Services.DataStore
         public async Task<bool> ValidatePatient(IPatient patient)
         {
             var todos = await cosmosDbService.GetSSN(patient);
-
-            foreach (var VARIABLE in todos)
+            if (todos != null && todos[0].PatientId == patient.SocSec)
             {
-                if (VARIABLE != null && VARIABLE.PatientId == patient.SocSec)
-                {
-                    patient.FirstName = VARIABLE.FirstName;
-                    patient.LastName = VARIABLE.LastName;
-                    return true;
-                }
+                patient.FirstName = todos[0].FirstName;
+                patient.LastName = todos[0].LastName;
+                return true;
+            }
+
+            //foreach (var VARIABLE in todos)
+            //{
+            //    if (VARIABLE != null && VARIABLE.PatientId == patient.SocSec)
+            //    {
+            //        patient.FirstName = VARIABLE.FirstName;
+            //        patient.LastName = VARIABLE.LastName;
+            //        return true;
+            //    }
                   
 
-            }
+            //}
             return false;
         }
 
