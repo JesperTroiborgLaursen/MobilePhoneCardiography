@@ -24,6 +24,7 @@ namespace MobilePhoneCardiography.ViewModels
         public Command AddMeasurementCommand { get; }
         public Command<Measurement> MeasurementTapped { get; }
 
+        private IRecorderController _recorderController;
         public ICommand OpenWebCommand { get; }
 
         public ICommand NewRecordingCommand { get; }
@@ -32,21 +33,21 @@ namespace MobilePhoneCardiography.ViewModels
         public ICommand RecordAudioCommand { get; }
 
         public MeasureViewModel()
-    {
-        Title = "Measure";
-        OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://aka.ms/xamarin-quickstart"));
-        NewRecordingCommand = new Command(OnNewRecordingClicked);
+        {
+            Title = "Measure";
+            OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://aka.ms/xamarin-quickstart"));
+            NewRecordingCommand = new Command(OnNewRecordingClicked);
 
-        Measurements = new ObservableCollection<Measurement>();
-        LoadMeasurementsCommand = new Command(async () => await ExecuteLoadMeasurementsCommand());
+            Measurements = new ObservableCollection<Measurement>();
+            LoadMeasurementsCommand = new Command(async () => await ExecuteLoadMeasurementsCommand());
 
-        MeasurementTapped = new Command<Measurement>(OnItemSelected);
+            MeasurementTapped = new Command<Measurement>(OnItemSelected);
 
-        AddMeasurementCommand = new Command(OnAddMeasurement);
+            AddMeasurementCommand = new Command(OnAddMeasurement);
 
-        RecordAudioCommand = new Command(StartRecordTask);
-        _recorderControler = new RecorderController(HandleAnalyzeFinishedEvent);
-    }
+            RecordAudioCommand = new Command(StartRecordTask);
+            _recorderController = new RecorderController(HandleAnalyzeFinishedEvent);
+        }
 
 
 
@@ -109,18 +110,17 @@ namespace MobilePhoneCardiography.ViewModels
             //await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={measurement.Id}");
         }
 
-        private RecorderController _recorderControler;
-        private async void StartRecordTask()
+        private void StartRecordTask()
         {
-            await _recorderControler.RecordAudio();
+            _recorderController.RecordAudio();
         }
 
         public DTOs.Measurement MeasureDTO { get; set; }
 
-        private async void HandleAnalyzeFinishedEvent(object sender, AnalyzeFinishedEventArgs e)
+        private void HandleAnalyzeFinishedEvent(object sender, AnalyzeFinishedEventArgs e)
         {
             MeasureDTO = e.DTO;
-            
+
         }
 
     }
