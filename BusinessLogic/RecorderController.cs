@@ -66,6 +66,11 @@ namespace BusinessLogic
             _soundModifyLogic.PlayRecording(MeasureDTO.HeartSound);
         }
 
+        public void PlayRecording(Measurement measurement)
+        {
+            _soundModifyLogic.PlayRecording(measurement.HeartSound);
+        }
+
         public void RecordAudio()
         {
             if (IsRecording == false)
