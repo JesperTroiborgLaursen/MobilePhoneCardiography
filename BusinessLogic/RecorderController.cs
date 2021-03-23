@@ -56,8 +56,16 @@ namespace BusinessLogic
             _soundModifyLogic = new SoundModifyLogic(null);
             _analyse = new AnalyzeLogic(handleAnalyzeFinishedEvent);
             _dataStorage = new FakeStorage(); //ligger som internal class
-
+          
             IsRecording = false;
+        }
+
+        public RecorderController(EventHandler<AnalyzeFinishedEventArgs> handleAnalyzeFinishedEvent,IRecorder recorder,ISoundModifyLogic soundModifyLogic, IAnalyzeLogic analyzeLogic, ISaveData saveData)
+        {
+            _recorderLogic = recorder ?? new Recorder(HandleRecordingFinishedEvent);
+            _soundModifyLogic = soundModifyLogic ?? new SoundModifyLogic(null);
+            _analyse = analyzeLogic ?? new AnalyzeLogic(handleAnalyzeFinishedEvent);
+            _dataStorage = saveData ?? new FakeStorage();
         }
 
 
