@@ -2,12 +2,34 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using EventArgss;
 using NSubstitute;
 using NUnit.Framework;
 
 namespace DataAccessLayer.Test.Unit
 {
+    public class FakeAudioRecorderService: IAudioRecorderService
+    {
+        public bool IsRecording { get; }
+        public string FilePath { get; set; }
+        public double AudioTimeout { get; set; }
+        public event EventHandler<string> AudioInputReceived;
+        public Task<Task<string>> StartRecording()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Stream GetAudioFileStream()
+        {
+            return new MemoryStream(100);
+        }
+
+        public FakeAudioRecorderService(EventHandler<string> AudioInputReceived)
+        {
+            this.AudioInputReceived += AudioInputReceived;
+        }
+    }
     public class Recorder_Test_Unit
     {
         private Recorder UUT;
@@ -120,5 +142,19 @@ namespace DataAccessLayer.Test.Unit
             Assert.That(_recordFinishedEventArgs.measureDTO.HeartSound, Is.EqualTo(memorystream));
 
         }
+
+        //[Test]
+        //public void test()
+        //{
+        //    sub_Recorder = new FakeAudioRecorderService(UUT.HandleRecorderIsFinished);
+        //    sub_Recorder.AudioInputReceived += Raise.Event<EventHandler<string>>(this, "Yeah");
+        //    //ARRAGE
+        //   var memorystream = new MemoryStream(100); //nemmest stream at behandle som ikke er en ægte stream fra vores mic
+           
+        //    UUT.HandleRecorderIsFinished(this, "test");
+        //   Assert.That(_recordFinishedEventArgs.measureDTO.HeartSound, Is.EqualTo(memorystream));
+
+        //}
+
     }
 }
