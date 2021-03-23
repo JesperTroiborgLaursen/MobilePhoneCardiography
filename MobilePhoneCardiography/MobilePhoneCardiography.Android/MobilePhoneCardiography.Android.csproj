@@ -69,9 +69,6 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1-beta1</Version>
     </PackageReference>
-    <PackageReference Include="NUnit">
-      <Version>3.13.1</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.Azure.DocumentDB.Core">
       <Version>2.13.1</Version>
     </PackageReference>
