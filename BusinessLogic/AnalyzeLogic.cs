@@ -8,6 +8,17 @@ namespace BusinessLogic
     public class AnalyzeLogic : IAnalyzeLogic
     {
         private Measurement analysisObject;
+        public AnalyzeLogic(EventHandler<AnalyzeFinishedEventArgs> handleAnalyzeFinishedEvent)
+        {
+            AnalyzeFinishedEvent += handleAnalyzeFinishedEvent;
+        }
+        #region Event
+        public event EventHandler<AnalyzeFinishedEventArgs> AnalyzeFinishedEvent;
+        protected virtual void OnAnalyzeFinished(AnalyzeFinishedEventArgs e)
+        {
+            AnalyzeFinishedEvent?.Invoke(this, e);
+        }
+        #endregion
 
         public Measurement Analyze(Measurement DTO)
         {
@@ -24,16 +35,8 @@ namespace BusinessLogic
         //Her skal vi analysere dataen
         private int Analyze1()
         {
-            Debug.WriteLine("Data bliver nu analyseret");
             return 13;
         }
-
-        protected virtual void OnAnalyzeFinished(AnalyzeFinishedEventArgs e)
-        {
-            AnalyzeFinishedEvent?.Invoke(this, e);
-        }
-
-        public event EventHandler<AnalyzeFinishedEventArgs> AnalyzeFinishedEvent;
 
     }
 }
