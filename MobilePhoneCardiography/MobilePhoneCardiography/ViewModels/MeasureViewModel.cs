@@ -119,6 +119,7 @@ namespace MobilePhoneCardiography.ViewModels
 
         private void HandleAnalyzeFinishedEvent(object sender, AnalyzeFinishedEventArgs e)
         {
+
             MeasureDTO = e.DTO;
             //Todo Denne linje skal væk når vi har introduceret RecordingsViewet
             //da den på nuværende tidspunkt blot afspiller lyden med det samme
