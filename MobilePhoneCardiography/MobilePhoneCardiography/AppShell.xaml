@@ -97,11 +97,11 @@
         </Tab>
 
         <Tab Title="Measure" Icon="icon_new.png">
-            <ShellContent Route="MeasureView" ContentTemplate="{DataTemplate local:MeasureView}" />
+            <ShellContent Route="MeasureView" AutomationId="MeasureTab" ContentTemplate="{DataTemplate local:MeasureView}" />
         </Tab>
         
         <Tab Title="Recordings" Icon="">
-            <ShellContent Route="RecordingsView" ContentTemplate="{DataTemplate local:RecordingsView}" />
+            <ShellContent Route="RecordingsView" AutomationId="RecordingsTab" ContentTemplate="{DataTemplate local:RecordingsView}" />
         </Tab>
 
         

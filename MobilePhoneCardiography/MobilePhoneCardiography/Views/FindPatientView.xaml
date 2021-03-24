@@ -30,7 +30,7 @@
             </Frame>
             </Frame>
             <Frame Opacity="{Binding ConsentFrameOpacity}">
-                <Label Text="Please confirm with the patient if this information is correct, and if he/she consent with the usage of his/hers data" IsVisible="{Binding ConsentVisible}"/>
+                <Label AutomationId="ConsentLabel" Text="Please confirm with the patient if this information is correct, and if he/she consent with the usage of his/hers data" IsVisible="{Binding ConsentVisible}"/>
             </Frame>
             <StackLayout VerticalOptions="CenterAndExpand" Spacing="3" Padding="15">
                 <Label Text="Social Security Number" FontSize="Medium" />
