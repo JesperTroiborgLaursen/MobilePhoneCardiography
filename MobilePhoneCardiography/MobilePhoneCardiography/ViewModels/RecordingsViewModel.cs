@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using DTOs;
 using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Views;
 using Xamarin.Essentials;

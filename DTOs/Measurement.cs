@@ -13,16 +13,23 @@ namespace DTOs
 
     public class Measurement
     {
-        public Stream SoundStream { get; set; }
+        public int Id { get; set; }
+        public Stream HeartSound { get; set; }
         public DateTime StartTime { get; set; }
         public int ProbabilityProcent { get; set; }
-        public int PatientID { get; set; }
-        public int HealthProfessionalID { get; set; }
+        public string PatientID { get; set; }
+        public string HealthProfID { get; set; }
 
         public PlacementOfDeviceEnum PlacementEnum { get; set; }
-        public Measurement(DateTime start)
+
+        public Measurement()
         {
-            StartTime = start;
+            
         }
+        public Measurement(DateTime startTime)
+        {
+            StartTime = startTime;
+        }
+      
     }
 }

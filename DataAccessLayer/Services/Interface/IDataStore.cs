@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MobilePhoneCardiography.Services
+namespace DataAccessLayer.Services
 {
     public interface IDataStore<T>
     {

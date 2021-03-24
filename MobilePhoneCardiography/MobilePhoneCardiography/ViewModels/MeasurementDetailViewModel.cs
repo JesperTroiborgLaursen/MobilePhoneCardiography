@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
+using DTOs;
 using Xamarin.Forms;
 
 namespace MobilePhoneCardiography.ViewModels
@@ -10,21 +12,21 @@ namespace MobilePhoneCardiography.ViewModels
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public class MeasurementDetailViewModel : BaseViewModel
     {
-        private int itemId;        
-        private List<short> _soundSamples;
+        private int itemId;
+        private Stream heartSound;
         private DateTime _startTime;
         private long _amountOfSamples;
         private int _probabilityPercentage;
-        private int _patientID;
-        private int _healthProffesionalID;
-        private int _placementOfDevice;
+        private string _patientID;
+        private string _healthProffesionalID;
+        private PlacementOfDeviceEnum _placementOfDevice;
 
         public int Id { get; set; }
 
-        public List<short> SoundSamples
+        public Stream HeartSound
         {
-            get => _soundSamples;
-            set => SetProperty(ref _soundSamples, value);
+            get => heartSound;
+            set => SetProperty(ref heartSound, value);
         }
         public DateTime StartTime
         {
@@ -44,19 +46,19 @@ namespace MobilePhoneCardiography.ViewModels
             set => SetProperty(ref _probabilityPercentage, value);
         }
 
-        public int PlacementOfDevice
+        public PlacementOfDeviceEnum PlacementOfDevice
         {
             get => _placementOfDevice;
             set => SetProperty(ref _placementOfDevice, value);
         }
 
-        public int PatientID
+        public string PatientID
         {
             get => _patientID;
             set => SetProperty(ref _patientID, value);
         }
 
-        public int HealthProffesionalID
+        public string HealthProffesionalID
         {
             get => _healthProffesionalID;
             set => SetProperty(ref _healthProffesionalID, value);
@@ -82,12 +84,15 @@ namespace MobilePhoneCardiography.ViewModels
                 var item = await DataStoreUserMeasurement.GetItemAsync(itemId);
                 Id = item.Id;
                 StartTime = item.StartTime;
-                SoundSamples = item.SoundSamples;
-                AmountOfSamples = item.AmountOfSamples;
-                ProbabilityPercentage = item.ProbabilityPercentage;
+                HeartSound = item.HeartSound; //TODO TILFØJET HEART SOUND
+                //SoundSamples = item.SoundSamples;
+                //TODO TROR SOUND SAMPLES ER UDGÅET
+                //AmountOfSamples = item.AmountOfSamples;
+                //TODO TROR AMOUNT OF SAMPLES ER UDGÅET
+                ProbabilityPercentage = item.ProbabilityProcent;
                 PatientID = item.PatientID;
-                HealthProffesionalID = item.HealthProffesionalID;
-                PlacementOfDevice = item.PlacementOfDevice;
+                HealthProffesionalID = item.HealthProfID;
+                PlacementOfDevice = item.PlacementEnum;
 
             }
             catch (Exception)
