@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventArgss", "EventArgss\Ev
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer.Test.Unit", "DataAccessLayer.Test.Unit\DataAccessLayer.Test.Unit.csproj", "{EC622BD8-A58D-43C1-85C0-FBD3B5327ABC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuisnessLogic.Test.Unit", "BuisnessLogic.Test.Unit\BuisnessLogic.Test.Unit.csproj", "{5D9EC5B2-E926-4830-BEF5-E36B68101EB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuisnessLogic.Test.Unit", "BuisnessLogic.Test.Unit\BuisnessLogic.Test.Unit.csproj", "{5D9EC5B2-E926-4830-BEF5-E36B68101EB8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestProjects", "TestProjects", "{D2FFD83C-0A85-492F-A784-22AACDCB7F39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
