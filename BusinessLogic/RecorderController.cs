@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using DataAccessLayer;
+using DataAccessLayer.Services.Interface;
 using DTOs;
 using EventArgss;
 
@@ -11,8 +12,7 @@ namespace BusinessLogic
 {
     public class RecorderController : IRecorderController
     {
-
-        private Measurement measureDTO;
+        #region Props
 
         private string _pageText = "Du har nu åbnet Plugin Audio Recorder skærmen";
 
@@ -29,35 +29,14 @@ namespace BusinessLogic
             get { return _sampleRate; }
             set { _sampleRate = value; }
         }
+        private bool _isRecording; //Todo Få knapper på UI til at være inaktive når der optages (Fx.)
 
-
-        private IRecorderLogic _recorderLogic;
-        private ISoundModifyLogic _soundModifyLogic;
-        private IAnalyzeLogic _analyse;
-        private ISaveData _dataStoreage;
-
-        public RecorderController(EventHandler<AnalyzeFinishedEventArgs> handleAnalyzeFinishedEvent)
+        public bool IsRecording
         {
-            _recorderLogic = new FakeRecorderLogic(HandleRecordingFinishedEvent);
-            _soundModifyLogic = new FakeSoundModifyLogic();
-
-            _analyse = new AnalyzeLogic();
-            _analyse.AnalyzeFinishedEvent += handleAnalyzeFinishedEvent;
-
-
-            _dataStoreage = new FakeStorage();
+            get { return _isRecording; }
+            private set { _isRecording = value; }
         }
 
-
-        public void PlayRecording()
-        {
-            _soundModifyLogic.PlayRecording(MeasureDTO.HeartSound);
-        }
-
-        public async Task RecordAudio()
-        {
-            await _recorderLogic.RecordAudio();
-        }
         private Measurement _measureDTO;
 
         public Measurement MeasureDTO
@@ -65,59 +44,66 @@ namespace BusinessLogic
             get { return _measureDTO; }
             set { _measureDTO = value; }
         }
+        #endregion 
+        #region Dependencies
+
+        private IRecorder _recorderLogic;
+        private ISoundModifyLogic _soundModifyLogic;
+        private IAnalyzeLogic _analyse;
+        private ISaveData _dataStorage;
+
+        #endregion
+        #region Ctor
+
+        public RecorderController(EventHandler<AnalyzeFinishedEventArgs> handleAnalyzeFinishedEvent)
+        {
+            _recorderLogic = new Recorder(HandleRecordingFinishedEvent);
+            _soundModifyLogic = new SoundModifyLogic(null);
+            _analyse = new AnalyzeLogic(handleAnalyzeFinishedEvent);
+            _dataStorage = new FakeStorage(); //ligger som internal class
+
+            IsRecording = false;
+        }
+
+        public RecorderController(EventHandler<AnalyzeFinishedEventArgs> handleAnalyzeFinishedEvent, IRecorder recorder, ISoundModifyLogic soundModifyLogic, IAnalyzeLogic analyzeLogic, ISaveData saveData)
+        {
+            _recorderLogic = recorder ?? new Recorder(HandleRecordingFinishedEvent);
+            _soundModifyLogic = soundModifyLogic ?? new SoundModifyLogic(null);
+            _analyse = analyzeLogic ?? new AnalyzeLogic(handleAnalyzeFinishedEvent);
+            _dataStorage = saveData ?? new FakeStorage();
+        }
+
+        #endregion
+        #region Metoder
+
+        public void PlayRecording(Measurement measurement)
+        {
+            _soundModifyLogic.PlayRecording(measurement.HeartSound);
+        }
+
+
+        public void RecordAudio()
+        {
+            if (IsRecording == false)
+            {
+                _recorderLogic.RecordAudio();
+                IsRecording = true;
+            }
+        }
+        #endregion
+        #region EventHandler
 
         private void HandleRecordingFinishedEvent(object sender, RecordFinishedEventArgs e)
         {
-            
+            IsRecording = false;
             MeasureDTO = e.measureDTO;
             MeasureDTO = _analyse.Analyze(MeasureDTO);
-            _dataStoreage.SaveToStorage(_measureDTO);
+            _dataStorage.SaveToStorage(MeasureDTO);
         }
+
+        #endregion
     }
 
-    /// <summary>
-    /// Fake recorderLogic, der stubber resten af systemet ned til.
-    /// Denne Rasiser blot et event, for at ilustere hvad processen er der fra
-    /// </summary>
-    public class FakeRecorderLogic : IRecorderLogic
-    {
-        private readonly EventHandler<RecordFinishedEventArgs> _handleRecordingFinishedEvent;
-
-        public FakeRecorderLogic(EventHandler<RecordFinishedEventArgs> handleRecordingFinishedEvent)
-        {
-            _handleRecordingFinishedEvent = handleRecordingFinishedEvent;
-        }
-
-        public async Task RecordAudio()
-        {
-            System.Diagnostics.Debug.WriteLine("Der er trykket start");
-            _handleRecordingFinishedEvent?.Invoke(this, new RecordFinishedEventArgs
-            {
-                measureDTO = new Measurement(DateTime.Now)
-            });
-
-        }
-    }
-
-    /// <summary>
-    /// Fake lydafspiller
-    /// </summary>
-    public class FakeSoundModifyLogic : ISoundModifyLogic
-    {
-        public void PlayRecording()
-        {
-           // throw new NotImplementedException();
-        }
-
-        public void PlayRecording(Stream sound)
-        {
-           // throw new NotImplementedException();
-        }
-    }
-
-    /// <summary>
-    /// Fake storage funktion
-    /// </summary>
     internal class FakeStorage : ISaveData
     {
         public void SaveToStorage(Measurement elementToStorage)
