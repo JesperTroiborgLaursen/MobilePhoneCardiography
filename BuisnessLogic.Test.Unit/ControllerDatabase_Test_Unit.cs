@@ -49,7 +49,8 @@ namespace BuisnessLogic.Test.Unit
             {
                 new JsonPatientId()
                 {
-                    PatientId = "1234561234"
+                    //todo sha256
+                    PatientId = "462ddb9fa125fdac01fe132e057295c3b8fd1946f394b12c382ec4ab43b25cf5"
                 }
             });
             IPatient fakeUser = new Patient();
@@ -67,9 +68,9 @@ namespace BuisnessLogic.Test.Unit
 
         }
 
-        [TestCase("1234561234",true)]
-        [TestCase("1134561234", false)]
-        [TestCase("LongStupidString", false)]
+        [TestCase("462ddb9fa125fdac01fe132e057295c3b8fd1946f394b12c382ec4ab43b25cf5", true)]
+        [TestCase("462ddb9fa125fgac01fe132e057295c3b8fd1946f394b12c382ec4ab43b25cf5", false)]
+        [TestCase("462ddb9fa125fdac01fe132e057295c3b8fdl946f394b12c382ec4ab43b25cf5", false)]
         public async Task ValidatePatients_StubReturnRealPatient_TestCaseIsCorrect(string SocSec, bool result)
         {
             #region SetUp
@@ -127,7 +128,8 @@ namespace BuisnessLogic.Test.Unit
             {
                 new JsonProfessionalUser()
                 {
-                    HealthProfID = "test",UserPW = "test"
+                    //todo sha256
+                    HealthProfID = "test",UserPW = "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
                 }
             });
             IUser fakeUser = new User();
@@ -143,7 +145,8 @@ namespace BuisnessLogic.Test.Unit
 
         }
 
-        [TestCase("test", "test", true)]
+
+        [TestCase("test",/*todo sha256*/ "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08", true)]
         [TestCase("test", "ERROR", false)]
         [TestCase("Error", "test", false)]
         [TestCase("Test", "Test", false)]

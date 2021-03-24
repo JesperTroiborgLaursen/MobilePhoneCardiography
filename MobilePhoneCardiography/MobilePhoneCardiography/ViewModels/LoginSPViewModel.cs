@@ -2,6 +2,7 @@
 using MobilePhoneCardiography.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Windows.Input;
 using DataAccessLayer;
@@ -17,6 +18,9 @@ namespace MobilePhoneCardiography.ViewModels
         private string _username;
         private string _password;
         private ControllerDatabase controllerDatabase;
+
+        //TODO SKAL FJERNES IGEN; KUN ITL AT TESTE DATABASE
+       
         public LoginSPViewModel()
         {
             controllerDatabase = new ControllerDatabase(new CosmosDBService(EnumDatabase.Professionel, DateTime.Now));
@@ -63,8 +67,11 @@ namespace MobilePhoneCardiography.ViewModels
                 Username = Username,
                 Password = Password
             };
+
+            //Todo Har en ide om at dette er bedre at oprette en ny database hver eneste gnag den skal bruges.
+            var validateLogin =  await new ControllerDatabase(new CosmosDBService(EnumDatabase.Professionel, DateTime.Now)).ValidateLogin(newUser);
             
-            var validateLogin = await controllerDatabase.ValidateLogin(newUser);
+            //var validateLogin = await controllerDatabase.ValidateLogin(newUser);
 
             if (validateLogin == true)
             {

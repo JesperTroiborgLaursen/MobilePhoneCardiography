@@ -13,7 +13,7 @@ namespace DataAccessLayer
 
         public Task<List<JsonProfessionalUser>> GetLogin(IUser iUser);
         public Task<List<JsonPatientId>> GetSSN(IPatient iPatient);
-        public Task InsertToDoItem(Object item);
+        public Task StoreHeartSound(JsonMeasurement measurement);
         public  Task DeleteToDoItem(Object item);
         public  Task UpdateToDoItem(Object item);
 

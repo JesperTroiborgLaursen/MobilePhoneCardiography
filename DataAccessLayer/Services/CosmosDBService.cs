@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using DataAccessLayer.Services;
 using Microsoft.Azure.Cosmos.Linq;
@@ -12,10 +13,9 @@ using Microsoft.Azure.Documents.Linq;
 using Microsoft.Azure.Documents.SystemFunctions;
 using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Models.Json;
-using NUnit.Framework;
 using User = Microsoft.Azure.Documents.User;
-using NUnit.Framework;
 using DTOs;
+using Newtonsoft.Json;
 
 namespace DataAccessLayer
 {
@@ -166,15 +166,26 @@ namespace DataAccessLayer
                 todos.AddRange(queryResults);
             }
 
+          
             return todos;
         }
+     
+
+        public async Task StoreHeartSound(JsonMeasurement measurement)
+        {
+            if (!await Initialize())
+                return;
+
+            await docClient.CreateDocumentAsync(
+                UriFactory.CreateDocumentCollectionUri(databaseName, collectionName ="Measurement"),
+                measurement);
+
+        }
+
         #endregion
         #region NotYetImplementet
         //TODO The Interface implementations, is just there to remove conflicts
-        Task ICosmosDBService.InsertToDoItem(object item)
-        {
-            return InsertToDoItem(item);
-        }
+      
 
         Task ICosmosDBService.DeleteToDoItem(object item)
         {
@@ -186,14 +197,14 @@ namespace DataAccessLayer
             return UpdateToDoItem(item);
         }
 
-        public async static Task InsertToDoItem(Object item)
+        public async static Task AddData(Measurement measurement)
         {
             if (!await Initialize())
                 return;
 
             await docClient.CreateDocumentAsync(
                 UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
-                item);
+                measurement);
         }
 
 

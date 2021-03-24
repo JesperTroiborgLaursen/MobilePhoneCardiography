@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 
@@ -31,7 +32,7 @@ namespace MobilePhoneCardiography.Models.Json
         string _soundFile;
 
         [JsonProperty("sound file")]
-        public string SoundFile
+        public string HeartSound
         {
             get => _soundFile;
             set
@@ -62,22 +63,6 @@ namespace MobilePhoneCardiography.Models.Json
             }
         }
 
-        int _amountOfSoundSamples;
-
-        [JsonProperty("amount of sound samples")]
-        public int AmountOfSoundSamples
-        {
-            get => _amountOfSoundSamples;
-            set
-            {
-                if (_amountOfSoundSamples == value)
-                    return;
-
-                _amountOfSoundSamples = value;
-
-                HandlePropertyChanged();
-            }
-        }
 
         int _probabilityPercentage;
 
@@ -96,10 +81,10 @@ namespace MobilePhoneCardiography.Models.Json
             }
         }
 
-        int _patientId;
+        string _patientId;
 
         [JsonProperty("patient ID")]
-        public int PatientId
+        public string PatientId
         {
             get => _patientId;
             set
@@ -113,10 +98,10 @@ namespace MobilePhoneCardiography.Models.Json
             }
         }
 
-        int _healthProfId;
+        string _healthProfId;
 
         [JsonProperty("healthproffesional ID")]
-        public int HealthProfId
+        public string HealthProfId
         {
             get => _healthProfId;
             set
@@ -156,9 +141,6 @@ namespace MobilePhoneCardiography.Models.Json
             PropertyChanged?.Invoke(this, eventArgs);
         }
 
-        public string id { get; set; }
-        public string PatientID { get; set; }
-        public DateTime date { get; set; }
         public event PropertyChangingEventHandler PropertyChanging;
     }
 }
