@@ -12,7 +12,6 @@ namespace DataAccessLayer
         #region Dependencies
         public IAudioRecorderService _recorder;
         public ITimeProvider _timeProvider;
-        public IFileAccess _fileAccess;
         #endregion
         #region Event
 
@@ -25,13 +24,12 @@ namespace DataAccessLayer
         #endregion
 
         public Recorder(EventHandler<RecordFinishedEventArgs> recordFinishedEventHandler, IAudioRecorderService audioRecorderService,
-            ITimeProvider timeProvider, IFileAccess fileAccess)
+            ITimeProvider timeProvider)
         {
             RecordFinishedEvent += recordFinishedEventHandler;
 
             _recorder = audioRecorderService ?? new ExtendedAudioRecorderService(HandleRecorderIsFinished);
             _timeProvider = timeProvider ?? new RealTimeProvider();
-            _fileAccess = fileAccess ?? new FileSystemAccess();
         }
 
         public Recorder(EventHandler<RecordFinishedEventArgs> recordFinishedEventHandler)
@@ -40,7 +38,6 @@ namespace DataAccessLayer
 
             _recorder = new ExtendedAudioRecorderService(HandleRecorderIsFinished);
             _timeProvider = new RealTimeProvider();
-            _fileAccess = new FileSystemAccess();
         }
 
         public void RecordAudio()

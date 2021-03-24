@@ -36,7 +36,6 @@ namespace DataAccessLayer.Test.Unit
         private EventHandler<RecordFinishedEventArgs> RecordFinishedEventHandler;
         private IAudioRecorderService sub_Recorder;
         private ITimeProvider sub_TimeProvider;
-        private IFileAccess sub_FileAccess;
         private RecordFinishedEventArgs _recordFinishedEventArgs;
         private DateTime testDateTime;
         [SetUp]
@@ -45,8 +44,7 @@ namespace DataAccessLayer.Test.Unit
             _recordFinishedEventArgs = null;
             sub_Recorder = Substitute.For<IAudioRecorderService>();
             sub_TimeProvider = Substitute.For<ITimeProvider>();
-            sub_FileAccess = Substitute.For<IFileAccess>();
-            UUT = new Recorder(RecordFinishedEventHandler, sub_Recorder, sub_TimeProvider, sub_FileAccess);
+            UUT = new Recorder(RecordFinishedEventHandler, sub_Recorder, sub_TimeProvider);
             sub_Recorder.AudioTimeout = 1; //gør tests meget hurtigere
             testDateTime = new DateTime(2012, 12, 31, 16, 00, 0);
             UUT.RecordFinishedEvent += (o, args) =>
