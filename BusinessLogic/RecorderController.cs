@@ -12,8 +12,6 @@ namespace BusinessLogic
 {
     public class RecorderController : IRecorderController
     {
-        private Measurement measureDTO;
-
         #region Props
 
         private string _pageText = "Du har nu åbnet Plugin Audio Recorder skærmen";
@@ -39,8 +37,14 @@ namespace BusinessLogic
             private set { _isRecording = value; }
         }
 
-        #endregion
+        private Measurement _measureDTO;
 
+        public Measurement MeasureDTO
+        {
+            get { return _measureDTO; }
+            set { _measureDTO = value; }
+        }
+        #endregion 
         #region Dependencies
 
         private IRecorder _recorderLogic;
@@ -49,6 +53,7 @@ namespace BusinessLogic
         private ISaveData _dataStorage;
 
         #endregion
+        #region Ctor
 
         public RecorderController(EventHandler<AnalyzeFinishedEventArgs> handleAnalyzeFinishedEvent)
         {
@@ -56,11 +61,11 @@ namespace BusinessLogic
             _soundModifyLogic = new SoundModifyLogic(null);
             _analyse = new AnalyzeLogic(handleAnalyzeFinishedEvent);
             _dataStorage = new FakeStorage(); //ligger som internal class
-          
+
             IsRecording = false;
         }
 
-        public RecorderController(EventHandler<AnalyzeFinishedEventArgs> handleAnalyzeFinishedEvent,IRecorder recorder,ISoundModifyLogic soundModifyLogic, IAnalyzeLogic analyzeLogic, ISaveData saveData)
+        public RecorderController(EventHandler<AnalyzeFinishedEventArgs> handleAnalyzeFinishedEvent, IRecorder recorder, ISoundModifyLogic soundModifyLogic, IAnalyzeLogic analyzeLogic, ISaveData saveData)
         {
             _recorderLogic = recorder ?? new Recorder(HandleRecordingFinishedEvent);
             _soundModifyLogic = soundModifyLogic ?? new SoundModifyLogic(null);
@@ -68,16 +73,14 @@ namespace BusinessLogic
             _dataStorage = saveData ?? new FakeStorage();
         }
 
-
-        public void PlayRecording()
-        {
-            _soundModifyLogic.PlayRecording(MeasureDTO.HeartSound);
-        }
+        #endregion
+        #region Metoder
 
         public void PlayRecording(Measurement measurement)
         {
             _soundModifyLogic.PlayRecording(measurement.HeartSound);
         }
+
 
         public void RecordAudio()
         {
@@ -87,13 +90,8 @@ namespace BusinessLogic
                 IsRecording = true;
             }
         }
-        private Measurement _measureDTO;
-
-        public Measurement MeasureDTO
-        {
-            get { return _measureDTO; }
-            set { _measureDTO = value; }
-        }
+        #endregion
+        #region EventHandler
 
         private void HandleRecordingFinishedEvent(object sender, RecordFinishedEventArgs e)
         {
@@ -102,6 +100,8 @@ namespace BusinessLogic
             MeasureDTO = _analyse.Analyze(MeasureDTO);
             _dataStorage.SaveToStorage(MeasureDTO);
         }
+
+        #endregion
     }
 
     internal class FakeStorage : ISaveData
