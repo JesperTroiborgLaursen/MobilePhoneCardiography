@@ -22,6 +22,7 @@ namespace DataAccessLayer
         }
 
         #endregion
+        #region Ctor
 
         public Recorder(EventHandler<RecordFinishedEventArgs> recordFinishedEventHandler, IAudioRecorderService audioRecorderService,
             ITimeProvider timeProvider)
@@ -38,13 +39,20 @@ namespace DataAccessLayer
 
             _recorder = new ExtendedAudioRecorderService(HandleRecorderIsFinished);
             _timeProvider = new RealTimeProvider();
+
+
         }
+        #endregion
+        #region Metoder
 
         public void RecordAudio()
         {
             _timeProvider.StartTimer();
             _recorder.StartRecording();
         }
+
+        #endregion
+        #region EventHandler
 
         public void HandleRecorderIsFinished(object sender, string e)
         {
@@ -62,5 +70,7 @@ namespace DataAccessLayer
                 measureDTO = tempMeasureDTO
             });
         }
+
+        #endregion
     }
 }

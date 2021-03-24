@@ -1,44 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
 using DataAccessLayer.Services.Interface;
-using Plugin.AudioRecorder;
 
 namespace DataAccessLayer
 {
-    public class ExtendedAudioPlayer : AudioPlayer, IAudioPlayer
-    {
-        public void PlaySound(string pathToAudioFile)
-        {
-            Debug.WriteLine("Optagelsen forsøges afspillles og optagelsen er færdig" + DateTime.Now.ToString());
-            try
-            {
-                Play(pathToAudioFile);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Optagelsen forsøges afspillles og optagelsen er færdig, men kunne ikke afspille " + DateTime.Now.ToString() + "\n" + e.Message);
-            }
-        }
-
-    }
-
-    public interface IAudioPlayer
-    {
-        event EventHandler FinishedPlaying;
-        void Pause();
-        void PlaySound(string pathToAudioFile);
-    }
-
-
     public class SoundPlayer : ISoundPlayer
     {
+        #region Fields
         public string _filePath;
+        #endregion
+        #region Dependencies
         private IAudioPlayer _player;
         private ISaveToMobile _localStorage;
         private IFileAccess _fileAccess;
+        #endregion
+        #region Ctor
 
         public SoundPlayer()
         {
@@ -48,6 +26,10 @@ namespace DataAccessLayer
 
             _filePath = _fileAccess.GetCombinePath("Recording.wav");
         }
+        
+
+        #endregion
+        #region Metoder
 
         /// <summary>
         /// Her bliver der afspillede en bestemt stream som skal injectieres.
@@ -64,19 +46,6 @@ namespace DataAccessLayer
             _player.PlaySound(_filePath);
         }
 
-
-        /// <summary>
-        /// Kan gemme et Stream objekt ned i en fil, hvis sti medtages som parameter
-        /// </summary>
-        /// <param name="path">Sti hvor lyden er gemt</param>
-        /// <param name="stream">Lyden der skal gemmes</param>
-        private void SaveFileStream(string path, Stream stream)
-        {
-            using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
-            {
-                stream.CopyTo(fileStream);
-                fileStream.Dispose();
-            }
-        }
+        #endregion
     }
 }
