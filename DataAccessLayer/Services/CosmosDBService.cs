@@ -12,9 +12,7 @@ using Microsoft.Azure.Documents.Linq;
 using Microsoft.Azure.Documents.SystemFunctions;
 using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Models.Json;
-using NUnit.Framework;
 using User = Microsoft.Azure.Documents.User;
-using NUnit.Framework;
 using DTOs;
 
 namespace DataAccessLayer
@@ -168,6 +166,38 @@ namespace DataAccessLayer
 
             return todos;
         }
+
+        public async Task<List<DateTime>> GetPatientDateTimes(IMeasurement measurement)
+        {
+            List<DateTime> patientDateTimes = new List<DateTime>();
+
+            List<DateTime> todos;
+            todos = new List<DateTime>();
+
+            if (!await Initialize())
+                return todos;
+
+            var todoQuery = docClient.CreateDocumentQuery<JsonPatientId>(
+                    UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
+                    new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
+                .Where(todo => todo.PatientId == measurement.PatientID)
+                .AsDocumentQuery();
+
+            foreach (var dateTime in todos)
+            {
+                patientDateTimes.Add(measurement.StartTime);
+            }
+            while (todoQuery.HasMoreResults)
+            {
+                var queryResults = await todoQuery.ExecuteNextAsync<DateTime>();
+                todos.AddRange(queryResults);
+            }
+
+            return patientDateTimes;
+            //Liste med alle datoer for den pågældende patient videresendes
+
+        }
+
         #endregion
         #region NotYetImplementet
         //TODO The Interface implementations, is just there to remove conflicts

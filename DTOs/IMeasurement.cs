@@ -3,15 +3,7 @@ using System.IO;
 
 namespace DTOs
 {
-    public enum PlacementOfDeviceEnum
-    {
-        CorDexter = 1,
-        CorSinister = 2,
-        CorInfra = 3
-    };
-
-
-    public class Measurement: IMeasurement
+    public interface IMeasurement
     {
         public int Id { get; set; }
         public Stream HeartSound { get; set; }
@@ -22,14 +14,5 @@ namespace DTOs
 
         public PlacementOfDeviceEnum PlacementEnum { get; set; }
 
-        public Measurement()
-        {
-            
-        }
-        public Measurement(DateTime startTime)
-        {
-            StartTime = startTime;
-        }
-      
     }
 }

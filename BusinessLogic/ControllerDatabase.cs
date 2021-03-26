@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DataAccessLayer;
 using DTOs;
 using MobilePhoneCardiography.Models;
+using MobilePhoneCardiography.Models.Json;
 
 namespace MobilePhoneCardiography.Services.DataStore
 {
@@ -54,6 +56,15 @@ namespace MobilePhoneCardiography.Services.DataStore
 
             //}
             return false;
+        }
+
+        public async Task<List<DateTime>> GetPatientLibrary(IMeasurement measurenent) //Er det ikke kun socSec vi skal have fat i?
+        {
+            var todos = new List<DateTime>();
+
+            todos = await cosmosDbService.GetPatientDateTimes(measurenent);
+            
+            return todos;
         }
 
     }

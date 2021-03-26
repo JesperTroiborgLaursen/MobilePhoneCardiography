@@ -13,11 +13,13 @@ namespace DataAccessLayer
 
         public Task<List<JsonProfessionalUser>> GetLogin(IUser iUser);
         public Task<List<JsonPatientId>> GetSSN(IPatient iPatient);
+        public Task<List<DateTime>> GetPatientDateTimes(IMeasurement measurement);
         public Task InsertToDoItem(Object item);
         public  Task DeleteToDoItem(Object item);
         public  Task UpdateToDoItem(Object item);
 
         public string DatabaseChoice(EnumDatabase databaseChoice);
+
 
     }
 }
