@@ -16,6 +16,7 @@ namespace MobilePhoneCardiography.Services.DataStore
                 sBuilder.Append(data[i].ToString("x2"));
             }
             return sBuilder.ToString();
+
         }
     }
 
