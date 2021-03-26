@@ -10,11 +10,9 @@
     <PackageReference Include="Microsoft.Azure.DocumentDB" Version="2.13.1" />
     <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.13.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1-beta1" />
-<<<<<<< HEAD
+
     <PackageReference Include="Plugin.AudioRecorder" Version="1.1.0" />
-=======
->>>>>>> CosmosDB_StoreHeartSound_FeatureAndTest
-    <PackageReference Include="System.Linq" Version="4.3.0" />
+  <PackageReference Include="System.Linq" Version="4.3.0" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
 
