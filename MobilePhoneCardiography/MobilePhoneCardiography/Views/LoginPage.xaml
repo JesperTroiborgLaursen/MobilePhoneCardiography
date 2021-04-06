@@ -23,7 +23,7 @@
             <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
                 <Label Text="Welcome to your Mobile Phonocardiograpic App. Please choose type of user:" FontSize="Title"/>
                 <Button VerticalOptions="Center" Text="Private User" AutomationId ="PrivateUserLoginButton"  Command="{Binding LoginPBCommand}"/>
-                <Button VerticalOptions="Center" Text="Healthcare Professional" Command="{Binding LoginSPCommand}"/>
+                <Button VerticalOptions="Center" Text="Healthcare Professional" AutomationId ="HealthUserLoginButton"  Command="{Binding LoginSPCommand}"/>
             </StackLayout>
 
     </ContentPage.Content>
