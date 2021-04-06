@@ -25,8 +25,6 @@ namespace UITest2
             app = AppInitializer.StartApp(platform);
             app.Tap("PrivateUserLoginButton");
             app.Tap(c => c.Marked("Patients"));
-
-
         }
 
         [Test]
@@ -262,6 +260,25 @@ namespace UITest2
 
             //Assert
             Assert.That(consentLabelVisible, Is.EqualTo("Please confirm with the patient if this information is correct, and if he/she consent with the usage of his/hers data"));
+        }
+
+
+        [Test]
+        public void ConfirmButton_LoadPatientAndPressConfirm_RecordingsTabOpened()
+        {
+
+            //Arrange
+            app.Tap("SocSecSearch");
+            app.EnterText("SocSecSearch", "2234567890");
+            app.PressEnter();
+            app.Tap("FindPatientButton");
+
+            //Act
+            app.Tap("ConfirmButton");
+            var tabElement = app.WaitForElement("RecordingsTab");
+
+            //Assert
+            Assert.That(tabElement, Is.Not.Null);
         }
 
 
