@@ -54,7 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microcharts">
+    <PackageReference Include="Microcharts.Forms">
       <Version>0.9.5.9</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Azure.Cosmos">
