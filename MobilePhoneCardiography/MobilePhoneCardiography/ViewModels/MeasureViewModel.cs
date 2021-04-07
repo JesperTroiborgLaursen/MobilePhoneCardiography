@@ -124,6 +124,7 @@ namespace MobilePhoneCardiography.ViewModels
             //Todo Denne linje skal væk når vi har introduceret RecordingsViewet
             //da den på nuværende tidspunkt blot afspiller lyden med det samme
             _recorderController.PlayRecording(MeasureDTO);
+
         }
 
     }
