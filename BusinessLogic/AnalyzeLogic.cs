@@ -8,6 +8,8 @@ using Xamarin.Essentials;
 
 namespace BusinessLogic
 {
+
+
     public class AnalyzeLogic : IAnalyzeLogic
     {
         private Measurement analysisObject;
