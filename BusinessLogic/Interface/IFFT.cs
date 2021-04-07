@@ -2,7 +2,7 @@
 
 namespace BusinessLogic
 {
-    internal interface IFFT
+    public interface IFFT
     {
         Measurement Analyze(Measurement DTO);
 

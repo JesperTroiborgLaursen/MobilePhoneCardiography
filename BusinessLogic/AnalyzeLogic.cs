@@ -13,9 +13,13 @@ namespace BusinessLogic
     public class AnalyzeLogic : IAnalyzeLogic
     {
         private Measurement analysisObject;
-        public AnalyzeLogic(EventHandler<AnalyzeFinishedEventArgs> handleAnalyzeFinishedEvent)
+        private IFFT interfaceFFT;
+
+        public AnalyzeLogic(EventHandler<AnalyzeFinishedEventArgs> handleAnalyzeFinishedEvent, IFFT interfaceFFT)
         {
             AnalyzeFinishedEvent += handleAnalyzeFinishedEvent;
+            this.interfaceFFT = interfaceFFT;
+
         }
         #region Event
         public event EventHandler<AnalyzeFinishedEventArgs> AnalyzeFinishedEvent;
@@ -29,20 +33,12 @@ namespace BusinessLogic
         {
             analysisObject = DTO;
             analysisObject.HeartSound = GetTestSound();
-            analysisObject.ProbabilityProcent = Analyze1();
+            analysisObject = interfaceFFT.Analyze(analysisObject);
             OnAnalyzeFinished(new AnalyzeFinishedEventArgs()
             {
                 DTO = analysisObject
             });
             return analysisObject;
-        }
-
-        //ToDo Vi skal have rette dette så vi ikke er låst til "13%"
-        //Her skal vi analysere dataen
-        private int Analyze1()
-        {
-            return 13;
-
         }
 
         private Stream GetTestSound()

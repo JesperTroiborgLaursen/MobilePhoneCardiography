@@ -59,7 +59,7 @@ namespace BusinessLogic
         {
             _recorderLogic = new Recorder(HandleRecordingFinishedEvent);
             _soundModifyLogic = new SoundModifyLogic(null);
-            _analyse = new AnalyzeLogic(handleAnalyzeFinishedEvent);
+            _analyse = new AnalyzeLogic(handleAnalyzeFinishedEvent, new FakeAnalyse());
             _dataStorage = new FakeStorage(); //ligger som internal class
 
             IsRecording = false;
@@ -69,7 +69,7 @@ namespace BusinessLogic
         {
             _recorderLogic = recorder ?? new Recorder(HandleRecordingFinishedEvent);
             _soundModifyLogic = soundModifyLogic ?? new SoundModifyLogic(null);
-            _analyse = analyzeLogic ?? new AnalyzeLogic(handleAnalyzeFinishedEvent);
+            _analyse = analyzeLogic ?? new AnalyzeLogic(handleAnalyzeFinishedEvent, new FakeAnalyse());
             _dataStorage = saveData ?? new FakeStorage();
         }
 
@@ -109,6 +109,14 @@ namespace BusinessLogic
         public void SaveToStorage(Measurement elementToStorage)
         {
             System.Diagnostics.Debug.WriteLine("Dine data er nu gemt");
+        }
+    }
+
+    internal class FakeAnalyse : IFFT
+    {
+        public Measurement Analyze(Measurement DTO)
+        {
+            return DTO;
         }
     }
 }
