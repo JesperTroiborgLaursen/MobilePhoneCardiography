@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Entry = Microcharts.ChartEntry;
 
 namespace MobilePhoneCardiography.ViewModels
 {
@@ -50,7 +52,6 @@ namespace MobilePhoneCardiography.ViewModels
         }
 
 
-
         private async void OnNewRecordingClicked(object obj)
         {
             // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
@@ -84,8 +85,21 @@ namespace MobilePhoneCardiography.ViewModels
         {
             IsBusy = true;
             SelectedMeasurement = null;
+            
+
+
         }
 
+       
+        //TODO this is entries for the chart line
+        private readonly List<Microcharts.ChartEntry> _entry = new List<Microcharts.ChartEntry>()
+       {
+           new Microcharts.ChartEntry(100)
+           {
+               Label = "Record1"
+           },
+       };
+        
         public Measurement SelectedMeasurement
         {
             get => _selectedMeasurement;
@@ -113,6 +127,7 @@ namespace MobilePhoneCardiography.ViewModels
         private void StartRecordTask()
         {
             _recorderController.RecordAudio();
+
         }
 
         public DTOs.Measurement MeasureDTO { get; set; }

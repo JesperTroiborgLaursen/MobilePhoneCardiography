@@ -1,13 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MobilePhoneCardiography.Views.MeasureView"
              xmlns:vm="clr-namespace:MobilePhoneCardiography.ViewModels"
+             xmlns:local="clr-namespace:MobilePhoneCardiography.ViewModels"
              xmlns:models="clr-namespace:MobilePhoneCardiography.Models;assembly=MobilePhoneCardiography"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="MobilePhoneCardiography.Views.MeasureView"
              Title="{Binding Title}">
-    
+   
+
+
     <ContentPage.BindingContext>
         <vm:MeasureViewModel />
+
     </ContentPage.BindingContext>
     
     <ContentPage.Resources>
@@ -16,6 +22,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
+    
 
 
     <Frame BackgroundColor="AliceBlue">
@@ -33,9 +40,16 @@
                 </Grid>
             </StackLayout>
 
+            <!--This is the frame where we put in our graph-->
             <Frame VerticalOptions="FillAndExpand">
+                <StackLayout>
+                    <Label Text="Microcharts"/>
+                    <forms:ChartView x:Name="MyLineChart" HeightRequest="50"/>
+                    <microcharts:ChartView x:Name="chartView" />
+                </StackLayout>
 
             </Frame>
+
             <StackLayout>
                 <Label FontSize="Medium" HorizontalTextAlignment="Center" Text="Gain"/>
                 <Slider   Value="1.0" MinimumTrackColor="LightBlue" MaximumTrackColor="AliceBlue" Minimum="0.05" Maximum="2.0"/>
