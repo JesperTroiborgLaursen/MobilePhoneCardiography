@@ -23,6 +23,32 @@ namespace UITest2
         }
 
 
+        [Test]
+        public void PrivateUserLoginButton_PressPrivateUserLoginButton_RecordingsTabOpened()
+        {
+            //Arrange
+
+            //Act
+            app.Tap("PrivateUserLoginButton");
+            var tabElement = app.WaitForElement("RecordingsTab");
+
+            //Assert
+            Assert.That(tabElement, Is.Not.Null);
+        }
+
+
+        [Test]
+        public void HealthUserLoginButton_PressHealthUserLoginButton_HealthLoginTabOpened()
+        {
+            //Arrange
+
+            //Act
+            app.Tap("HealthUserLoginButton");
+            var tabElement = app.WaitForElement("HealthUserLoginTab");
+
+            //Assert
+            Assert.That(tabElement, Is.Not.Null);
+        }
 
 
 

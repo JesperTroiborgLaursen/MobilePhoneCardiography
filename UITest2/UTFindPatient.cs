@@ -266,7 +266,6 @@ namespace UITest2
         [Test]
         public void ConfirmButton_LoadPatientAndPressConfirm_RecordingsTabOpened()
         {
-
             //Arrange
             app.Tap("SocSecSearch");
             app.EnterText("SocSecSearch", "2234567890");

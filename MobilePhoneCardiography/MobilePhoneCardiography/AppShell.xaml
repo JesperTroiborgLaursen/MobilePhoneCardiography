@@ -87,7 +87,7 @@
         <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Healthcare Professional Login" Icon="" FlyoutItemIsVisible="False">
-        <ShellContent Route="LoginSPView" ContentTemplate="{DataTemplate local:LoginSPView}" />
+        <ShellContent Route="LoginSPView" AutomationId="HealthUserLoginTab" ContentTemplate="{DataTemplate local:LoginSPView}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Measurement" Icon="icon_feed.png">
