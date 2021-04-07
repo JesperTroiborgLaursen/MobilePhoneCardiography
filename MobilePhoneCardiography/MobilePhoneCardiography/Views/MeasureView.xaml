@@ -6,7 +6,7 @@
              xmlns:models="clr-namespace:MobilePhoneCardiography.Models;assembly=MobilePhoneCardiography"
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
-             x:Class="MobilePhoneCardiography.Views.MeasureView"
+             x:Class="MobilePhoneCardiography.ViewModels.MeasureViewModel"   
              Title="{Binding Title}">
    
 

@@ -11,7 +11,6 @@ using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Entry = Microcharts.ChartEntry;
 
 namespace MobilePhoneCardiography.ViewModels
 {
