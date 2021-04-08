@@ -44,10 +44,9 @@
             <Frame VerticalOptions="FillAndExpand">
                 <StackLayout>
                     <Label Text="Microcharts"/>
-                    <forms:ChartView x:Name="MyLineChart" HeightRequest="50"/>
-                    <microcharts:ChartView x:Name="chartView" />
+                    <forms:ChartView x:Name="chartView1" HeightRequest="50"/>
+                    <microcharts:ChartView x:Name="chartView" HeightRequest="200"/>
                 </StackLayout>
-
             </Frame>
 
             <StackLayout>

@@ -11,13 +11,15 @@ using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Microcharts.Forms;
+using Microcharts;
+using SkiaSharp;
 
 namespace MobilePhoneCardiography.ViewModels
 {
     public class MeasureViewModel : BaseViewModel
 
     {
-
         private Measurement _selectedMeasurement;
 
         public ObservableCollection<Measurement> Measurements { get; }
@@ -84,21 +86,10 @@ namespace MobilePhoneCardiography.ViewModels
         {
             IsBusy = true;
             SelectedMeasurement = null;
-            
-
-
         }
 
-       
-        //TODO this is entries for the chart line
-        private readonly List<Microcharts.ChartEntry> _entry = new List<Microcharts.ChartEntry>()
-       {
-           new Microcharts.ChartEntry(100)
-           {
-               Label = "Record1"
-           },
-       };
-        
+
+     
         public Measurement SelectedMeasurement
         {
             get => _selectedMeasurement;
