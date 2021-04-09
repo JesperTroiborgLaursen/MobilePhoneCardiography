@@ -2,6 +2,7 @@
 using MobilePhoneCardiography.Views;
 using System;
 using DataAccessLayer.Services;
+using EventArgss;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,7 +10,6 @@ namespace MobilePhoneCardiography
 {
     public partial class App : Application
     {
-
         public App()
         {
             InitializeComponent();
@@ -32,5 +32,7 @@ namespace MobilePhoneCardiography
         protected override void OnResume()
         {
         }
+
+        
     }
 }

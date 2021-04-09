@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using DataAccessLayer;
 using DTOs;
+using EventArgss;
 using MobilePhoneCardiography.Services.DataStore;
 using MobilePhoneCardiography.Views;
 using Xamarin.Forms;
@@ -24,6 +25,7 @@ namespace MobilePhoneCardiography.ViewModels
         private bool consentVisible;
         private string consentFrameOpacity = "0";
         private ControllerDatabase controllerDatabase;
+        public bool IsProUser { get; set; }
         public FindPatientViewModel()
         {
             controllerDatabase = new ControllerDatabase(new CosmosDBService(EnumDatabase.Patient,DateTime.Now));
@@ -32,6 +34,7 @@ namespace MobilePhoneCardiography.ViewModels
             ConfirmCommand = new Command(Confirm);
             this.PropertyChanged +=
                 (_, __) => FindPatientCommand.ChangeCanExecute();
+            IsProUser = false;
         }
 
         private async void Confirm()
@@ -171,10 +174,16 @@ namespace MobilePhoneCardiography.ViewModels
             }
             // This will pop the current page off the navigation stack
             //TODO DENNE SKAL IKKE VISES; ELLERS KAN MAN IKKE TJEKKE OM DET ER DEN KORREKTE PATIENT
-           
+
             //await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
+        }
 
-
+        public void HandleUserChangedEvent(object sender, UserChangedEventArgs e)
+        {
+            if (e.CurrentUser.Id != "0")
+            {
+                IsProUser = true;
+            }
         }
     }
 }

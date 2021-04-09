@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Input;
 using DataAccessLayer;
 using DTOs;
+using EventArgss;
 using MobilePhoneCardiography.Services.DataStore;
 using MobilePhoneCardiography.Views;
 using Xamarin.Forms;
@@ -20,11 +21,13 @@ namespace MobilePhoneCardiography.ViewModels
         private ControllerDatabase controllerDatabase;
 
         //TODO SKAL FJERNES IGEN; KUN ITL AT TESTE DATABASE
-       
+
+
+        public event EventHandler<UserChangedEventArgs> UserChangedEvent;
+        
         public LoginSPViewModel()
         {
             controllerDatabase = new ControllerDatabase(new CosmosDBService(EnumDatabase.Professionel, DateTime.Now));
-
 
             LoginCommand = new Command(OnLogin, ValidateLoginNotBlank);
             ForgotPWCommand = new Command(OnForgotPW);
@@ -59,6 +62,11 @@ namespace MobilePhoneCardiography.ViewModels
             await Shell.Current.GoToAsync("..");
         }
 
+        public void OnUserChange(UserChangedEventArgs e)
+        {
+            UserChangedEvent?.Invoke(this, e);
+        }
+
         private async void OnLogin()
         {
             IUser newUser = new User()
@@ -73,8 +81,9 @@ namespace MobilePhoneCardiography.ViewModels
             
             //var validateLogin = await controllerDatabase.ValidateLogin(newUser);
 
-            if (validateLogin == true)
+            if (validateLogin)
             {
+                OnUserChange(new UserChangedEventArgs(){CurrentUser = newUser});
                 // This will pop the current page off the navigation stack
                 await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
             }
