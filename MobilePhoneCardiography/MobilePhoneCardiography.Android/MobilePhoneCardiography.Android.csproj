@@ -140,6 +140,37 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\TestHjertelyd1_44100.wav" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <AndroidAsset Include="Assets\HeartSounds\Training-A-5\Normal\a0007_10s.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\HeartSounds\Training-A-5\Normal\a0011_10s.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\HeartSounds\Training-A-5\Normal\a0012_10s.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\HeartSounds\Training-A-5\Normal\a0016_10s.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\HeartSounds\Training-A-5\Normal\a0019_10s.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\HeartSounds\Training-A-5\Abnormal\a0001_10s.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\HeartSounds\Training-A-5\Abnormal\a0002_10s.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\HeartSounds\Training-A-5\Abnormal\a0003_10s.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\HeartSounds\Training-A-5\Abnormal\a0004_10s.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\HeartSounds\Training-A-5\Abnormal\a0005_10s.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
