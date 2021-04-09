@@ -21,6 +21,7 @@ namespace UITest2
         public void BeforeEachTest()
         {
             app = AppInitializer.StartApp(platform);
+            app.Tap("HealthUserLoginButton");
         }
 
 
