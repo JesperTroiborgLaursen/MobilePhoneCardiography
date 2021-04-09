@@ -65,6 +65,7 @@
     <Compile Include="UTFindPatient.cs" />
     <Compile Include="AppInitializer.cs" />
     <Compile Include="UTLoginPage.cs" />
+    <Compile Include="UTLoginSPView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

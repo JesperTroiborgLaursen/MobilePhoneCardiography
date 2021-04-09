@@ -29,6 +29,7 @@ namespace MobilePhoneCardiography.ViewModels
         {
             controllerDatabase = new ControllerDatabase(new CosmosDBService(EnumDatabase.Professionel, DateTime.Now));
 
+
             LoginCommand = new Command(OnLogin, ValidateLoginNotBlank);
             ForgotPWCommand = new Command(OnForgotPW);
             this.PropertyChanged +=
