@@ -23,5 +23,8 @@ namespace UITest2
             app.Tap("PrivateUserLoginButton");
             app.Tap(c => c.Marked("Measure"));
         }
+
+
+
     }
 }

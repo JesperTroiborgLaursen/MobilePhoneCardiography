@@ -15,6 +15,8 @@ namespace MobilePhoneCardiography.ViewModels
     {
         private Measurement _selectedMeasurement;
 
+        public Patient SelectedPatient { get; set; }
+
         public ObservableCollection<Measurement> Measurements { get; }
         public Command LoadMeasurementsCommand { get; }
         public Command AddMeasurementCommand { get; }
@@ -33,6 +35,8 @@ namespace MobilePhoneCardiography.ViewModels
             MeasurementTapped = new Command<Measurement>(OnItemSelected);
 
             AddMeasurementCommand = new Command(OnAddMeasurement);
+
+            SelectedPatient = new Patient() {Id = "0"};
         }
 
 
@@ -54,7 +58,11 @@ namespace MobilePhoneCardiography.ViewModels
                 var measurements = await DataStoreUserMeasurement.GetItemsAsync(true);
                 foreach (var measurement in measurements)
                 {
-                    Measurements.Add(measurement);
+                    if (measurement.PatientID == SelectedPatient.Id)
+                    {
+                        Measurements.Add(measurement);
+                    }
+                    
                 }
             }
             catch (Exception ex)
