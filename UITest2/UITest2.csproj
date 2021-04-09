@@ -66,6 +66,9 @@
     <Compile Include="AppInitializer.cs" />
     <Compile Include="UTLoginPage.cs" />
     <Compile Include="UTLoginSPView.cs" />
+    <Compile Include="UTMeasureView.cs" />
+    <Compile Include="UTMeasurementDetailView.cs" />
+    <Compile Include="UTRecordingsView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
