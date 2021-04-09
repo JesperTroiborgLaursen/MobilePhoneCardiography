@@ -17,10 +17,10 @@ namespace DataAccessLayer.Services
         {
             measurements = new List<Measurement>()
             {
-                new Measurement{HealthProfID = "1",PatientID = "123346-1234",PlacementEnum = PlacementOfDeviceEnum.CorDexter,
+                new Measurement{Id = 1, HealthProfID = "1",PatientID = "123346-1234",PlacementEnum = PlacementOfDeviceEnum.CorDexter,
                     ProbabilityProcent = 50,HeartSound = Stream.Null, StartTime = DateTime.Now},
 
-                new Measurement{HealthProfID = "2",PatientID = "234567-2345",PlacementEnum = PlacementOfDeviceEnum.CorInfra,
+                new Measurement{Id = 2, HealthProfID = "2",PatientID = "234567-2345",PlacementEnum = PlacementOfDeviceEnum.CorInfra,
                     ProbabilityProcent = 90,HeartSound = Stream.Null, StartTime = DateTime.Now},
 
 
@@ -37,7 +37,7 @@ namespace DataAccessLayer.Services
 
         public async Task<bool> UpdateItemAsync(Measurement measurement)
         {
-            var oldMeasurement = measurements.Where((Measurement arg) => arg.StartTime == measurement.StartTime).FirstOrDefault();
+            var oldMeasurement = measurements.Where((Measurement arg) => arg.Id == measurement.Id).FirstOrDefault();
             measurements.Remove(oldMeasurement);
             measurements.Add(measurement);
 
@@ -46,7 +46,7 @@ namespace DataAccessLayer.Services
 
         public async Task<bool> DeleteItemAsync(long id)
         {
-            var oldMeasurement = measurements.Where((Measurement arg) => arg.StartTime ==Convert.ToDateTime(id)).FirstOrDefault();
+            var oldMeasurement = measurements.Where((Measurement arg) => arg.Id ==id).FirstOrDefault();
             measurements.Remove(oldMeasurement);
 
             return await Task.FromResult(true);
@@ -54,7 +54,7 @@ namespace DataAccessLayer.Services
 
         public async Task<Measurement> GetItemAsync(long id)
         {
-            return await Task.FromResult(measurements.FirstOrDefault(s => s.StartTime == Convert.ToDateTime(id)));
+            return await Task.FromResult(measurements.FirstOrDefault(s => s.Id == id));
         }
 
         public async Task<IEnumerable<Measurement>> GetItemsAsync(bool forceRefresh = false)
