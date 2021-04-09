@@ -6,7 +6,8 @@ using DataAccessLayer;
 using DataAccessLayer.Services.Interface;
 using DTOs;
 using EventArgss;
-
+using Microcharts;
+using SkiaSharp;
 
 namespace BusinessLogic
 {
@@ -89,6 +90,40 @@ namespace BusinessLogic
                 _recorderLogic.RecordAudio();
                 IsRecording = true;
             }
+        }
+
+        public ChartEntry[] PlotRecording(Stream recording)
+        {
+            byte[] tempBytes = ReadFully(recording);
+            ChartEntry[] entries = new ChartEntry[tempBytes.Length];
+
+            int i = 0;
+            foreach (var tempByte in tempBytes)
+            {
+                entries[i] = new Microcharts.ChartEntry(tempByte)
+                {
+                    Color = SKColor.Parse("#2c3e50")
+                };
+                i++;
+            }
+            return entries;
+
+        }
+
+        //TODO Temporary method - delete when Mads and Emils branch is merged to master
+        public byte[] ReadFully(Stream input)
+        {
+            byte[] buffer = new byte[16 * 1024];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int read;
+                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+                return ms.ToArray();
+            }
+
         }
         #endregion
         #region EventHandler

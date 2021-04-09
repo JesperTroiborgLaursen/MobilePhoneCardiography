@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using DTOs;
+using Microcharts;
 
 namespace BusinessLogic
 {
@@ -9,6 +10,7 @@ namespace BusinessLogic
     {
         void PlayRecording(Measurement measurement);
         void RecordAudio();
+        public ChartEntry[] PlotRecording(Stream recording);
         bool IsRecording { get; }
         string PageText { get; set; }
 

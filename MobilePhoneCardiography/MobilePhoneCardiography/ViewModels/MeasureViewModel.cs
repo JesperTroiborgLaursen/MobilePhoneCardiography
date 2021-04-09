@@ -20,6 +20,8 @@ namespace MobilePhoneCardiography.ViewModels
     public class MeasureViewModel : BaseViewModel
 
     {
+        #region Attributter og dependencies
+
         private Measurement _selectedMeasurement;
 
         public ObservableCollection<Measurement> Measurements { get; }
@@ -31,10 +33,13 @@ namespace MobilePhoneCardiography.ViewModels
         public ICommand OpenWebCommand { get; }
 
         public ICommand NewRecordingCommand { get; }
-
+        
 
         public ICommand RecordAudioCommand { get; }
 
+        public ChartEntry[] ChartValues { get; set; }
+        #endregion
+        #region Constructor
         public MeasureViewModel()
         {
             Title = "Measure";
@@ -52,7 +57,8 @@ namespace MobilePhoneCardiography.ViewModels
             _recorderController = new RecorderController(HandleAnalyzeFinishedEvent);
         }
 
-
+        #endregion
+        #region Methods
         private async void OnNewRecordingClicked(object obj)
         {
             // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
@@ -129,7 +135,8 @@ namespace MobilePhoneCardiography.ViewModels
             //Todo Denne linje skal væk når vi har introduceret RecordingsViewet
             //da den på nuværende tidspunkt blot afspiller lyden med det samme
             _recorderController.PlayRecording(MeasureDTO);
+            ChartValues = _recorderController.PlotRecording(MeasureDTO.HeartSound);
         }
-
+        #endregion
     }
 }
