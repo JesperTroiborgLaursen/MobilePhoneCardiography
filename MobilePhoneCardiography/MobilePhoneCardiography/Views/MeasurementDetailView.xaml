@@ -33,6 +33,8 @@
                     <StackLayout Grid.Column="1" Grid.Row="0" HorizontalOptions="FillAndExpand">
                         <Entry Text="Length" FontSize="Medium" IsEnabled="False"/>
                         <Label Text="{Binding AmountOfSamples}" FontSize="Small" IsEnabled="False"/>
+                        <Entry Text="Placement" FontSize="Medium" IsEnabled="False"/>
+                        <Label Text="{Binding PlacementOfDevice}" AutomationId="PlacementLabel" FontSize="Small" IsEnabled="False"/>
                     </StackLayout>
                 </Grid>
                 <Grid>
