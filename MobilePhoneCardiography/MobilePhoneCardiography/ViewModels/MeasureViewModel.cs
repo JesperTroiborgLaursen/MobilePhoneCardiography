@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -14,6 +14,7 @@ using Xamarin.Forms;
 using Microcharts.Forms;
 using Microcharts;
 using SkiaSharp;
+using System.Threading;
 
 namespace MobilePhoneCardiography.ViewModels
 {
@@ -21,6 +22,8 @@ namespace MobilePhoneCardiography.ViewModels
 
     {
         #region Attributter og dependencies
+
+        public event EventHandler<GraphReadyEventArgs> graphReadyEvent;
 
         private Measurement _selectedMeasurement;
 
@@ -123,8 +126,7 @@ namespace MobilePhoneCardiography.ViewModels
         private void StartRecordTask()
         {
             _recorderController.RecordAudio();
-            ChartValuesMvm = _recorderController.ChartValues;
-            //_measureView.SetChartValues();
+            
         }
 
         public DTOs.Measurement MeasureDTO { get; set; }
@@ -136,7 +138,18 @@ namespace MobilePhoneCardiography.ViewModels
             //Todo Denne linje skal væk når vi har introduceret RecordingsViewet
             //da den på nuværende tidspunkt blot afspiller lyden med det samme
             _recorderController.PlayRecording(MeasureDTO);
-           
+            ChartValuesMvm = _recorderController.ChartValues;
+            
+            if (ChartValuesMvm != null)
+            {
+                ChartEntry[] tempArray = ChartValuesMvm.Take(5000).ToArray<ChartEntry>();
+                OnGraphReady(new GraphReadyEventArgs { ChartValues = tempArray });
+            }
+        }
+
+        public void OnGraphReady(GraphReadyEventArgs e)
+        {
+            graphReadyEvent?.Invoke(this, e);
         }
         #endregion
     }

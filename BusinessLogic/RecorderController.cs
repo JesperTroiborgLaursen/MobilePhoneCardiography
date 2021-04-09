@@ -14,7 +14,7 @@ using MobilePhoneCardiography.Services.DataStore;
 
 namespace BusinessLogic
 {
-   
+
     public class RecorderController : IRecorderController
     {
         #region Props
@@ -84,7 +84,7 @@ namespace BusinessLogic
         #endregion
         #region Metoder
 
-        
+
         public void PlayRecording(Measurement measurement)
         {
             _soundModifyLogic.PlayRecording(measurement.HeartSound);
@@ -100,7 +100,7 @@ namespace BusinessLogic
             }
         }
 
-        public ChartEntry[] PlotRecording(Stream recording)
+        public ChartEntry[] ProcessStreamValues(Stream recording)
         {
 
             byte[] tempBytes = ReadToEnd(recording);  //TODO how do we fix this method ReadFully(recording);
@@ -109,10 +109,15 @@ namespace BusinessLogic
             int i = 0;
             foreach (var tempByte in tempBytes)
             {
-                entries[i] = new Microcharts.ChartEntry(tempByte)
-                {
-                    Color = SKColor.Parse("#2c3e50")
-                };
+                entries[i] = new Microcharts.ChartEntry(tempByte);
+                //{
+
+                //    Label = "sample",
+                //    ValueLabel = tempByte.ToString(),
+                //    Color = SKColor.Parse("#b455b6")
+
+
+                //};
                 i++;
             }
             return entries;
@@ -196,7 +201,9 @@ namespace BusinessLogic
             MeasureDTO = e.measureDTO;
             MeasureDTO = _analyse.Analyze(MeasureDTO);
             _dataStorage.SaveToStorage(MeasureDTO);
-            ChartValues = PlotRecording(MeasureDTO.HeartSound);
+            ChartValues = ProcessStreamValues(MeasureDTO.HeartSound);
+            
+
         }
 
         #endregion
