@@ -11,6 +11,7 @@ namespace BusinessLogic
         void PlayRecording(Measurement measurement);
         void RecordAudio();
         public ChartEntry[] PlotRecording(Stream recording);
+        public ChartEntry[] ChartValues { get; set; }
         bool IsRecording { get; }
         string PageText { get; set; }
 

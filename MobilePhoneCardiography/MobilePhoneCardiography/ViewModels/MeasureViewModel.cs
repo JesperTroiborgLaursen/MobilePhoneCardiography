@@ -37,7 +37,7 @@ namespace MobilePhoneCardiography.ViewModels
 
         public ICommand RecordAudioCommand { get; }
 
-        public ChartEntry[] ChartValues { get; set; }
+        public ChartEntry[] ChartValuesMvm { get; set; }
         #endregion
         #region Constructor
         public MeasureViewModel()
@@ -123,7 +123,8 @@ namespace MobilePhoneCardiography.ViewModels
         private void StartRecordTask()
         {
             _recorderController.RecordAudio();
-
+            ChartValuesMvm = _recorderController.ChartValues;
+            //_measureView.SetChartValues();
         }
 
         public DTOs.Measurement MeasureDTO { get; set; }
@@ -135,7 +136,7 @@ namespace MobilePhoneCardiography.ViewModels
             //Todo Denne linje skal væk når vi har introduceret RecordingsViewet
             //da den på nuværende tidspunkt blot afspiller lyden med det samme
             _recorderController.PlayRecording(MeasureDTO);
-            ChartValues = _recorderController.PlotRecording(MeasureDTO.HeartSound);
+           
         }
         #endregion
     }
