@@ -16,6 +16,10 @@ namespace MobilePhoneCardiography.Views
         {
             InitializeComponent();
             this.BindingContext = new LoginViewModel();
+
+           
+            
         }
+        
     }
 }

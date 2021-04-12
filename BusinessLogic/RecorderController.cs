@@ -51,6 +51,7 @@ namespace BusinessLogic
         }
         public ChartEntry[] ChartValues { get; set; }
 
+
         #endregion 
         #region Dependencies
 
@@ -58,6 +59,7 @@ namespace BusinessLogic
         private ISoundModifyLogic _soundModifyLogic;
         private IAnalyzeLogic _analyse;
         private ISaveData _dataStorage;
+        private IGraphFeatures _graphFeatures;
         #endregion
         #region Ctor
 
@@ -67,7 +69,7 @@ namespace BusinessLogic
             _soundModifyLogic = new SoundModifyLogic(null);
             _analyse = new AnalyzeLogic(handleAnalyzeFinishedEvent);
             _dataStorage = new FakeStorage(); //ligger som internal class
-
+            _graphFeatures = new GraphFeatures();
             IsRecording = false;
 
         }
@@ -78,6 +80,8 @@ namespace BusinessLogic
             _soundModifyLogic = soundModifyLogic ?? new SoundModifyLogic(null);
             _analyse = analyzeLogic ?? new AnalyzeLogic(handleAnalyzeFinishedEvent);
             _dataStorage = saveData ?? new FakeStorage();
+            _graphFeatures = new GraphFeatures();
+
 
         }
 
@@ -103,13 +107,14 @@ namespace BusinessLogic
         public ChartEntry[] ProcessStreamValues(Stream recording)
         {
 
-            byte[] tempBytes = ReadToEnd(recording);  //TODO how do we fix this method ReadFully(recording);
-            ChartEntry[] entries = new ChartEntry[tempBytes.Length];
+            byte[] everyRecordingByte = ReadToEnd(recording);  //TODO how do we fix this method ReadFully(recording);
+            byte[] downSampledRecording = _graphFeatures.DownSample(everyRecordingByte);
+            ChartEntry[] entries = new ChartEntry[downSampledRecording.Length];
 
             int i = 0;
-            foreach (var tempByte in tempBytes)
+            foreach (var bytes in downSampledRecording)
             {
-                entries[i] = new Microcharts.ChartEntry(tempByte);
+                entries[i] = new Microcharts.ChartEntry(bytes);
                 //{
 
                 //    Label = "sample",
@@ -178,20 +183,7 @@ namespace BusinessLogic
         }
 
 
-        //TODO Temporary method - delete when Mads and Emils branch is merged to master
-        //public byte[] ReadFully(Stream input)
-        //{
-        //    byte[] buffer = new byte[16 * 1024];
-
-        //    int read;
-        //    while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
-        //    {
-        //        ms.Write(buffer, 0, read);
-        //    }
-        //    return ms.ToArray();
-
-
-        //}
+      
         #endregion
         #region EventHandler
 
@@ -199,11 +191,9 @@ namespace BusinessLogic
         {
             IsRecording = false;
             MeasureDTO = e.measureDTO;
+            ChartValues = ProcessStreamValues(MeasureDTO.HeartSound);
             MeasureDTO = _analyse.Analyze(MeasureDTO);
             _dataStorage.SaveToStorage(MeasureDTO);
-            ChartValues = ProcessStreamValues(MeasureDTO.HeartSound);
-            
-
         }
 
         #endregion

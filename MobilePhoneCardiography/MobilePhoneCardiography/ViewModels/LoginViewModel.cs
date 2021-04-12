@@ -38,7 +38,11 @@ namespace MobilePhoneCardiography.ViewModels
 
           
                 // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-                await Shell.Current.GoToAsync($"//{nameof(LoginSPView)}");
+                //await Shell.Current.GoToAsync($"//{nameof(LoginSPView)}");
+
+            //TODO Change this one before rebasing. This is only for testing
+            await Shell.Current.GoToAsync($"//{nameof(MeasureView)}");
+
         }
     }
 }
