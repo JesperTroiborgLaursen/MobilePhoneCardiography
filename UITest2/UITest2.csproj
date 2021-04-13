@@ -65,7 +65,6 @@
     <Compile Include="UTFindPatient.cs" />
     <Compile Include="AppInitializer.cs" />
     <Compile Include="UTLoginPage.cs" />
-    <Compile Include="UTLoginPage.cs" />
     <Compile Include="UTLoginSPView.cs" />
     <Compile Include="UTMeasureView.cs" />
     <Compile Include="UTMeasurementDetailView.cs" />
