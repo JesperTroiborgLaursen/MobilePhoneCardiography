@@ -8,14 +8,6 @@ namespace BusinessLogic
     {
         public byte[] DownSample(byte[] graphDataByteArray)
         {
-            /*
-            dataValues = new List<float>();
-            dataValues = graphDataByteArray.OfType<float>().ToList();
-            graphDataByteArray = null;
-            NWaves.Signals.DiscreteSignal signal = new NWaves.Signals.DiscreteSignal(44000 ,dataValues);
-            graphDataByteArray = NWaves.Operations.Operation.Decimate(signal, 4);
-            */
-
             List<byte> tempArray = new List<byte>();
             int number = 0;
             int periodicI = 0;

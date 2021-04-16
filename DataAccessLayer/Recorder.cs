@@ -54,7 +54,7 @@ namespace DataAccessLayer
         //TODO delete or change this method
         public async void StartRecordingConcurrentStream()
         {
-            var audioRecordTask = await _recorder.StartRecording();
+            var audioRecordTask = await _recorder.StartRecording(); // starter rent faktisk en recording
 
             using (var stream = _recorder.GetAudioFileStream())
             {
