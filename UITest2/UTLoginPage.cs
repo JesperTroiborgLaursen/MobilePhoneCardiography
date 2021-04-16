@@ -27,10 +27,11 @@ namespace UITest2
         public void PrivateUserLoginButton_PressPrivateUserLoginButton_RecordingsTabOpened()
         {
             //Arrange
+            //TODO: Need to retrieve patient or have mock data to test this
 
             //Act
             app.Tap("PrivateUserLoginButton");
-            var tabElement = app.WaitForElement("RecordingsTab");
+            var tabElement = app.WaitForElement("RecordingsList");
 
             //Assert
             Assert.That(tabElement, Is.Not.Null);
@@ -38,13 +39,14 @@ namespace UITest2
 
 
         [Test]
-        public void HealthUserLoginButton_PressHealthUserLoginButton_HealthLoginTabOpened()
+        public virtual void HealthUserLoginButton_PressHealthUserLoginButton_HealthLoginTabOpened()
         {
             //Arrange
 
             //Act
             app.Tap("HealthUserLoginButton");
-            var tabElement = app.WaitForElement("HealthUserLoginTab");
+            //If UsernameEntry is appearing the tab has opened -> this is a workaround, because automationIds dont work for tabs.
+            var tabElement = app.WaitForElement("UsernameEntry");
 
             //Assert
             Assert.That(tabElement, Is.Not.Null);

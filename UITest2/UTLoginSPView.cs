@@ -79,11 +79,10 @@ namespace UITest2
             app.PressEnter();
             app.Tap("PasswordEntry");
             app.EnterText("PasswordEntry", "test");
-            app.PressEnter();
 
             app.Tap("LoginButton");
 
-            var loginResult = app.WaitForElement("RecordingsTab");
+            var loginResult = app.WaitForElement("RecordingsList");
 
             //Assert
             Assert.That(loginResult, Is.Not.Null);
@@ -104,6 +103,7 @@ namespace UITest2
             app.PressEnter();
 
             app.Tap("LoginButton");
+            //TODO Appen crasher når der hentes forkert data fra DB
 
             var loginResult = app.WaitForElement("WrongLabel");
 
@@ -126,6 +126,7 @@ namespace UITest2
             app.PressEnter();
 
             app.Tap("LoginButton");
+            //TODO Appen crasher når der hentes forkert data fra DB
 
             var loginResult = app.WaitForElement("WrongLabel");
 

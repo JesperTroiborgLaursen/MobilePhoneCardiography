@@ -35,7 +35,7 @@ namespace UITest2
             app.Tap("SocSecSearch");
 
             //Act
-            app.EnterText("SocSecSearch", "2234567890");
+            app.EnterText("SocSecSearch", "234567-2345");
             app.PressEnter();
             var findPatientButtonEnabled = app.Query(c => c.Marked("FindPatientButton")).FirstOrDefault().Enabled;
 
@@ -49,7 +49,7 @@ namespace UITest2
 
             //Arrange
             app.Tap("SocSecSearch");
-            app.EnterText("SocSecSearch", "2234567890");
+            app.EnterText("SocSecSearch", "234567-2345");
             app.PressEnter();
             app.Tap("SocSecSearch");
             app.ClearText();
@@ -68,7 +68,7 @@ namespace UITest2
 
             //Arrange
             app.Tap("SocSecSearch");
-            app.EnterText("SocSecSearch", "2234567890");
+            app.EnterText("SocSecSearch", "234567-2345");
             app.PressEnter();
 
 
@@ -94,7 +94,7 @@ namespace UITest2
 
             //Arrange
             app.Tap("SocSecSearch");
-            app.EnterText("SocSecSearch", "2234567890");
+            app.EnterText("SocSecSearch", "234567-2345");
             app.PressEnter();
 
 
@@ -120,7 +120,7 @@ namespace UITest2
 
         //    //Arrange
         //    app.Tap("SocSecSearch");
-        //    app.EnterText("SocSecSearch", "2234567890");
+        //    app.EnterText("SocSecSearch", "234567-2345");
         //    app.PressEnter();
         //    app.Tap("FindPatientButton");
 
@@ -149,7 +149,7 @@ namespace UITest2
 
             //Arrange
             app.Tap("SocSecSearch");
-            app.EnterText("SocSecSearch", "2234567890");
+            app.EnterText("SocSecSearch", "234567-2345");
             app.PressEnter();
 
 
@@ -176,7 +176,7 @@ namespace UITest2
 
             //Arrange
             app.Tap("SocSecSearch");
-            app.EnterText("SocSecSearch", "1234567890");
+            app.EnterText("SocSecSearch", "123346-1234");
             app.PressEnter();
             
             //Act
@@ -186,7 +186,7 @@ namespace UITest2
             var lastName = app.Query("LastName").FirstOrDefault().Text;
 
             //Assert
-            Assert.That(socSec, Is.EqualTo("1234567890"));
+            Assert.That(socSec, Is.EqualTo("123346-1234"));
             Assert.That(firstName, Is.EqualTo("John"));
             Assert.That(lastName, Is.EqualTo("Doe"));
         }
@@ -198,7 +198,7 @@ namespace UITest2
 
             //Arrange
             app.Tap("SocSecSearch");
-            app.EnterText("SocSecSearch", "2234567890");
+            app.EnterText("SocSecSearch", "234567-2345");
             app.PressEnter();
             
             //Act
@@ -208,7 +208,7 @@ namespace UITest2
             var lastName = app.Query("LastName").FirstOrDefault().Text;
 
             //Assert
-            Assert.That(socSec, Is.EqualTo("2234567890"));
+            Assert.That(socSec, Is.EqualTo("234567-2345"));
             Assert.That(firstName, Is.EqualTo("Jim"));
             Assert.That(lastName, Is.EqualTo("Smith"));
         }
@@ -219,7 +219,7 @@ namespace UITest2
 
             //Arrange
             app.Tap("SocSecSearch");
-            app.EnterText("SocSecSearch", "2234567890");
+            app.EnterText("SocSecSearch", "234567-2345");
             app.PressEnter();
             app.Tap("FindPatientButton");
             
@@ -251,7 +251,7 @@ namespace UITest2
 
             //Arrange
             app.Tap("SocSecSearch");
-            app.EnterText("SocSecSearch", "2234567890");
+            app.EnterText("SocSecSearch", "234567-2345");
             app.PressEnter();
             app.Tap("FindPatientButton");
 
@@ -268,7 +268,7 @@ namespace UITest2
         {
             //Arrange
             app.Tap("SocSecSearch");
-            app.EnterText("SocSecSearch", "2234567890");
+            app.EnterText("SocSecSearch", "234567-2345");
             app.PressEnter();
             app.Tap("FindPatientButton");
 

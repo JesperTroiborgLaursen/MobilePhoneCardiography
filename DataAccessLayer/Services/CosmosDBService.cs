@@ -126,7 +126,7 @@ namespace DataAccessLayer
 
             if (!await Initialize())
                 return todos;
-
+            //TODO Denne her burde nok pakkes ind i en try-catch
             var todoQuery = docClient.CreateDocumentQuery<JsonProfessionalUser>(
                     UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
                     new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
