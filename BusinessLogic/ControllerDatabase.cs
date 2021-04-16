@@ -110,7 +110,13 @@ namespace MobilePhoneCardiography.Services.DataStore
 
             var todos = await cosmosDbService.GetLogin(user);
             //TODO Denne linje er under test
-            if (todos != null && todos[0].UserPW == user.Password && todos[0].HealthProfID == user.Username) return true;
+            if (todos != null && todos.Count != 0 )
+            {
+                if (todos[0].UserPW == user.Password && todos[0].HealthProfID == user.Username)
+                {
+                    return true;
+                }
+            }
 
             //TODO Denne linje er væk fra test
             //foreach (var VARIABLE in todos)

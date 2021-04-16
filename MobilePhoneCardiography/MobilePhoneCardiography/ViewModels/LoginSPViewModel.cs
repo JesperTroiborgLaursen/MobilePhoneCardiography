@@ -18,6 +18,7 @@ namespace MobilePhoneCardiography.ViewModels
     {
         private string _username;
         private string _password;
+        private bool _wrongPasswordLabelVisible;
         private ControllerDatabase controllerDatabase;
 
         //TODO SKAL FJERNES IGEN; KUN ITL AT TESTE DATABASE
@@ -33,6 +34,7 @@ namespace MobilePhoneCardiography.ViewModels
             ForgotPWCommand = new Command(OnForgotPW);
             this.PropertyChanged +=
                 (_, __) => LoginCommand.ChangeCanExecute();
+            WrongPasswordLabelVisible = false;
         }
 
         private bool ValidateLoginNotBlank()
@@ -51,6 +53,12 @@ namespace MobilePhoneCardiography.ViewModels
         {
             get => _password;
             set => SetProperty(ref _password, value);
+        }
+
+        public bool WrongPasswordLabelVisible
+        {
+            get => _wrongPasswordLabelVisible;
+            set => SetProperty(ref _wrongPasswordLabelVisible, value);
         }
 
         public Command LoginCommand { get; }
@@ -77,16 +85,36 @@ namespace MobilePhoneCardiography.ViewModels
             };
 
             //Todo Har en ide om at dette er bedre at oprette en ny database hver eneste gnag den skal bruges.
-            var validateLogin =  await new ControllerDatabase(new CosmosDBService(EnumDatabase.Professionel, DateTime.Now)).ValidateLogin(newUser);
+            //TODO Appen craasher hvis logn er forkert
+            try
+            {
+                var validateLogin = await new ControllerDatabase(new CosmosDBService(EnumDatabase.Professionel, DateTime.Now)).ValidateLogin(newUser);
+                if (validateLogin)
+                {
+                    OnUserChange(new UserChangedEventArgs() { CurrentUser = newUser });
+                    // This will pop the current page off the navigation stack
+                    await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
+                    WrongPasswordLabelVisible = false;
+                    Username = "";
+                    Password = "";
+                }
+                else
+                {
+                    WrongPasswordLabelVisible = true;
+                }
+            }
+            catch (Exception e)
+            {
+                WrongPasswordLabelVisible = true;
+                Console.WriteLine(e);
+                throw;
+
+            }
+            
             
             //var validateLogin = await controllerDatabase.ValidateLogin(newUser);
 
-            if (validateLogin)
-            {
-                OnUserChange(new UserChangedEventArgs(){CurrentUser = newUser});
-                // This will pop the current page off the navigation stack
-                await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
-            }
+            
 
             //TODO WHAT WILL HAPPEN IF ITS WRONG???
 

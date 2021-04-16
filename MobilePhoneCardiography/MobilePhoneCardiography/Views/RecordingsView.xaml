@@ -6,7 +6,7 @@
              xmlns:dtOs="clr-namespace:DTOs;assembly=DTOs"
              Title="{Binding Title}">
     
-    <ContentPage.BindingContext>
+    <ContentPage.BindingContext >
         <vm:RecordingsViewModel />
     </ContentPage.BindingContext>
     
@@ -17,16 +17,16 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="New Recording" Command="{Binding NewRecordingCommand}" />
+        <ToolbarItem Text="New Recording" AutomationId="NewRecButton" Command="{Binding NewRecordingCommand}" />
     </ContentPage.ToolbarItems>
 
     <RefreshView x:DataType="vm:RecordingsViewModel" Command="{Binding LoadMeasurementsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-        <CollectionView x:Name="MeasurementsListView"
+        <CollectionView x:Name="MeasurementsListView" AutomationId="RecordingsList"
                         ItemsSource="{Binding Measurements}"
                         SelectionMode="None">
-            <CollectionView.ItemTemplate>
+            <CollectionView.ItemTemplate >
                 <DataTemplate>
-                    <StackLayout Padding="10" x:DataType="dtOs:Measurement">
+                    <StackLayout  Padding="10" x:DataType="dtOs:Measurement">
                         <Label Text="{Binding StartTime}" 
                                LineBreakMode="NoWrap" 
                                Style="{DynamicResource ListItemTextStyle}" 

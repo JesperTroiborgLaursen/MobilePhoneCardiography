@@ -14,7 +14,8 @@
 
     <ContentPage.Content>
 
-        <StackLayout IsVisible="{Binding IsProUser}">
+        <!--<StackLayout IsVisible="{Binding IsProUser}">-->
+        <StackLayout>
             <Frame Margin="0,50,0,0">
             <Frame BorderColor="Gainsboro" BackgroundColor="AliceBlue" >
             <StackLayout VerticalOptions="Center">

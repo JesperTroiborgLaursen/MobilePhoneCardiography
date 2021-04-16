@@ -14,16 +14,16 @@
 
 
     <ContentPage.Content>
-        <StackLayout Spacing="3" Padding="15">
+        <StackLayout VerticalOptions="Center" Spacing="3" Padding="15">
             <Label Text="Username" FontSize="Medium" />
             <Entry Text="{Binding Username, Mode=TwoWay}" AutomationId="UsernameEntry" FontSize="Medium" />
             <Label Text="Password" FontSize="Medium" />
-            <Editor Text="{Binding Password, Mode=TwoWay}" AutomationId="PasswordEntry" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
+            <Entry Text="{Binding Password, Mode=TwoWay}" AutomationId="PasswordEntry" IsPassword="True" FontSize="Medium" Margin="0" />
             <StackLayout Orientation="Vertical">
                 <Button Text="Login" Command="{Binding LoginCommand}" AutomationId="LoginButton" HorizontalOptions="FillAndExpand"></Button>
                 <Button Text="Forgot Password?" Command="{Binding ForgotPWCommand}" AutomationId="ForgotPWButton" HorizontalOptions="FillAndExpand"></Button>
             </StackLayout>
-            <Label Text="Password or username was wrong. Please try again or press Forgot Password to retrieve your password" TextColor="IndianRed" IsVisible="False" AutomationId="WrongLabel"/>
+            <Label Text="Password or username was wrong. Please try again or press Forgot Password to retrieve your password" TextColor="IndianRed" IsVisible="{Binding WrongPasswordLabelVisible}" AutomationId="WrongLabel"/>
         </StackLayout>
     </ContentPage.Content>
     

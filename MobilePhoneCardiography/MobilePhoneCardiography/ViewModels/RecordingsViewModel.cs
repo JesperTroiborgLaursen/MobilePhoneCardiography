@@ -37,7 +37,7 @@ namespace MobilePhoneCardiography.ViewModels
 
             AddMeasurementCommand = new Command(OnAddMeasurement);
 
-            SelectedPatient = new Patient() {Id = "0"};
+            SelectedPatient = new Patient() {Id = "123346-1234"};
         }
 
 
