@@ -21,6 +21,7 @@ namespace MobilePhoneCardiography.ViewModels
     public class MeasureViewModel : BaseViewModel
 
     {
+        
         #region Attributter og dependencies
 
         public event EventHandler<GraphReadyEventArgs> graphReadyEvent;
@@ -58,6 +59,7 @@ namespace MobilePhoneCardiography.ViewModels
 
             RecordAudioCommand = new Command(StartRecordTask);
             _recorderController = new RecorderController(HandleAnalyzeFinishedEvent);
+            _recorderController.StartRecordingEvent += HandleRecordingStartedEvent;
         }
 
         #endregion
@@ -126,14 +128,13 @@ namespace MobilePhoneCardiography.ViewModels
         private void StartRecordTask()
         {
             _recorderController.RecordAudio();
-            
         }
 
         public DTOs.Measurement MeasureDTO { get; set; }
 
         private void HandleAnalyzeFinishedEvent(object sender, AnalyzeFinishedEventArgs e)
         {
-
+            ChartValuesMvm = null;
             MeasureDTO = e.DTO;
             //Todo Denne linje skal væk når vi har introduceret RecordingsViewet
             //da den på nuværende tidspunkt blot afspiller lyden med det samme
@@ -142,8 +143,6 @@ namespace MobilePhoneCardiography.ViewModels
             
             if (ChartValuesMvm != null)
             {
-                //ChartEntry[] tempArray = ChartValuesMvm.Take(5000).ToArray<ChartEntry>();
-                //tempArray
                 OnGraphReady(new GraphReadyEventArgs { ChartValues = ChartValuesMvm });
             }
         }
@@ -152,6 +151,17 @@ namespace MobilePhoneCardiography.ViewModels
         {
             graphReadyEvent?.Invoke(this, e);
         }
+
+        private void HandleRecordingStartedEvent(object sender, StartRecordingEventArgs e)
+        {
+            ChartValuesMvm = null;
+            ChartValuesMvm = _recorderController.ConcurrentAudioSequenceToChartEntryArray();
+            if (ChartValuesMvm != null)
+            {
+                OnGraphReady(new GraphReadyEventArgs { ChartValues = ChartValuesMvm });
+            }
+        }
+
         #endregion
     }
 }

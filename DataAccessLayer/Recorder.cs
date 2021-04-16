@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using DataAccessLayer.Services.Interface;
 using DTOs;
 using EventArgss;
+using Plugin.AudioRecorder;
 
 namespace DataAccessLayer
 {
     public class Recorder : IRecorder
     {
         #region Dependencies
-        public IAudioRecorderService _recorder;
+        public IAudioRecorderService RecorderService { get; set; }
         public ITimeProvider _timeProvider;
         #endregion
         #region Event
@@ -29,7 +31,7 @@ namespace DataAccessLayer
         {
             RecordFinishedEvent += recordFinishedEventHandler;
 
-            _recorder = audioRecorderService ?? new ExtendedAudioRecorderService(HandleRecorderIsFinished);
+            RecorderService = audioRecorderService ?? new ExtendedAudioRecorderService(HandleRecorderIsFinished);
             _timeProvider = timeProvider ?? new RealTimeProvider();
         }
 
@@ -37,7 +39,7 @@ namespace DataAccessLayer
         {
             RecordFinishedEvent += recordFinishedEventHandler;
 
-            _recorder = new ExtendedAudioRecorderService(HandleRecorderIsFinished);
+            RecorderService = new ExtendedAudioRecorderService(HandleRecorderIsFinished);
             _timeProvider = new RealTimeProvider();
 
 
@@ -48,22 +50,32 @@ namespace DataAccessLayer
         public void RecordAudio()
         {
             _timeProvider.StartTimer();
-            _recorder.StartRecording();
+            //Todo indkommenter igen, og fjern concurrent stream hvis det fejler!!
+            //RecorderService.StartRecording(); 
+            ConcurrentStream(); // samtidig stream af lyd til graf, uden lydfilen er færdig!
         }
+
+        public Stream SequenceStream { get; set; }
 
         //TODO delete or change this method
-        public async void StartRecordingConcurrentStream()
+        public async void ConcurrentStream()
         {
-            var audioRecordTask = await _recorder.StartRecording(); // starter rent faktisk en recording
-
-            using (var stream = _recorder.GetAudioFileStream())
+            var audioRecordTask = await RecorderService.StartRecording();
+            
+            if (RecorderService.IsRecording)
             {
-                
-                //var simpleResult = await SpeechApiClient.
-
+                using (var stream = RecorderService.GetAudioFileStream())
+                {
+                    //Todo check values in the WriteWavHeader
+                    AudioFunctions.WriteWavHeader(stream, 2, 44100, 8);
+                    SequenceStream = stream;
+                }
             }
 
+
         }
+
+
 
         #endregion
         #region EventHandler
@@ -74,7 +86,7 @@ namespace DataAccessLayer
 
             Measurement tempMeasureDTO = new Measurement(_timeProvider.GetDateTime());
 
-            var stream = _recorder.GetAudioFileStream();
+            var stream = RecorderService.GetAudioFileStream();
 
             tempMeasureDTO.HeartSound = stream;
 

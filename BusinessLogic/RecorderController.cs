@@ -7,10 +7,8 @@ using DataAccessLayer.Services.Interface;
 using DTOs;
 using EventArgss;
 using Microcharts;
+using Plugin.AudioRecorder;
 using SkiaSharp;
-
-//temp added
-using MobilePhoneCardiography.Services.DataStore;
 
 namespace BusinessLogic
 {
@@ -81,9 +79,13 @@ namespace BusinessLogic
             _analyse = analyzeLogic ?? new AnalyzeLogic(handleAnalyzeFinishedEvent);
             _dataStorage = saveData ?? new FakeStorage();
             _graphFeatures = new GraphFeatures();
-
-
         }
+
+        #endregion
+        #region StartRecordingEventArgs
+
+        public event EventHandler<StartRecordingEventArgs> StartRecordingEvent;
+
 
         #endregion
         #region Metoder
@@ -101,8 +103,10 @@ namespace BusinessLogic
             {
                 _recorderLogic.RecordAudio();
                 IsRecording = true;
+                OnStartRecording(new StartRecordingEventArgs() { Clicked = true });
             }
         }
+
 
         public ChartEntry[] ProcessStreamValues(Stream recording)
         {
@@ -115,14 +119,6 @@ namespace BusinessLogic
             foreach (var bytes in downSampledRecording)
             {
                 entries[i] = new Microcharts.ChartEntry(bytes);
-                //{
-
-                //    Label = "sample",
-                //    ValueLabel = tempByte.ToString(),
-                //    Color = SKColor.Parse("#b455b6")
-
-
-                //};
                 i++;
             }
             return entries;
@@ -183,7 +179,6 @@ namespace BusinessLogic
         }
 
 
-      
         #endregion
         #region EventHandler
 
@@ -196,6 +191,15 @@ namespace BusinessLogic
             _dataStorage.SaveToStorage(MeasureDTO);
         }
 
+        protected virtual void OnStartRecording(StartRecordingEventArgs e)
+        {
+            StartRecordingEvent?.Invoke(this, e);
+        }
+
+        public ChartEntry[] ConcurrentAudioSequenceToChartEntryArray()
+        {
+           return ProcessStreamValues(_recorderLogic.SequenceStream);
+        }
         #endregion
     }
 

@@ -49,7 +49,7 @@ namespace DataAccessLayer
             StopRecordingOnSilence = false;
             StopRecordingAfterTimeout = true;
             //todo det er her vi sætter tiden til 10 eller 5 sek
-            AudioTimeout = 5;
+            AudioTimeout = 30;
 
             AudioInputReceived += handleRecordIsFinished;
         }
@@ -59,5 +59,7 @@ namespace DataAccessLayer
             get => Convert.ToDouble(TotalAudioTimeout);
             set => TotalAudioTimeout = TimeSpan.FromSeconds(value);
         }
+
+      
     }
 }

@@ -27,10 +27,6 @@ namespace BusinessLogic
                 avg = Convert.ToByte(Math.Round(result));
                 tempArray.Add(avg);
                 periodicI += sampleNumber;
-                if (periodicI > 479800)
-                {
-
-                }
             }
           
             graphDataByteArray = null;
@@ -38,6 +34,7 @@ namespace BusinessLogic
 
             return graphDataByteArray;
         }
+
     }
     public interface IGraphFeatures
     {
