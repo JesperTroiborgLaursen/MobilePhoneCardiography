@@ -22,6 +22,7 @@ namespace BusinessLogic
                     result += graphDataByteArray[number];
                     number++;
                 }
+
                 result = result / sampleNumber;
                 avg = Convert.ToByte(Math.Round(result));
                 tempArray.Add(avg);
@@ -31,13 +32,7 @@ namespace BusinessLogic
 
                 }
             }
-
-            //for (int i = 0; i < graphDataByteArray.Length/4; i++)
-            //{
-            //    tempArray.Add(graphDataByteArray[number]);
-            //    number++;
-            //    number = number + 4;
-            //}
+          
             graphDataByteArray = null;
             graphDataByteArray = tempArray.ToArray();
 
