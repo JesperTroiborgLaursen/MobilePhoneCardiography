@@ -137,6 +137,15 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
+=======
+    <PackageReference Include="Accord.MachineLearning">
+      <Version>3.8.2-alpha</Version>
+    </PackageReference>
+    <PackageReference Include="BASS">
+      <Version>2.4.12.1</Version>
+    </PackageReference>
+>>>>>>> Stashed changes
     <PackageReference Include="Microsoft.Azure.Cosmos">
       <Version>3.17.0</Version>
     </PackageReference>
