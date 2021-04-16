@@ -4,7 +4,6 @@ using System;
 using DataAccessLayer.Services;
 using EventArgss;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace MobilePhoneCardiography
 {

@@ -6,6 +6,7 @@ using System.Windows.Input;
 using DTOs;
 using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Views;
+using MvvmHelpers;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -29,7 +30,7 @@ namespace MobilePhoneCardiography.ViewModels
 
             NewRecordingCommand = new Command(OnNewRecordingClicked);
 
-            Measurements = new ObservableCollection<Measurement>();
+            Measurements = new ObservableRangeCollection<Measurement>();
             LoadMeasurementsCommand = new Command(async () => await ExecuteLoadMeasurementsCommand());
 
             MeasurementTapped = new Command<Measurement>(OnItemSelected);
