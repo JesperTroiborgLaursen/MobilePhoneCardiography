@@ -142,8 +142,9 @@ namespace MobilePhoneCardiography.ViewModels
             
             if (ChartValuesMvm != null)
             {
-                ChartEntry[] tempArray = ChartValuesMvm.Take(5000).ToArray<ChartEntry>();
-                OnGraphReady(new GraphReadyEventArgs { ChartValues = tempArray });
+                //ChartEntry[] tempArray = ChartValuesMvm.Take(5000).ToArray<ChartEntry>();
+                //tempArray
+                OnGraphReady(new GraphReadyEventArgs { ChartValues = ChartValuesMvm });
             }
         }
 

@@ -4,6 +4,7 @@ using System.Text;
 using DataAccessLayer.Services.Interface;
 using DTOs;
 using EventArgss;
+using Xamarin.Cognitive.Speech;
 
 namespace DataAccessLayer
 {
@@ -49,6 +50,20 @@ namespace DataAccessLayer
         {
             _timeProvider.StartTimer();
             _recorder.StartRecording();
+        }
+
+        //TODO delete or change this method
+        public async void StartRecording2()
+        {
+            var audioRecordTask = await _recorder.StartRecording();
+
+            using (var stream = _recorder.GetAudioFileStream())
+            {
+                
+                //var simpleResult = await SpeechApiClient.
+
+            }
+
         }
 
         #endregion

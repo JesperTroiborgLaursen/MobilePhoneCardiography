@@ -18,11 +18,34 @@ namespace BusinessLogic
 
             List<byte> tempArray = new List<byte>();
             int number = 0;
-            for (int i = 0; i < graphDataByteArray.Length/4; i++)
+            int periodicI = 0;
+            int sampleNumber = 100;
+            
+            while (graphDataByteArray.Length > number+sampleNumber)
             {
-                tempArray.Add(graphDataByteArray[number]);
-                number = number + 4;
+                byte avg = 0;
+                double result = 0;
+                for (int i = number; i < (periodicI+sampleNumber); i++)
+                {
+                    result += graphDataByteArray[number];
+                    number++;
+                }
+                result = result / sampleNumber;
+                avg = Convert.ToByte(Math.Round(result));
+                tempArray.Add(avg);
+                periodicI += sampleNumber;
+                if (periodicI > 479800)
+                {
+
+                }
             }
+
+            //for (int i = 0; i < graphDataByteArray.Length/4; i++)
+            //{
+            //    tempArray.Add(graphDataByteArray[number]);
+            //    number++;
+            //    number = number + 4;
+            //}
             graphDataByteArray = null;
             graphDataByteArray = tempArray.ToArray();
 
