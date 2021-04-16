@@ -4,7 +4,6 @@ using System.Text;
 using DataAccessLayer.Services.Interface;
 using DTOs;
 using EventArgss;
-using Xamarin.Cognitive.Speech;
 
 namespace DataAccessLayer
 {
@@ -53,7 +52,7 @@ namespace DataAccessLayer
         }
 
         //TODO delete or change this method
-        public async void StartRecording2()
+        public async void StartRecordingConcurrentStream()
         {
             var audioRecordTask = await _recorder.StartRecording();
 
