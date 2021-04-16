@@ -31,6 +31,18 @@
 
     <PackageReference Include="Plugin.AudioRecorder" Version="1.1.0" />
 
+    <Compile Remove="Services\IDataStore.cs" />
+    <Compile Remove="Services\MockDataStore.cs" />
+    <Compile Remove="Services\MockDataStoreMeasurements.cs" />
+    <Compile Remove="Services\MockDataStoreUser.cs" />
+    <Compile Remove="Views\PatientsView.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\PatientsView.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
     <PackageReference Include="System.Linq" Version="4.3.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />  
@@ -57,5 +69,9 @@
     <Compile Update="Views\MeasureView.xaml.cs">
       <DependentUpon>MeasureView.xaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 </Project>

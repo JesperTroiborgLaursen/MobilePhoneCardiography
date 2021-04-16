@@ -64,16 +64,16 @@ namespace MobilePhoneCardiography.ViewModels
             set => SetProperty(ref _healthProffesionalID, value);
         }
 
-        public int ItemId
+        public string ItemId
         {
             get
             {
-                return itemId;
+                return itemId.ToString();
             }
             set
             {
-                itemId = value;
-                LoadItemId(value);
+                itemId = Convert.ToInt16(value);
+                LoadItemId(Convert.ToInt16(value));
             }
         }
 
