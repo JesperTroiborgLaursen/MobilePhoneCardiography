@@ -21,7 +21,7 @@ namespace MobilePhoneCardiography.ViewModels
     public class MeasureViewModel : BaseViewModel
 
     {
-        
+
         #region Attributter og dependencies
 
         public event EventHandler<GraphReadyEventArgs> graphReadyEvent;
@@ -37,7 +37,7 @@ namespace MobilePhoneCardiography.ViewModels
         public ICommand OpenWebCommand { get; }
 
         public ICommand NewRecordingCommand { get; }
-        
+
 
         public ICommand RecordAudioCommand { get; }
 
@@ -60,6 +60,8 @@ namespace MobilePhoneCardiography.ViewModels
             RecordAudioCommand = new Command(StartRecordTask);
             _recorderController = new RecorderController(HandleAnalyzeFinishedEvent);
             _recorderController.StartRecordingEvent += HandleRecordingStartedEvent;
+
+
         }
 
         #endregion
@@ -100,7 +102,7 @@ namespace MobilePhoneCardiography.ViewModels
         }
 
 
-     
+
         public Measurement SelectedMeasurement
         {
             get => _selectedMeasurement;
@@ -140,7 +142,7 @@ namespace MobilePhoneCardiography.ViewModels
             //da den på nuværende tidspunkt blot afspiller lyden med det samme
             _recorderController.PlayRecording(MeasureDTO);
             ChartValuesMvm = _recorderController.ChartValues;
-            
+
             if (ChartValuesMvm != null)
             {
                 OnGraphReady(new GraphReadyEventArgs { ChartValues = ChartValuesMvm });
@@ -162,6 +164,28 @@ namespace MobilePhoneCardiography.ViewModels
             }
         }
 
-        #endregion
+        //private async Task PollChartValuesAsync()
+        //{
+        //    while(true)
+        //    {
+        //        //TODO consider the delay time
+        //        await Task.Delay(300);
+        //        var values = await GetValuesAsync();
+        //        this.ChartValuesMvm = new RadialGaugeChart()
+        //        {
+        //            Entries = values.Select(values => new Entry(values),
+        //        };
+        //        this.PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(nameof(this.ChartValuesMvm)))
+
+        //    }
+        //}
+
+        //    private async ChartEntry[] GetValuesAsync()
+        //    {
+        //         return await ChartValuesMvm;
+        //    }
+
+            #endregion
+        //}
     }
 }

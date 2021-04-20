@@ -51,8 +51,8 @@ namespace DataAccessLayer
         {
             _timeProvider.StartTimer();
             //Todo indkommenter igen, og fjern concurrent stream hvis det fejler!!
-            //RecorderService.StartRecording(); 
-            ConcurrentStream(); // samtidig stream af lyd til graf, uden lydfilen er færdig!
+            RecorderService.StartRecording(); 
+            //ConcurrentStream(); // samtidig stream af lyd til graf, uden lydfilen er færdig!
         }
 
         public Stream SequenceStream { get; set; }
