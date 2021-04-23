@@ -15,8 +15,8 @@ namespace DataAccessLayer.Services
         {
             patients = new List<Patient>()
             {
-                new Patient{ SocSec = "1234567890", FirstName = "John", LastName= "Doe" },
-                new Patient{ SocSec = "2234567890", FirstName = "Jim", LastName= "Smith" }
+                new Patient{ SocSec = "123346-1234", FirstName = "John", LastName= "Doe" },
+                new Patient{ SocSec = "234567-2345", FirstName = "Jim", LastName= "Smith" }
             };
         }
 

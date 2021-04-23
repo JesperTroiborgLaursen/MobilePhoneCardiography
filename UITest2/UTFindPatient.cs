@@ -274,7 +274,7 @@ namespace UITest2
 
             //Act
             app.Tap("ConfirmButton");
-            var tabElement = app.WaitForElement("RecordingsTab");
+            var tabElement = app.WaitForElement("RecordingsList");
 
             //Assert
             Assert.That(tabElement, Is.Not.Null);
