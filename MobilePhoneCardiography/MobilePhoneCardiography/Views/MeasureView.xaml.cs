@@ -28,7 +28,7 @@ namespace MobilePhoneCardiography.Views
         }
      
 
-        private void HandleGraphReadyEvent(object s, GraphReadyEventArgs e)
+        private void HandleGraphReadyEvent(object s, GraphReadyEventArgs e) // bruges til den statiske og den dynamiske graf
         {
 
             

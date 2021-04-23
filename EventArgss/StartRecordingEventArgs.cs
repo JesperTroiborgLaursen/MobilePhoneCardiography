@@ -7,5 +7,6 @@ namespace EventArgss
     public class StartRecordingEventArgs
     {
         public bool Clicked { get; set; }
+        //Todo change this to stream instead
     }
 }

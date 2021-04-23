@@ -125,6 +125,7 @@ namespace BusinessLogic
 
         }
 
+        //TODO Temporary method to make the convert from stream to byte work
         private static byte[] ReadToEnd(System.IO.Stream stream)
         {
             long originalPosition = 0;
@@ -195,7 +196,6 @@ namespace BusinessLogic
             StartRecordingEvent?.Invoke(this, e);
         }
 
-        //TODO temp method to seperate audio file in sequences
         public ChartEntry[] ConcurrentAudioSequenceToChartEntryArray()
         {
            return ProcessStreamValues(_recorderLogic.SequenceStream);

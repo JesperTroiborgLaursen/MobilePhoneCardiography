@@ -70,6 +70,7 @@ namespace MobilePhoneCardiography.ViewModels
         {
             // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
             await Shell.Current.GoToAsync($"//{nameof(MeasureView)}");
+            _recorderController.ProcessStreamValues()
         }
 
         async Task ExecuteLoadMeasurementsCommand()
@@ -153,8 +154,8 @@ namespace MobilePhoneCardiography.ViewModels
         {
             graphReadyEvent?.Invoke(this, e);
         }
-
-        private void HandleRecordingStartedEvent(object sender, StartRecordingEventArgs e)
+        //Todo move this to the datalayer in class Recorder.cs and change the name of it aswell :D
+        private void HandleRecordingStartedEvent(object sender, StartRecordingEventArgs e) //denne er ny, oprettet med Henrik
         {
             ChartValuesMvm = null;
             ChartValuesMvm = _recorderController.ConcurrentAudioSequenceToChartEntryArray();
