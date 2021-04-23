@@ -63,6 +63,9 @@
     <Compile Update="Views\LoginSPView.xaml.cs">
       <DependentUpon>LoginSPView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\PlacementInfoView.xaml.cs">
+      <DependentUpon>PlacementInfoView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\RecordingsView.xaml.cs">
       <DependentUpon>RecordingsView.xaml</DependentUpon>
     </Compile>
