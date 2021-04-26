@@ -13,7 +13,8 @@ namespace BusinessLogic
 
     public class RecorderController : IRecorderController
     {
-        #region Props
+        #region Props and Atts
+        public event EventHandler<StreamSequenceOngoingArgs> ongoingEvent;
 
         private string _pageText = "Du har nu åbnet Plugin Audio Recorder skærmen";
 
@@ -46,7 +47,7 @@ namespace BusinessLogic
             set { _measureDTO = value; }
         }
         public ChartEntry[] ChartValues { get; set; }
-       
+
         #endregion
         #region Dependencies
 
@@ -94,15 +95,25 @@ namespace BusinessLogic
         {
             if (IsRecording == false)
             {
-                _recorder.RecordAudio();
-                IsRecording = true;
+                _recorder.RecorderService.AudioTimeout = 1;
+                
+                for (int i = 0; i < 10; i++)
+                {
+                    _recorder.RecordAudio();
+                    IsRecording = true;
+                    //OnStreamSequenceOngoing(new StreamSequenceOngoingArgs({ });
+                }
+
+                //TODO handleFinishedRecording here
             }
+
+            //TODO for the concurrentStream method. Not sure if it will be used
             //while (_recorder.RecorderLogic.IsRecording)
             //{
             //    _recorder.ConcurrentStream();
             //}
         }
-        
+
 
         public ChartEntry[] ProcessStreamValues(Stream recording)
         {
@@ -174,7 +185,7 @@ namespace BusinessLogic
         }
 
 
-      
+
         #endregion
         #region EventHandler
 
@@ -185,6 +196,11 @@ namespace BusinessLogic
             ChartValues = ProcessStreamValues(MeasureDTO.HeartSound);
             MeasureDTO = _analyse.Analyze(MeasureDTO);
             _dataStorage.SaveToStorage(MeasureDTO);
+        }
+
+        protected virtual void OnStreamSequenceOngoing(StreamSequenceOngoingArgs e)
+        {
+            ongoingEvent?.Invoke(this, e);
         }
 
         #endregion

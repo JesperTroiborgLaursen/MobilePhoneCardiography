@@ -14,8 +14,7 @@ namespace DataAccessLayer
     public class Recorder : IRecorder
     {
         #region Dependencies
-        public IAudioRecorderService RecorderLogic { get; set; }
-        public IAudioRecorderService RecorderLogic2 { get; set; }
+        public IAudioRecorderService RecorderService { get; set; }
 
         public Stream SequenceStream { get; set; }
 
@@ -37,9 +36,7 @@ namespace DataAccessLayer
         {
             RecordFinishedEvent += recordFinishedEventHandler;
 
-            RecorderLogic = audioRecorderService ?? new ExtendedAudioRecorderService(HandleRecorderIsFinished);
-            RecorderLogic2 = new ExtendedAudioRecorderService(HandleRecorderIsFinished);
-
+            RecorderService = audioRecorderService ?? new ExtendedAudioRecorderService(HandleRecorderIsFinished);
             _timeProvider = timeProvider ?? new RealTimeProvider();
         }
 
@@ -47,7 +44,7 @@ namespace DataAccessLayer
         {
             RecordFinishedEvent += recordFinishedEventHandler;
 
-            RecorderLogic = new ExtendedAudioRecorderService(HandleRecorderIsFinished);
+            RecorderService = new ExtendedAudioRecorderService(HandleRecorderIsFinished);
 
             _timeProvider = new RealTimeProvider();
 
@@ -59,16 +56,16 @@ namespace DataAccessLayer
         public void RecordAudio()
         {
             _timeProvider.StartTimer();
-            RecorderLogic.StartRecording();
+            RecorderService.StartRecording();
         }
 
         public async Task ConcurrentStream()
         {
-            var audioRecordTask = await RecorderLogic.StartRecording();
+            var audioRecordTask = await RecorderService.StartRecording();
 
-            if (RecorderLogic.IsRecording)
+            if (RecorderService.IsRecording)
             {
-                using (var stream = RecorderLogic.GetAudioFileStream())
+                using (var stream = RecorderService.GetAudioFileStream())
                 {
                     SequenceStream = stream;
                     AudioFunctions.WriteWavHeader(SequenceStream, 2, 44100, 8);
@@ -105,7 +102,7 @@ namespace DataAccessLayer
 
             Measurement tempMeasureDTO = new Measurement(_timeProvider.GetDateTime());
 
-            var stream = RecorderLogic.GetAudioFileStream();
+            var stream = RecorderService.GetAudioFileStream();
 
             tempMeasureDTO.HeartSound = stream;
 

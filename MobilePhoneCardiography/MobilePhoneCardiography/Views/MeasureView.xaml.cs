@@ -15,6 +15,7 @@ namespace MobilePhoneCardiography.Views
         MeasureViewModel _viewModel;
 
         TimeSpan timeSpan;
+        ChartEntry[] entriesArray;
 
         public MeasureView()
         {
@@ -26,13 +27,18 @@ namespace MobilePhoneCardiography.Views
 
             timeSpan = new TimeSpan(3);
 
-
         }
 
 
         private void HandleGraphReadyEvent(object s, GraphReadyEventArgs e)
         {
-            chartView.Chart = new LineChart { Entries = e.ChartValues, IsAnimated = false, LineSize = (float)1, PointMode = 0, EnableYFadeOutGradient = false, LineMode = (LineMode)2 }; //AnimationDuration = timeSpan, IsAnimated = false, AnimationProgress = (float)0, LineSize = (float)0.1, PointMode = 0 };
+            if (entriesArray != null)
+            {
+                chartView.Chart = new LineChart { Entries = e.ChartValues, IsAnimated = false, LineSize = (float)1, PointMode = 0, EnableYFadeOutGradient = false, LineMode = (LineMode)2 }; //AnimationDuration = timeSpan, IsAnimated = false, AnimationProgress = (float)0, LineSize = (float)0.1, PointMode = 0 };
+            }
+
+            //chartView.Chart{ Entries = e.ChartValues}; 
+
             chartView.CancelAnimations();
         }
 

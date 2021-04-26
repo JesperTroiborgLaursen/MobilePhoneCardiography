@@ -9,7 +9,7 @@ namespace DataAccessLayer.Services.Interface
     public interface IRecorder
     {
         void RecordAudio();
-        IAudioRecorderService RecorderLogic { get; set; }
+        IAudioRecorderService RecorderService { get; set; }
         Task ConcurrentStream();
      
     }
