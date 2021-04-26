@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using DataAccessLayer.Services.Interface;
 using DTOs;
 using EventArgss;
+using Plugin.AudioRecorder;
 using Xamarin.Cognitive.Speech;
 
 namespace DataAccessLayer
@@ -11,7 +14,11 @@ namespace DataAccessLayer
     public class Recorder : IRecorder
     {
         #region Dependencies
-        public IAudioRecorderService _recorder;
+        public IAudioRecorderService RecorderLogic { get; set; }
+        public IAudioRecorderService RecorderLogic2 { get; set; }
+
+        public Stream SequenceStream { get; set; }
+
         public ITimeProvider _timeProvider;
         #endregion
         #region Event
@@ -30,7 +37,9 @@ namespace DataAccessLayer
         {
             RecordFinishedEvent += recordFinishedEventHandler;
 
-            _recorder = audioRecorderService ?? new ExtendedAudioRecorderService(HandleRecorderIsFinished);
+            RecorderLogic = audioRecorderService ?? new ExtendedAudioRecorderService(HandleRecorderIsFinished);
+            RecorderLogic2 = new ExtendedAudioRecorderService(HandleRecorderIsFinished);
+
             _timeProvider = timeProvider ?? new RealTimeProvider();
         }
 
@@ -38,7 +47,8 @@ namespace DataAccessLayer
         {
             RecordFinishedEvent += recordFinishedEventHandler;
 
-            _recorder = new ExtendedAudioRecorderService(HandleRecorderIsFinished);
+            RecorderLogic = new ExtendedAudioRecorderService(HandleRecorderIsFinished);
+
             _timeProvider = new RealTimeProvider();
 
 
@@ -49,20 +59,40 @@ namespace DataAccessLayer
         public void RecordAudio()
         {
             _timeProvider.StartTimer();
-            _recorder.StartRecording();
+            RecorderLogic.StartRecording();
         }
 
-        //TODO delete or change this method
-        public async void StartRecording2()
+        public async Task ConcurrentStream()
         {
-            var audioRecordTask = await _recorder.StartRecording();
+            var audioRecordTask = await RecorderLogic.StartRecording();
 
-            using (var stream = _recorder.GetAudioFileStream())
+            if (RecorderLogic.IsRecording)
             {
-                
-                //var simpleResult = await SpeechApiClient.
+                using (var stream = RecorderLogic.GetAudioFileStream())
+                {
+                    SequenceStream = stream;
+                    AudioFunctions.WriteWavHeader(SequenceStream, 2, 44100, 8);
 
+                    //private Stream LocateTrainingSound()
+                    //{
+
+                    //    Task<Stream> read = FileSystem.OpenAppPackageFileAsync("HeartSounds\\Abno_403_10TIL_20_e01732.wav");
+                    //    while (read.IsCompleted != true) { }
+                    //    return read.Result;
+                    //}
+
+                    //    //Todo check values in the WriteWavHeader
+                    //    stream.CopyTo(SequenceStream);
+                    //    System.Diagnostics.Debug.WriteLine("Test");
+
+                    //    Task<Stream> readAudio = RecorderLogic.GetAudioFileStream();
+                    //    while (readAudio.IsCompleted != true) { } ;
+                    //    return readAudio.Result;
+                    //}
+                }   
+                
             }
+
 
         }
 
@@ -75,7 +105,7 @@ namespace DataAccessLayer
 
             Measurement tempMeasureDTO = new Measurement(_timeProvider.GetDateTime());
 
-            var stream = _recorder.GetAudioFileStream();
+            var stream = RecorderLogic.GetAudioFileStream();
 
             tempMeasureDTO.HeartSound = stream;
 

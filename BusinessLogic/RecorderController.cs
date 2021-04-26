@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Threading.Tasks;
 using DataAccessLayer;
 using DataAccessLayer.Services.Interface;
 using DTOs;
 using EventArgss;
 using Microcharts;
 using SkiaSharp;
-
-//temp added
-using MobilePhoneCardiography.Services.DataStore;
 
 namespace BusinessLogic
 {
@@ -50,12 +46,11 @@ namespace BusinessLogic
             set { _measureDTO = value; }
         }
         public ChartEntry[] ChartValues { get; set; }
-
-
-        #endregion 
+       
+        #endregion
         #region Dependencies
 
-        private IRecorder _recorderLogic;
+        private IRecorder _recorder;
         private ISoundModifyLogic _soundModifyLogic;
         private IAnalyzeLogic _analyse;
         private ISaveData _dataStorage;
@@ -65,7 +60,7 @@ namespace BusinessLogic
 
         public RecorderController(EventHandler<AnalyzeFinishedEventArgs> handleAnalyzeFinishedEvent)
         {
-            _recorderLogic = new Recorder(HandleRecordingFinishedEvent);
+            _recorder = new Recorder(HandleRecordingFinishedEvent);
             _soundModifyLogic = new SoundModifyLogic(null);
             _analyse = new AnalyzeLogic(handleAnalyzeFinishedEvent);
             _dataStorage = new FakeStorage(); //ligger som internal class
@@ -76,7 +71,7 @@ namespace BusinessLogic
 
         public RecorderController(EventHandler<AnalyzeFinishedEventArgs> handleAnalyzeFinishedEvent, IRecorder recorder, ISoundModifyLogic soundModifyLogic, IAnalyzeLogic analyzeLogic, ISaveData saveData)
         {
-            _recorderLogic = recorder ?? new Recorder(HandleRecordingFinishedEvent);
+            _recorder = recorder ?? new Recorder(HandleRecordingFinishedEvent);
             _soundModifyLogic = soundModifyLogic ?? new SoundModifyLogic(null);
             _analyse = analyzeLogic ?? new AnalyzeLogic(handleAnalyzeFinishedEvent);
             _dataStorage = saveData ?? new FakeStorage();
@@ -99,10 +94,15 @@ namespace BusinessLogic
         {
             if (IsRecording == false)
             {
-                _recorderLogic.RecordAudio();
+                _recorder.RecordAudio();
                 IsRecording = true;
             }
+            //while (_recorder.RecorderLogic.IsRecording)
+            //{
+            //    _recorder.ConcurrentStream();
+            //}
         }
+        
 
         public ChartEntry[] ProcessStreamValues(Stream recording)
         {
@@ -115,21 +115,12 @@ namespace BusinessLogic
             foreach (var bytes in downSampledRecording)
             {
                 entries[i] = new Microcharts.ChartEntry(bytes);
-                //{
-
-                //    Label = "sample",
-                //    ValueLabel = tempByte.ToString(),
-                //    Color = SKColor.Parse("#b455b6")
-
-
-                //};
                 i++;
             }
             return entries;
 
         }
 
-        //TODO Temporary method to make the convert from stream to byte work
         private static byte[] ReadToEnd(System.IO.Stream stream)
         {
             long originalPosition = 0;

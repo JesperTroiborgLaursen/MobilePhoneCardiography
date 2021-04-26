@@ -14,6 +14,5 @@ namespace BusinessLogic
         public ChartEntry[] ChartValues { get; set; }
         bool IsRecording { get; }
         string PageText { get; set; }
-
     }
 }
