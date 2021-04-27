@@ -41,6 +41,10 @@ namespace MobilePhoneCardiography.ViewModels
         public ICommand RecordAudioCommand { get; }
 
         public ChartEntry[] ChartValuesMvm { get; set; }
+        public ChartEntry[] combinedEntries;
+        public ChartEntry[] newEntries;
+        public ChartEntry[] oldEntries;
+
         #endregion
         #region Constructor
         public MeasureViewModel()
@@ -125,6 +129,8 @@ namespace MobilePhoneCardiography.ViewModels
 
         private void StartRecordTask()
         {
+            combinedEntries = null;
+            oldEntries = null;
             _recorderController.RecordAudio();
             
         }

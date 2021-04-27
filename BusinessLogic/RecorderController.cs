@@ -91,7 +91,7 @@ namespace BusinessLogic
         }
 
 
-        public void RecordAudio()
+        public async void RecordAudio()
         {
             if (IsRecording == false)
             {
@@ -99,8 +99,13 @@ namespace BusinessLogic
                 
                 for (int i = 0; i < 10; i++)
                 {
-                    _recorder.RecordAudio();
-                    IsRecording = true;
+                    //_recorder.RecordAudio();
+                    await _recorder.RecorderService.StartRecording();
+                        IsRecording = true;
+                    while (IsRecording == true) { }
+
+                
+
                     //OnStreamSequenceOngoing(new StreamSequenceOngoingArgs({ });
                 }
 

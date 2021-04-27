@@ -15,7 +15,7 @@ namespace MobilePhoneCardiography.Views
         MeasureViewModel _viewModel;
 
         TimeSpan timeSpan;
-        ChartEntry[] entriesArray;
+        
 
         public MeasureView()
         {
@@ -23,24 +23,32 @@ namespace MobilePhoneCardiography.Views
             BindingContext = _viewModel = new MeasureViewModel();
 
             _viewModel.graphReadyEvent += HandleGraphReadyEvent;
-            //Added temp
-
-            timeSpan = new TimeSpan(3);
 
         }
 
 
         private void HandleGraphReadyEvent(object s, GraphReadyEventArgs e)
         {
-            if (entriesArray != null)
+            if (_viewModel.oldEntries == null)
             {
-                chartView.Chart = new LineChart { Entries = e.ChartValues, IsAnimated = false, LineSize = (float)1, PointMode = 0, EnableYFadeOutGradient = false, LineMode = (LineMode)2 }; //AnimationDuration = timeSpan, IsAnimated = false, AnimationProgress = (float)0, LineSize = (float)0.1, PointMode = 0 };
+                _viewModel.oldEntries = e.ChartValues;
+                chartView.Chart = new LineChart { Entries = _viewModel.oldEntries, IsAnimated = false, LineSize = (float)1, PointMode = 0, EnableYFadeOutGradient = false, LineMode = (LineMode)2 };
             }
 
-            //chartView.Chart{ Entries = e.ChartValues}; 
+            else if (_viewModel.oldEntries != null)
+            {
+                _viewModel.newEntries = e.ChartValues;
+                _viewModel.combinedEntries = new ChartEntry[_viewModel.oldEntries.Length + _viewModel.newEntries.Length];
+                for (int i = 0; i < _viewModel.combinedEntries.Length; ++i)
+                {
+                    _viewModel.combinedEntries[i] = i < _viewModel.oldEntries.Length ? _viewModel.oldEntries[i] : _viewModel.newEntries[i - _viewModel.oldEntries.Length];
+                }
+                chartView.Chart = new LineChart { Entries = _viewModel.combinedEntries, IsAnimated = false, LineSize = (float)1, PointMode = 0, EnableYFadeOutGradient = false, LineMode = (LineMode)2 };
+                _viewModel.oldEntries = _viewModel.combinedEntries;
+                chartView.CancelAnimations();
+            }
 
-            chartView.CancelAnimations();
+            else { /*Do nothing*/}
         }
-
     }
 }
