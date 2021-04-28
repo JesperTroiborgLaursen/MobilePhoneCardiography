@@ -95,11 +95,27 @@ namespace BusinessLogic
 
         public async Task RecordAudio()
         {
-            _recorder.RecordAudioTest();
+            _recorder.RecordAudio();
+            _recorder.RecorderService.AudioTimeout = 1;
+            //TODO moved this method from controller to recorder
+           
+            //    if (IsRecording == false)
+            //    {
+
+            //        for (int i = 0; i < 10; i++)
+            //        {
+            //            //_recorder.RecordAudio();
+            //            await _recorder.RecorderService.StartRecording();
+            //            //OnStreamSequenceOngoing(new StreamSequenceOngoingArgs({ });
+            //        }
+
+            //        //TODO handleFinishedRecording here
+            //    }
         }
+        
 
 
-            public ChartEntry[] ProcessStreamValues(Stream recording)
+        public ChartEntry[] ProcessStreamValues(Stream recording)
         {
 
             byte[] everyRecordingByte = ReadToEnd(recording);  //TODO how do we fix this method ReadFully(recording);

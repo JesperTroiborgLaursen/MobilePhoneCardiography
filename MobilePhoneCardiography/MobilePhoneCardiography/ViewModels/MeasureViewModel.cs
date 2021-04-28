@@ -131,6 +131,8 @@ namespace MobilePhoneCardiography.ViewModels
         {
             combinedEntries = null;
             oldEntries = null;
+
+
             _recorderController.RecordAudio();
             
         }
