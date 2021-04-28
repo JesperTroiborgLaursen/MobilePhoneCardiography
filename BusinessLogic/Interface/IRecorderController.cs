@@ -9,7 +9,7 @@ namespace BusinessLogic
     public interface IRecorderController
     {
         void PlayRecording(Measurement measurement);
-        void RecordAudio();
+        Task RecordAudio();
         public ChartEntry[] ProcessStreamValues(Stream recording);
         public ChartEntry[] ChartValues { get; set; }
         bool IsRecording { get; }

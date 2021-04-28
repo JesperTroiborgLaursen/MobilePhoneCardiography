@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using DataAccessLayer;
 using DataAccessLayer.Services.Interface;
 using DTOs;
@@ -84,6 +85,7 @@ namespace BusinessLogic
         #endregion
         #region Metoder
 
+        //TODO this event is already in Recorder.cs, but I need it to continously update
 
         public void PlayRecording(Measurement measurement)
         {
@@ -91,36 +93,13 @@ namespace BusinessLogic
         }
 
 
-        public async void RecordAudio()
+        public async Task RecordAudio()
         {
-            if (IsRecording == false)
-            {
-                _recorder.RecorderService.AudioTimeout = 1;
-                
-                for (int i = 0; i < 10; i++)
-                {
-                    //_recorder.RecordAudio();
-                    await _recorder.RecorderService.StartRecording();
-                        IsRecording = true;
-                    while (IsRecording == true) { }
-
-                
-
-                    //OnStreamSequenceOngoing(new StreamSequenceOngoingArgs({ });
-                }
-
-                //TODO handleFinishedRecording here
-            }
-
-            //TODO for the concurrentStream method. Not sure if it will be used
-            //while (_recorder.RecorderLogic.IsRecording)
-            //{
-            //    _recorder.ConcurrentStream();
-            //}
+            _recorder.RecordAudioTest();
         }
 
 
-        public ChartEntry[] ProcessStreamValues(Stream recording)
+            public ChartEntry[] ProcessStreamValues(Stream recording)
         {
 
             byte[] everyRecordingByte = ReadToEnd(recording);  //TODO how do we fix this method ReadFully(recording);
@@ -201,12 +180,15 @@ namespace BusinessLogic
             ChartValues = ProcessStreamValues(MeasureDTO.HeartSound);
             MeasureDTO = _analyse.Analyze(MeasureDTO);
             _dataStorage.SaveToStorage(MeasureDTO);
-        }
 
-        protected virtual void OnStreamSequenceOngoing(StreamSequenceOngoingArgs e)
+            
+        }
+            protected virtual void OnStreamSequenceOngoing(StreamSequenceOngoingArgs e)
         {
             ongoingEvent?.Invoke(this, e);
         }
+
+        
 
         #endregion
     }

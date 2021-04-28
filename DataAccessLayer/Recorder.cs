@@ -59,6 +59,7 @@ namespace DataAccessLayer
             RecorderService.StartRecording();
         }
 
+        //TODO maybe we dont need this method
         public async Task ConcurrentStream()
         {
             var audioRecordTask = await RecorderService.StartRecording();
@@ -91,6 +92,32 @@ namespace DataAccessLayer
             }
 
 
+        }
+
+        //TODO moved this method from controller to recorder
+        public void RecordAudioTest()
+        {
+            if (RecorderService.IsRecording == false)
+            {
+               RecorderService.AudioTimeout = 1;
+
+                for (int i = 0; i < 10; i++)
+                {
+                    //_recorder.RecordAudio();
+                    RecorderService.StartRecording();
+                    //RecorderService.IsRecording = true;
+                   
+                    //OnStreamSequenceOngoing(new StreamSequenceOngoingArgs({ });
+                }
+
+                //TODO handleFinishedRecording here
+            }
+
+            //TODO for the concurrentStream method. Not sure if it will be used
+            //while (_recorder.RecorderLogic.IsRecording)
+            //{
+            //    _recorder.ConcurrentStream();
+            //}
         }
 
         #endregion

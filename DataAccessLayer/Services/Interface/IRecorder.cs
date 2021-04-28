@@ -11,7 +11,9 @@ namespace DataAccessLayer.Services.Interface
         void RecordAudio();
         IAudioRecorderService RecorderService { get; set; }
         Task ConcurrentStream();
-     
+        void RecordAudioTest();
+
+
     }
 
 
