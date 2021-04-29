@@ -95,10 +95,10 @@ namespace BusinessLogic
 
         public async Task RecordAudio()
         {
-            _recorder.RecordAudio();
             _recorder.RecorderService.AudioTimeout = 1;
-            //TODO moved this method from controller to recorder
-           
+            await _recorder.ConcurrentStream(); //RecorderService.StartRecording();
+            //_analyse.OneSecAnalyze()
+
             //    if (IsRecording == false)
             //    {
 

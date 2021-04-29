@@ -127,13 +127,16 @@ namespace MobilePhoneCardiography.ViewModels
             //await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={measurement.Id}");
         }
 
-        private void StartRecordTask()
+        private async void StartRecordTask()
         {
             combinedEntries = null;
             oldEntries = null;
 
-
-            _recorderController.RecordAudio();
+            //TODO added this one here 29/4. Should it be in BL instead?
+            for (int i = 0; i < 10; i++)
+            {
+                await _recorderController.RecordAudio();
+            }
             
         }
 
@@ -150,8 +153,6 @@ namespace MobilePhoneCardiography.ViewModels
             
             if (ChartValuesMvm != null)
             {
-                //ChartEntry[] tempArray = ChartValuesMvm.Take(5000).ToArray<ChartEntry>();
-                //tempArray
                 OnGraphReady(new GraphReadyEventArgs { ChartValues = ChartValuesMvm });
             }
         }

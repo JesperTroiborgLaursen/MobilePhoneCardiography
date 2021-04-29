@@ -53,14 +53,10 @@ namespace DataAccessLayer
         #endregion
         #region Metoder
 
-        public void RecordAudio()
+        public async void RecordAudio()
         {
             _timeProvider.StartTimer();
-            for (int i = 0; i < 10; i++)
-            {
-                 RecorderService.StartRecording();
-
-            }
+            await RecorderService.StartRecording();
         }
 
         #region Remove method?
@@ -92,8 +88,8 @@ namespace DataAccessLayer
                     //    while (readAudio.IsCompleted != true) { } ;
                     //    return readAudio.Result;
                     //}
-                }   
-                
+                }
+
             }
 
 

@@ -8,5 +8,6 @@ namespace BusinessLogic
     {
         event EventHandler<AnalyzeFinishedEventArgs> AnalyzeFinishedEvent;
         Measurement Analyze(Measurement DTO);
+        Measurement OneSecAnalyze(Measurement DTO);
     }
 }

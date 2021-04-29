@@ -30,6 +30,15 @@ namespace BusinessLogic
             });
             return analysisObject;
         }
+        public Measurement OneSecAnalyze(Measurement DTO)
+        {
+            analysisObject = DTO;
+            OnAnalyzeFinished(new AnalyzeFinishedEventArgs()
+            {
+                DTO = analysisObject
+            });
+            return analysisObject;
+        }
 
         //ToDo Vi skal have rette dette så vi ikke er låst til "13%"
         //Her skal vi analysere dataen
