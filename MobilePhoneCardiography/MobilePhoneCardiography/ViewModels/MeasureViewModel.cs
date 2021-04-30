@@ -40,6 +40,7 @@ namespace MobilePhoneCardiography.ViewModels
 
         public ICommand RecordAudioCommand { get; }
 
+        public DTOs.Measurement MeasureDTO { get; set; }
         public ChartEntry[] ChartValuesMvm { get; set; }
         #endregion
         #region Constructor
@@ -90,15 +91,6 @@ namespace MobilePhoneCardiography.ViewModels
                 IsBusy = false;
             }
         }
-
-        public void OnAppearing()
-        {
-            IsBusy = true;
-            SelectedMeasurement = null;
-        }
-
-
-     
         public Measurement SelectedMeasurement
         {
             get => _selectedMeasurement;
@@ -108,6 +100,15 @@ namespace MobilePhoneCardiography.ViewModels
                 OnItemSelected(value);
             }
         }
+
+        public void OnAppearing()
+        {
+            IsBusy = true;
+            SelectedMeasurement = null;
+        }
+
+
+     
 
         private async void OnAddMeasurement(object obj)
         {
@@ -129,7 +130,6 @@ namespace MobilePhoneCardiography.ViewModels
             
         }
 
-        public DTOs.Measurement MeasureDTO { get; set; }
 
         private void HandleAnalyzeFinishedEvent(object sender, AnalyzeFinishedEventArgs e)
         {

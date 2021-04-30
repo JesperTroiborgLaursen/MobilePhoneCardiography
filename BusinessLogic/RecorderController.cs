@@ -130,7 +130,7 @@ namespace BusinessLogic
         }
 
         //TODO Temporary method to make the convert from stream to byte work
-        private static byte[] ReadToEnd(System.IO.Stream stream)
+        private byte[] ReadToEnd(System.IO.Stream stream)
         {
             long originalPosition = 0;
 

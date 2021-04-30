@@ -14,7 +14,7 @@ namespace MobilePhoneCardiography.Views
     {
         MeasureViewModel _viewModel;
 
-        TimeSpan timeSpan;
+        TimeSpan _animationTimeSpan;
 
         public MeasureView()
         {
@@ -24,8 +24,7 @@ namespace MobilePhoneCardiography.Views
             _viewModel.graphReadyEvent += HandleGraphReadyEvent;
             //Added temp
 
-            timeSpan = new TimeSpan(3);
-
+            _animationTimeSpan = new TimeSpan(1);
 
         }
      
@@ -54,11 +53,9 @@ namespace MobilePhoneCardiography.Views
                  },
              };
 
-            chartView.Chart = new LineChart { Entries = e.ChartValues, IsAnimated = false, LineSize = (float)1, PointMode = 0, EnableYFadeOutGradient = false, LineMode = (LineMode)2 }; //AnimationDuration = timeSpan, IsAnimated = false, AnimationProgress = (float)0, LineSize = (float)0.1, PointMode = 0 };
+            chartView.Chart = new LineChart { Entries = e.ChartValues, IsAnimated = false, LineSize = (float)1, PointMode = 0, EnableYFadeOutGradient = false, LineMode = (LineMode)2, AnimationDuration = _animationTimeSpan }; //IsAnimated = false, AnimationProgress = (float)0, LineSize = (float)0.1, PointMode = 0 };
             chartView.CancelAnimations();
 
-            //chartView.Effects.Clear();
-          
           
 
             
