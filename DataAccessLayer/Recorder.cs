@@ -52,7 +52,7 @@ namespace DataAccessLayer
             _recorder.StartRecording();
         }
 
-        //TODO delete or change this method
+        //TODO delete or change this method from concurrent streaming
         public async void StartRecording2()
         {
             var audioRecordTask = await _recorder.StartRecording();
