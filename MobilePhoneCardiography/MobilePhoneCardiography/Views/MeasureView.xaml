@@ -44,10 +44,10 @@
             <Frame VerticalOptions="FillAndExpand">
                 <StackLayout>
                     <Label Text="Phonocardiograf" FontSize="Title" VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
-                    <Label Text="Amplitude" Rotation="-90" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand" VerticalOptions="Center" TextColor="Black" />
+                    <Label Text="Amplitude" Rotation="-90" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand" VerticalOptions="End" VerticalTextAlignment="End" TextColor="Black" />
                     <!--<Label Text="-2.5   -2.0  -1.5  -1.0  -0.5  -0.0   0.5   1.0   1.5" 
                            Rotation="-90" HorizontalTextAlignment="Start" HorizontalOptions="Start" VerticalOptions="Start" />-->
-                    <microcharts:ChartView x:Name="chartView" HeightRequest="200" WidthRequest="170" HorizontalOptions="End"/>
+                    <microcharts:ChartView x:Name="chartView" HeightRequest="200" WidthRequest="340" HorizontalOptions="End" />
                     <Label Text="0         1         2         3         4         5         6         7        8        9        10"/>
                     <Label Text="Time [sec]" HorizontalTextAlignment="Center" TextColor="Black"/>
                 </StackLayout>
