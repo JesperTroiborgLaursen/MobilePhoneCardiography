@@ -4,6 +4,7 @@ using System.Text;
 using NUnit.Framework;
 using BusinessLogic;
 using DataAccessLayer.Services.Interface;
+using DTOs;
 using EventArgss;
 using Microcharts;
 using NSubstitute;
@@ -57,6 +58,16 @@ namespace BuisnessLogic.Test.Unit
                     sub_Recorder.Received(1).RecordAudio();
                     Assert.That(UUT.IsRecording);
                 });
+        }
+
+        [Test]
+        public void PlayRecording_OneCall_soundModifyLogic_ReceivedOneCall()
+        {
+            //ARRANGE
+            Measurement dto = new Measurement(new DateTime(1, 1, 1));
+            UUT.PlayRecording(dto);
+
+            sub_soundModifyLogic.Received(1).PlayRecording(dto.HeartSound);
         }
 
         [Test]
