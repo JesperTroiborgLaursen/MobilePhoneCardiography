@@ -4,6 +4,8 @@ using Microcharts;
 using Microcharts.Forms;
 using MobilePhoneCardiography.ViewModels;
 using SkiaSharp;
+using SkiaSharp.Views;
+using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using EventArgss;
@@ -33,8 +35,6 @@ namespace MobilePhoneCardiography.Views
         {
           
             chartView.Chart = new LineChart { 
-                ShowYAxisText = true, 
-                LegendOption = SeriesLegendOption.Bottom, 
                 Entries = e.ChartValues, 
                 IsAnimated = false, 
                 LineSize = (float)1, 

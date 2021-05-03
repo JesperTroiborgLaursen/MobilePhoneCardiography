@@ -10,24 +10,24 @@
     <ContentPage.BindingContext>
         <viewModels:FindPatientViewModel/>
     </ContentPage.BindingContext>
-    
+
 
     <ContentPage.Content>
 
         <StackLayout>
             <Frame Margin="0,50,0,0">
-            <Frame BorderColor="Gainsboro" BackgroundColor="AliceBlue" >
-            <StackLayout VerticalOptions="Center">
-                
-                <Label Text="Social Security Number" FontSize="Medium" />
-                <Entry Text="{Binding SocSec, Mode=OneWay}" FontSize="Medium" IsEnabled="False" AutomationId="SocSec"/>
-                <Label Text="First Name" FontSize="Medium" />
-                <Entry Text="{Binding FirstName, Mode=OneWay}" FontSize="Medium" IsEnabled="False" AutomationId="FirstName"/>
-                <Label Text="Last Name" FontSize="Medium" />
-                <Entry Text="{Binding LastName, Mode=OneWay}" FontSize="Medium" IsEnabled="False" AutomationId="LastName"/>
+                <Frame BorderColor="Gainsboro" BackgroundColor="AliceBlue" >
+                    <StackLayout VerticalOptions="Center">
 
-            </StackLayout>
-            </Frame>
+                        <Label Text="Social Security Number" FontSize="Medium" />
+                        <Entry Text="{Binding SocSec, Mode=OneWay}" FontSize="Medium" IsEnabled="False" AutomationId="SocSec"/>
+                        <Label Text="First Name" FontSize="Medium" />
+                        <Entry Text="{Binding FirstName, Mode=OneWay}" FontSize="Medium" IsEnabled="False" AutomationId="FirstName"/>
+                        <Label Text="Last Name" FontSize="Medium" />
+                        <Entry Text="{Binding LastName, Mode=OneWay}" FontSize="Medium" IsEnabled="False" AutomationId="LastName"/>
+
+                    </StackLayout>
+                </Frame>
             </Frame>
             <Frame Opacity="{Binding ConsentFrameOpacity}">
                 <Label AutomationId="ConsentLabel" Text="Please confirm with the patient if this information is correct, and if he/she consent with the usage of his/hers data" IsVisible="{Binding ConsentVisible}"/>
@@ -45,5 +45,4 @@
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
-    
 </ContentPage>
