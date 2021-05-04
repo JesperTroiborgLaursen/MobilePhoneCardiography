@@ -47,7 +47,19 @@
                     <Label Text="Amplitude" Rotation="-90" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand" VerticalOptions="End" VerticalTextAlignment="End" TextColor="Black" />
                     <!--<Label Text="-2.5   -2.0  -1.5  -1.0  -0.5  -0.0   0.5   1.0   1.5" 
                            Rotation="-90" HorizontalTextAlignment="Start" HorizontalOptions="Start" VerticalOptions="Start" />-->
-                    <microcharts:ChartView x:Name="chartView" HeightRequest="200" WidthRequest="340" HorizontalOptions="End" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="200" />
+                           
+                        </Grid.RowDefinitions>
+
+                        <microcharts:ChartView x:Name="chartView" Grid.Column="100"  HeightRequest="200" WidthRequest="340" HorizontalOptions="End" />
+                    </Grid>
+
                     <Label Text="0         1         2         3         4         5         6         7        8        9        10"/>
                     <Label Text="Time [sec]" HorizontalTextAlignment="Center" TextColor="Black"/>
                 </StackLayout>

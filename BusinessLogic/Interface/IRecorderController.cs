@@ -13,7 +13,7 @@ namespace BusinessLogic
         public ChartEntry[] ProcessStreamValues(Stream recording);
         public ChartEntry[] ChartValues { get; set; }
         bool IsRecording { get; }
-        string PageText { get; set; }
+        
 
     }
 }

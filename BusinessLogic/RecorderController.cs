@@ -18,40 +18,17 @@ namespace BusinessLogic
     public class RecorderController : IRecorderController
     {
         #region Props
-
-        private string _pageText = "Du har nu åbnet Plugin Audio Recorder skærmen";
-
-        public string PageText
-        {
-            get { return _pageText; }
-            set { _pageText = value; }
-        }
-        //RecorderController skal sørge for at udskrive vigtige meddelelser ifbm. recording!!!!!!!!!!!
-        private string _sampleRate;
-
-        public string SampleRate
-        {
-            get { return _sampleRate; }
-            set { _sampleRate = value; }
-        }
+        //RecorderControllerens opgave er at udskrive vigtige meddelelser ifbm. recording!!!!!!!!!!!
+  
         private bool _isRecording; //Todo Få knapper på UI til at være inaktive når der optages (Fx.)
+        private Measurement _measureDTO;
 
+        public ChartEntry[] ChartValues { get; set; }
         public bool IsRecording
         {
             get { return _isRecording; }
             private set { _isRecording = value; }
         }
-
-        private Measurement _measureDTO;
-
-        public Measurement MeasureDTO
-        {
-            get { return _measureDTO; }
-            set { _measureDTO = value; }
-        }
-        public ChartEntry[] ChartValues { get; set; }
-
-
         #endregion 
         #region Dependencies
 
@@ -71,7 +48,6 @@ namespace BusinessLogic
             _dataStorage = new FakeStorage(); //ligger som internal class
             _graphFeatures = new GraphFeatures();
             IsRecording = false;
-
         }
 
         public RecorderController(EventHandler<AnalyzeFinishedEventArgs> handleAnalyzeFinishedEvent, IRecorder recorder, ISoundModifyLogic soundModifyLogic, IAnalyzeLogic analyzeLogic, ISaveData saveData)
@@ -81,8 +57,6 @@ namespace BusinessLogic
             _analyse = analyzeLogic ?? new AnalyzeLogic(handleAnalyzeFinishedEvent);
             _dataStorage = saveData ?? new FakeStorage();
             _graphFeatures = new GraphFeatures();
-
-
         }
 
         #endregion
@@ -115,21 +89,12 @@ namespace BusinessLogic
             foreach (var bytes in downSampledRecording)
             {
                 entries[i] = new Microcharts.ChartEntry(bytes);
-                //{
-
-                //    Label = "sample",
-                //    ValueLabel = tempByte.ToString(),
-                //    Color = SKColor.Parse("#b455b6")
-
-
-                //};
                 i++;
             }
             return entries;
 
         }
 
-        //TODO Temporary method to make the convert from stream to byte work
         private byte[] ReadToEnd(System.IO.Stream stream)
         {
             long originalPosition = 0;
@@ -181,19 +146,16 @@ namespace BusinessLogic
                 }
             }
         }
-
-
-      
         #endregion
         #region EventHandler
 
         private void HandleRecordingFinishedEvent(object sender, RecordFinishedEventArgs e)
         {
             IsRecording = false;
-            MeasureDTO = e.measureDTO;
-            ChartValues = ProcessStreamValues(MeasureDTO.HeartSound);
-            MeasureDTO = _analyse.Analyze(MeasureDTO);
-            _dataStorage.SaveToStorage(MeasureDTO);
+            _measureDTO = e.measureDTO;
+            ChartValues = ProcessStreamValues(_measureDTO.HeartSound);
+            _measureDTO = _analyse.Analyze(_measureDTO);
+            _dataStorage.SaveToStorage(_measureDTO);
         }
 
         #endregion
