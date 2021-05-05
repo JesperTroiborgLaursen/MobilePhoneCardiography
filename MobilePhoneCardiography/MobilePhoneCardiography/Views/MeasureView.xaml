@@ -39,13 +39,8 @@
                     </StackLayout>
                 </Grid>
             </StackLayout>
-
-          
-            <!--This is the frame where we put in our graph-->
             <Frame VerticalOptions="FillAndExpand">
                 <StackLayout>
-                    <!--<Label Text="-2.5   -2.0  -1.5  -1.0  -0.5  -0.0   0.5   1.0   1.5" 
-                           Rotation="-90" HorizontalTextAlignment="Start" HorizontalOptions="Start" VerticalOptions="Start" />-->
                     <Grid BackgroundColor="White" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="10"/>
@@ -61,7 +56,7 @@
 
                        
                             
-                        <Label Text="Phonocardiogram" 
+                        <Label Text="          Phonocardiogram" 
                                Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" FontSize="Title" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                         <microcharts:ChartView x:Name="chartView" 
                                Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="2" HeightRequest="200" WidthRequest="400" HorizontalOptions="Center" VerticalOptions="Center"/>
