@@ -40,28 +40,41 @@
                 </Grid>
             </StackLayout>
 
+          
             <!--This is the frame where we put in our graph-->
             <Frame VerticalOptions="FillAndExpand">
                 <StackLayout>
-                    <Label Text="Phonocardiograf" FontSize="Title" VerticalTextAlignment="Start" HorizontalTextAlignment="Center"/>
-                    <Label Text="Amplitude" Rotation="-90" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand" VerticalOptions="End" VerticalTextAlignment="End" TextColor="Black" />
                     <!--<Label Text="-2.5   -2.0  -1.5  -1.0  -0.5  -0.0   0.5   1.0   1.5" 
                            Rotation="-90" HorizontalTextAlignment="Start" HorizontalOptions="Start" VerticalOptions="Start" />-->
-                    <Grid>
+                    <Grid BackgroundColor="White" >
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100" />
-                            
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="300"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="200" />
-                           
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="300"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
 
-                        <microcharts:ChartView x:Name="chartView" Grid.Column="100"  HeightRequest="200" WidthRequest="340" HorizontalOptions="End" />
+                       
+                            
+                        <Label Text="Phonocardiogram" 
+                               Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" FontSize="Title" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        <microcharts:ChartView x:Name="chartView" 
+                               Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="2" HeightRequest="200" WidthRequest="400" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Label Text="Amplitude" 
+                               Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Rotation="-90" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" HorizontalOptions="Start" VerticalOptions="Center" TextColor="Black" />
+                    <Label Text="   -1.0  -0.5  0  0.5  1.0" 
+                               Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Rotation="-90" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" HorizontalOptions="Start" VerticalOptions="Center"/>
+                        <Label Text="0       1      2      3      4      5      6      7     8     9     10"
+                               Grid.Row="2" Grid.Column="2" HorizontalTextAlignment="Center" />
+                        <Label Text="Time [sec]" 
+                               Grid.Row="3" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="Black"/>
                     </Grid>
 
-                    <Label Text="0         1         2         3         4         5         6         7        8        9        10"/>
-                    <Label Text="Time [sec]" HorizontalTextAlignment="Center" TextColor="Black"/>
                 </StackLayout>
             </Frame>
 
