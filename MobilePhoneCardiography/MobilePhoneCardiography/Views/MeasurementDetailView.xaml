@@ -51,10 +51,10 @@
                 <Slider AutomationId="TempoSlider" Value="1.0" MinimumTrackColor="LightBlue" MaximumTrackColor="AliceBlue" Minimum="0.05" Maximum="2.0"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Button Text="Play" AutomationId="PlayButton"/>
-                <Button Text="Stop" AutomationId="StopButton"/>
-                <Button Text="Rewind" AutomationId="RewindButton"/>
-                <Button Text="Forward" AutomationId="ForwardButton"/>
+                <Button Image="play.png" AutomationId="PlayButton"/>
+                <Button Image="stop.png" AutomationId="StopButton"/>
+                <Button Image="rewind.png" AutomationId="RewindButton"/>
+                <Button Image="forward.png"  AutomationId="ForwardButton"/>
             </StackLayout>
             
 

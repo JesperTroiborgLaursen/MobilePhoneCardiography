@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobilePhoneCardiography.Views.PlacementInfoView"
              xmlns:vm="clr-namespace:MobilePhoneCardiography.ViewModels"
-             xmlns:models="clr-namespace:MobilePhoneCardiography.Models;assembly=MobilePhoneCardiography"
              Title="{Binding Title}">
     
     <ContentPage.BindingContext>
@@ -19,6 +18,33 @@
    
     <Frame BackgroundColor="AliceBlue">
         <StackLayout>
+            <StackLayout>
+                <Frame Padding="0"  CornerRadius="2" IsClippedToBounds="False" VerticalOptions="Fill" HorizontalOptions="Fill">
+                    <StackLayout Padding="0" Spacing="1">
+                        <Frame Padding="5">
+                        <Image  Source="https://www.aafp.org/afp/1999/0801/afp19990801p558-f1.jpg" HeightRequest="300"/>
+                        </Frame>
+                       <Frame Padding="5">
+                        <Grid BackgroundColor="White">
+
+                            <Label Grid.Column="0" Grid.Row="0"  Text="URSB = Upper Right Sternal Border" TextColor="LightBlue" FontSize="10"/>
+                            <Label Grid.Column="1" Grid.Row="0" Text="URSB = Upper Left Sternal Border" TextColor="LightBlue" FontSize="10"/>
+                            <Label Grid.Column="0" Grid.Row="1" Text="URSB = Lower Left Sternal Border" TextColor="LightBlue" FontSize="10"/>
+                            <Label Grid.Column="1" Grid.Row="1" Text="URSB = Apex" TextColor="LightBlue" FontSize="10"/>
+                        </Grid>
+                       </Frame>
+                    </StackLayout>
+                </Frame>
+                
+            </StackLayout>
+            <Frame VerticalOptions="FillAndExpand" >
+                <StackLayout>
+                    <Label Text="Maybe dont worry yet!" FontSize="Title"/>
+                    <Entry Margin="0" FontSize="0" IsEnabled="False"/>
+                    <Label VerticalOptions="Center" Text="Heart murmurs are common in healthy infants, children, and adolescents. Although most are not pathologic, a murmur may be the sole manifestation of serious heart disease." />
+                    <Label Text="Always consult your family doctor if you are concerned about your childrens health!" Font="Italic"/>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </Frame>
 

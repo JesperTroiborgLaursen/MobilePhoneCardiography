@@ -5,9 +5,11 @@ namespace DTOs
 {
     public enum PlacementOfDeviceEnum
     {
-        CorDexter = 1,
-        CorSinister = 2,
-        CorInfra = 3
+        URSB = 1,
+        ULSB = 2,
+        LLSB= 3,
+        Apex = 4
+
     };
 
 

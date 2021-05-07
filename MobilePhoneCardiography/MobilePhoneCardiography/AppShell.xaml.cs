@@ -14,11 +14,14 @@ namespace MobilePhoneCardiography
             Routing.RegisterRoute(nameof(MeasurementDetailView), typeof(MeasurementDetailView));
             Routing.RegisterRoute(nameof(LoginSPView), typeof(LoginSPView));
             Routing.RegisterRoute(nameof(FindPatientView), typeof(FindPatientView));
+            Routing.RegisterRoute(nameof(PlacementInfoView), typeof(PlacementInfoView));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
+
             await Shell.Current.GoToAsync("//LoginPage");
+            Shell.Current.FlyoutIsPresented = false;
         }
     }
 }
