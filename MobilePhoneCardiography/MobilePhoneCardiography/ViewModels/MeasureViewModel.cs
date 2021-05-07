@@ -27,6 +27,10 @@ namespace MobilePhoneCardiography.ViewModels
 
         public ICommand RecordAudioCommand { get; }
         public ICommand PlacementInfoCommand { get; }
+
+        public bool StartVisible { get; set; }
+        public bool StopVisible { get; set; }
+
         public List<object> Placement
         {
             get => _placement;
@@ -41,10 +45,14 @@ namespace MobilePhoneCardiography.ViewModels
             PlacementInfoCommand = new Command(OnPlacementInfoClicked);
             _recorderController = new RecorderController(HandleAnalyzeFinishedEvent);
 
+            StartVisible = true;
+            StopVisible = false;
+
             Placement = new List<object>();
-            Placement.Add(PlacementOfDeviceEnum.CorDexter.ToString());
-            Placement.Add(PlacementOfDeviceEnum.CorInfra.ToString());
-            Placement.Add(PlacementOfDeviceEnum.CorSinister.ToString());
+            Placement.Add(PlacementOfDeviceEnum.URSB.ToString());
+            Placement.Add(PlacementOfDeviceEnum.ULSB.ToString());
+            Placement.Add(PlacementOfDeviceEnum.LLSB.ToString());
+            Placement.Add(PlacementOfDeviceEnum.Apex.ToString());
         }
 
 
@@ -52,13 +60,15 @@ namespace MobilePhoneCardiography.ViewModels
 
         private void StartRecordTask()
         {
+            StartVisible = false;
+            StopVisible = true;
             _recorderController.RecordAudio();
         }
 
         private async void OnPlacementInfoClicked(object obj)
         {
             // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-            await Shell.Current.GoToAsync($"//{nameof(MeasureView)}");
+            await Shell.Current.GoToAsync($"{nameof(PlacementInfoView)}");
         }
 
         private void HandleAnalyzeFinishedEvent(object sender, AnalyzeFinishedEventArgs e)
@@ -67,6 +77,8 @@ namespace MobilePhoneCardiography.ViewModels
             MeasureDTO = e.DTO;
             //Todo Denne linje skal væk når vi har introduceret RecordingsViewet
             //da den på nuværende tidspunkt blot afspiller lyden med det samme
+            StartVisible = true;
+            StopVisible = false;
             _recorderController.PlayRecording(MeasureDTO);
         }
 

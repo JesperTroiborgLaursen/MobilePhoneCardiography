@@ -17,10 +17,10 @@ namespace DataAccessLayer.Services
         {
             measurements = new List<Measurement>()
             {
-                new Measurement{Id = 1, HealthProfID = "1",PatientID = "123346-1234",PlacementEnum = PlacementOfDeviceEnum.CorDexter,
+                new Measurement{Id = 1, HealthProfID = "1",PatientID = "123346-1234",PlacementEnum = PlacementOfDeviceEnum.ULSB,
                     ProbabilityProcent = 50,HeartSound = Stream.Null, StartTime = DateTime.Now},
 
-                new Measurement{Id = 2, HealthProfID = "2",PatientID = "234567-2345",PlacementEnum = PlacementOfDeviceEnum.CorInfra,
+                new Measurement{Id = 2, HealthProfID = "2",PatientID = "234567-2345",PlacementEnum = PlacementOfDeviceEnum.URSB,
                     ProbabilityProcent = 90,HeartSound = Stream.Null, StartTime = DateTime.Now},
 
 
