@@ -13,6 +13,10 @@ namespace MobilePhoneCardiography.ViewModels
         public PlacementInfoViewModel()
         {
             Title = "Placement of microphone";
+
+
         }
+
+
     }
 }

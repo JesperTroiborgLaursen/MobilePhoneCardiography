@@ -20,11 +20,14 @@
                         </ContentView>--><!--
                 </StackLayout>
             </StackLayout>-->
-            <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
-                <Label Text="Welcome to your Mobile Phonocardiograpic App. Please choose type of user:" FontSize="Title"/>
-                <Button VerticalOptions="Center" Text="Private User" AutomationId ="PrivateUserLoginButton"  Command="{Binding LoginPBCommand}"/>
-                <Button VerticalOptions="Center" Text="Healthcare Professional" AutomationId ="HealthUserLoginButton"  Command="{Binding LoginSPCommand}"/>
+            <StackLayout >
+                <Label Text="Welcome to your Mobile Phonocardiograpic App." FontSize="Title" VerticalOptions="CenterAndExpand" Padding="10,0,0,0"/>
+                <Entry VerticalOptions="Fill" IsEnabled="False" Margin="0"/>
+                <StackLayout Padding="10,0,10,50" VerticalOptions="End">
+                    <Label Text="Please choose type of user:" FontSize="Large"/>
+                    <Button VerticalOptions="End" Image="privareuser.png" Text="Private User" AutomationId ="PrivateUserLoginButton"  Command="{Binding LoginPBCommand}"/>
+                    <Button VerticalOptions="End" Image="helathpro.png" Text="Healthcare Professional" AutomationId ="HealthUserLoginButton"  Command="{Binding LoginSPCommand}"/>
             </StackLayout>
-
+            </StackLayout>
     </ContentPage.Content>
 </ContentPage>

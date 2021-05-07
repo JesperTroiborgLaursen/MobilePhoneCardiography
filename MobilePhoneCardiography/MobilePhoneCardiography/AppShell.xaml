@@ -83,24 +83,24 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
     
-    <FlyoutItem Title="Login" Icon="user.svg" FlyoutItemIsVisible="False">
+    <FlyoutItem Title="Login"  FlyoutItemIsVisible="False">
         <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Healthcare Professional Login" Icon="" FlyoutItemIsVisible="False">
+    <FlyoutItem Title="Healthcare Professional Login" FlyoutItemIsVisible="False">
         <ShellContent Route="LoginSPView" AutomationId="HealthUserLoginTab" ContentTemplate="{DataTemplate local:LoginSPView}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Measurement" Icon="icon_feed.png">
+    <FlyoutItem Title="Measurement" Icon="measurements.png">
 
-        <Tab x:Name="PatientsTab" Title="Patients" Icon="icon_user.png">
+        <Tab x:Name="PatientsTab" Title="Patients" Icon="patients.png">
             <ShellContent Route="FindPatientsView" AutomationId="FindPatientTab" ContentTemplate="{DataTemplate local:FindPatientView}" />
         </Tab>
 
-        <Tab Title="Measure" Icon="icon_new.png">
+        <Tab Title="Measure" Icon="measure.png">
             <ShellContent Route="MeasureView" AutomationId="MeasureTab" ContentTemplate="{DataTemplate local:MeasureView}" />
         </Tab>
-        
-        <Tab Title="Recordings" Icon="">
+
+        <Tab Title="Recordings" Icon="recordings.png">
             <ShellContent Route="RecordingsView" AutomationId="RecordingsTab" ContentTemplate="{DataTemplate local:RecordingsView}" />
         </Tab>
 
@@ -108,7 +108,7 @@
     </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
-    <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked"/>
+    <MenuItem Text="Logout" Icon="logout.png" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked"/>
 
 
 </Shell>
