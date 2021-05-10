@@ -39,13 +39,13 @@
                     </StackLayout>
                 </Grid>
             </StackLayout>
-            <Frame VerticalOptions="FillAndExpand">
+            <Frame VerticalOptions="FillAndExpand" HeightRequest="400" WidthRequest="400">
                 <StackLayout>
                     <Grid BackgroundColor="White" >
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="10*"/>
-                            <ColumnDefinition Width="10*"/>
-                            <ColumnDefinition Width="300*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="350*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="10*"/>
@@ -60,10 +60,10 @@
                                Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" FontSize="Title" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                         <microcharts:ChartView x:Name="chartView" 
                                Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="2" HeightRequest="200" WidthRequest="400" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    <Label Text="Amplitude" 
+                        <Label Text="Amplitude" 
                                Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Rotation="-90" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" HorizontalOptions="Start" VerticalOptions="Center" TextColor="Black" />
-                    <Label Text="   -1.0  -0.5  0  0.5  1.0" 
-                               Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="3" Rotation="-90" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" HorizontalOptions="Start" VerticalOptions="Center"/>
+                        <!--<Label Text="   -1.0  -0.5  0  0.5  1.0"--> 
+                               <!--Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="3" Rotation="-90" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" HorizontalOptions="Start" VerticalOptions="Center"/>-->
                         <Label Text="0       1      2      3      4      5      6      7     8     9     10"
                                Grid.Row="2" Grid.Column="2" HorizontalTextAlignment="Center" />
                         <Label Text="Time [sec]" 

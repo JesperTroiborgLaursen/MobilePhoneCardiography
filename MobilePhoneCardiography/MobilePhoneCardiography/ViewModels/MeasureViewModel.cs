@@ -127,7 +127,8 @@ namespace MobilePhoneCardiography.ViewModels
         private void StartRecordTask()
         {
             _recorderController.RecordAudio();
-            
+            //ChartValuesMvm = new Microcharts.ChartEntry[0];
+            //OnGraphReady(new GraphReadyEventArgs { ChartValues = ChartValuesMvm });
         }
 
 

@@ -9,6 +9,7 @@ using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using EventArgss;
+using System.Linq;
 
 namespace MobilePhoneCardiography.Views
 {
@@ -33,9 +34,8 @@ namespace MobilePhoneCardiography.Views
 
         private void HandleGraphReadyEvent(object s, GraphReadyEventArgs e)
         {
-          
-            chartView.Chart = new LineChart { 
-                Entries = e.ChartValues, 
+            chartView.Chart = new LineChart {
+                Entries = e.ChartValues.Take(3000),
                 IsAnimated = false, 
                 LineSize = (float)1, 
                 PointMode = 0, 
@@ -43,6 +43,7 @@ namespace MobilePhoneCardiography.Views
                 LineMode = (LineMode)2, 
                 AnimationDuration = _animationTimeSpan }; //IsAnimated = false, AnimationProgress = (float)0, LineSize = (float)0.1, PointMode = 0 };
             chartView.CancelAnimations();
+
         }
 
     }
