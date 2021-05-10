@@ -35,7 +35,7 @@ namespace DataAccessLayer
     }
 
     /// <summary>
-    /// Denne klasse arver fra AudioRecorderService og implamentere IAudioRecorderService
+    /// Denne klasse arver fra AudioRecorderService og implementerer IAudioRecorderService
     /// Det gør at man kan teste på dette datalag
     /// </summary>
     public class ExtendedAudioRecorderService : AudioRecorderService, IAudioRecorderService
@@ -49,8 +49,8 @@ namespace DataAccessLayer
             StopRecordingOnSilence = false;
             StopRecordingAfterTimeout = true;
             //todo det er her vi sætter tiden til 10 eller 5 sek
-            AudioTimeout = 4;
-
+            AudioTimeout = 10;
+            PreferredSampleRate = 22050;
             AudioInputReceived += handleRecordIsFinished;
         }
 

@@ -52,20 +52,6 @@ namespace DataAccessLayer
             _recorder.StartRecording();
         }
 
-        //TODO delete or change this method from concurrent streaming
-        public async void StartRecording2()
-        {
-            var audioRecordTask = await _recorder.StartRecording();
-
-            using (var stream = _recorder.GetAudioFileStream())
-            {
-                
-                //var simpleResult = await SpeechApiClient.
-
-            }
-
-        }
-
         #endregion
         #region EventHandler
 

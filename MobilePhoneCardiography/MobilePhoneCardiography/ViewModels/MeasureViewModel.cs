@@ -44,6 +44,9 @@ namespace MobilePhoneCardiography.ViewModels
         public ChartEntry[] ChartValuesMvm { get; set; }
         #endregion
         #region Constructor
+        /// <summary>
+        /// Class to show the graph view on the application
+        /// </summary>
         public MeasureViewModel()
         {
             Title = "Measure";
@@ -124,14 +127,20 @@ namespace MobilePhoneCardiography.ViewModels
             //await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={measurement.Id}");
         }
 
+        /// <summary>
+        /// Kalder RecordAudio() i BusinessLogic layer
+        /// </summary>
         private void StartRecordTask()
         {
             _recorderController.RecordAudio();
-            //ChartValuesMvm = new Microcharts.ChartEntry[0];
-            //OnGraphReady(new GraphReadyEventArgs { ChartValues = ChartValuesMvm });
         }
 
 
+        /// <summary>
+        /// Event der kaldes når optagelsen er færdig med at analysere for hjerte mislyde
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HandleAnalyzeFinishedEvent(object sender, AnalyzeFinishedEventArgs e)
         {
 
@@ -143,13 +152,11 @@ namespace MobilePhoneCardiography.ViewModels
             
             if (ChartValuesMvm != null)
             {
-                //ChartEntry[] tempArray = ChartValuesMvm.Take(5000).ToArray<ChartEntry>();
-                //tempArray
                 OnGraphReady(new GraphReadyEventArgs { ChartValues = ChartValuesMvm });
             }
         }
 
-        public void OnGraphReady(GraphReadyEventArgs e)
+        private void OnGraphReady(GraphReadyEventArgs e)
         {
             graphReadyEvent?.Invoke(this, e);
         }

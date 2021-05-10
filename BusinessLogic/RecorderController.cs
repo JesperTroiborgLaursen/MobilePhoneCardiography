@@ -18,12 +18,21 @@ namespace BusinessLogic
     public class RecorderController : IRecorderController
     {
         #region Props
+        /// <summary>
+        /// Håndterer kaldene til og fra recorderen
+        /// </summary>
         //RecorderControllerens opgave er at udskrive vigtige meddelelser ifbm. recording!!!!!!!!!!!
   
         private bool _isRecording; //Todo Få knapper på UI til at være inaktive når der optages (Fx.)
         private Measurement _measureDTO;
 
+        /// <summary>
+        /// Property til at gemme vores værdier til grafen i
+        /// </summary>
         public ChartEntry[] ChartValues { get; set; }
+        /// <summary>
+        /// Property to check if the recording is ongoing
+        /// </summary>
         public bool IsRecording
         {
             get { return _isRecording; }
@@ -78,19 +87,21 @@ namespace BusinessLogic
             }
         }
 
+        /// <summary>
+        /// Bearbejdning af wav filerne i en optagelse. Metoden kører først en konvertering fra Stream til byte array, derefter en downsampling og til slut en konvertering fra bytes til dB 
+        /// </summary>
+        /// <param name="recording"> Den optagelse der skal bearbejdes</param>
+        /// <returns></returns>
         public ChartEntry[] ProcessStreamValues(Stream recording)
         {
-            byte maxByteValue = 127;
             byte dB;
-            byte[] everyRecordingByte = ReadToEnd(recording);  //TODO how do we fix this method ReadFully(recording);
+            byte[] everyRecordingByte = ReadToEnd(recording); 
             byte[] downSampledRecording = _graphFeatures.DownSample(everyRecordingByte);
-            ChartEntry[] entries = new ChartEntry[downSampledRecording.Length + 1]; //+ amount of extra values manually inserted
+            ChartEntry[] entries = new ChartEntry[downSampledRecording.Length + 1]; //+ amount of extra entry points manually inserted
 
             int i = 0;
-            entries[i] = new Microcharts.ChartEntry(80) { Label = "Indikator", ValueLabel = "80", Color = SKColor.Parse("#2c3e50")}; 
+            entries[i] = new Microcharts.ChartEntry(120) { Label = "Indikator", ValueLabel = "120", Color = SKColor.Parse("#f00a0a") }; //Extra indicator point so we know the approximately value of the amplitudes
             i++;
-            //entries[i] = new Microcharts.ChartEntry(40) { Label = "Indikator", ValueLabel = "40" };// , Color = SKColor.FromHsl(2, 2, 100, 100) };
-            //i++;
             foreach (var bytes in downSampledRecording)
             {
                 if (bytes != 0)
@@ -105,6 +116,11 @@ namespace BusinessLogic
 
         }
         
+        /// <summary>
+        /// Konverterer fra Stream objekt til byte array
+        /// </summary>
+        /// <param name="stream"> Det Stream objekt der skal konverteres til byte array</param>
+        /// <returns></returns>
         private byte[] ReadToEnd(System.IO.Stream stream)
         {
             long originalPosition = 0;
@@ -159,6 +175,11 @@ namespace BusinessLogic
         #endregion
         #region EventHandler
 
+        /// <summary>
+        /// Event der kaldes når optagelsen er færdig. Den sætter derefter gang i nogle behandlings- og visualiserings metoder
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HandleRecordingFinishedEvent(object sender, RecordFinishedEventArgs e)
         {
             IsRecording = false;

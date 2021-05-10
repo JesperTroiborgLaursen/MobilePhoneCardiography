@@ -19,6 +19,9 @@ namespace MobilePhoneCardiography.Views
 
         TimeSpan _animationTimeSpan;
 
+        /// <summary>
+        /// Design of graph
+        /// </summary>
         public MeasureView()
         {
             InitializeComponent();
@@ -31,17 +34,23 @@ namespace MobilePhoneCardiography.Views
 
         }
 
-
+        /// <summary>
+        /// Event is triggered when the ChartEntry points are sat to a value. 
+        /// The mehtod plots the heart sound graph
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="e"></param>
         private void HandleGraphReadyEvent(object s, GraphReadyEventArgs e)
         {
             chartView.Chart = new LineChart {
-                Entries = e.ChartValues.Take(3000),
+                Entries = e.ChartValues,
                 IsAnimated = false, 
-                LineSize = (float)1, 
+                LineSize = (float)0.5, 
                 PointMode = 0, 
                 EnableYFadeOutGradient = false, 
                 LineMode = (LineMode)2, 
-                AnimationDuration = _animationTimeSpan }; //IsAnimated = false, AnimationProgress = (float)0, LineSize = (float)0.1, PointMode = 0 };
+                AnimationDuration = _animationTimeSpan,
+                AnimationProgress = (float)0};
             chartView.CancelAnimations();
 
         }
