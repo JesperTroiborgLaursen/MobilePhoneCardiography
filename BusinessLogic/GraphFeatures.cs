@@ -8,18 +8,10 @@ namespace BusinessLogic
     {
         public byte[] DownSample(byte[] graphDataByteArray)
         {
-            /*
-            dataValues = new List<float>();
-            dataValues = graphDataByteArray.OfType<float>().ToList();
-            graphDataByteArray = null;
-            NWaves.Signals.DiscreteSignal signal = new NWaves.Signals.DiscreteSignal(44000 ,dataValues);
-            graphDataByteArray = NWaves.Operations.Operation.Decimate(signal, 4);
-            */
-
             List<byte> tempArray = new List<byte>();
             int number = 0;
             int periodicI = 0;
-            int sampleNumber = 100;
+            int sampleNumber = 500; //Takes every 300 sample
             
             while (graphDataByteArray.Length > number+sampleNumber)
             {
@@ -36,16 +28,10 @@ namespace BusinessLogic
                 periodicI += sampleNumber;
                 if (periodicI > 479800)
                 {
-
+                    break;
                 }
             }
 
-            //for (int i = 0; i < graphDataByteArray.Length/4; i++)
-            //{
-            //    tempArray.Add(graphDataByteArray[number]);
-            //    number++;
-            //    number = number + 4;
-            //}
             graphDataByteArray = null;
             graphDataByteArray = tempArray.ToArray();
 

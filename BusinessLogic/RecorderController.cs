@@ -84,16 +84,18 @@ namespace BusinessLogic
             byte dB;
             byte[] everyRecordingByte = ReadToEnd(recording);  //TODO how do we fix this method ReadFully(recording);
             byte[] downSampledRecording = _graphFeatures.DownSample(everyRecordingByte);
-            ChartEntry[] entries = new ChartEntry[downSampledRecording.Length];
+            ChartEntry[] entries = new ChartEntry[downSampledRecording.Length + 1]; //+ amount of extra values manually inserted
 
             int i = 0;
-            //entries[i] = new Microcharts.ChartEntry(300) { ValueLabel = "indikator", Color = SKColor.FromHsl(2,2,100,100)};
+            entries[i] = new Microcharts.ChartEntry(80) { Label = "Indikator", ValueLabel = "80", Color = SKColor.Parse("#2c3e50")}; 
+            i++;
+            //entries[i] = new Microcharts.ChartEntry(40) { Label = "Indikator", ValueLabel = "40" };// , Color = SKColor.FromHsl(2, 2, 100, 100) };
             //i++;
             foreach (var bytes in downSampledRecording)
             {
                 if (bytes != 0)
                 {
-                    dB = (byte)(20 * Math.Log10(Math.Abs(bytes))); //Converts from byte in wav to dB. Formula: 20 * logbase10 (amplitude1 / amplitude2)//20*log10((x-128)/255) gives dB FS.
+                    dB = (byte)(20 * Math.Log10(Math.Abs(bytes))); //Converts from byte in wav to dB. Formula: 20*log10(x) gives dB FS.
                 }
                 else { dB = bytes; }
                 entries[i] = new Microcharts.ChartEntry(bytes);
