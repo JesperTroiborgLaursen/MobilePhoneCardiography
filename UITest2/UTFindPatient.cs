@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using NUnit.Framework;
 using Xamarin.UITest;
 using Xamarin.UITest.Queries;
@@ -35,7 +36,7 @@ namespace UITest2
             app.Tap("SocSecSearch");
 
             //Act
-            app.EnterText("SocSecSearch", "234567-2345");
+            app.EnterText("SocSecSearch", "123456-1234");
             app.PressEnter();
             var findPatientButtonEnabled = app.Query(c => c.Marked("FindPatientButton")).FirstOrDefault().Enabled;
 
@@ -49,7 +50,7 @@ namespace UITest2
 
             //Arrange
             app.Tap("SocSecSearch");
-            app.EnterText("SocSecSearch", "234567-2345");
+            app.EnterText("SocSecSearch", "123456-1234");
             app.PressEnter();
             app.Tap("SocSecSearch");
             app.ClearText();
@@ -68,7 +69,7 @@ namespace UITest2
 
             //Arrange
             app.Tap("SocSecSearch");
-            app.EnterText("SocSecSearch", "234567-2345");
+            app.EnterText("SocSecSearch", "123456-1234");
             app.PressEnter();
 
 
@@ -94,7 +95,7 @@ namespace UITest2
 
             //Arrange
             app.Tap("SocSecSearch");
-            app.EnterText("SocSecSearch", "234567-2345");
+            app.EnterText("SocSecSearch", "123456-1234");
             app.PressEnter();
 
 
@@ -149,7 +150,7 @@ namespace UITest2
 
             //Arrange
             app.Tap("SocSecSearch");
-            app.EnterText("SocSecSearch", "234567-2345");
+            app.EnterText("SocSecSearch", "123456-1234");
             app.PressEnter();
 
 
@@ -171,7 +172,7 @@ namespace UITest2
 
 
         [Test]
-        public void FindPatientButton_Entering1234567890AsSocSecPressingFindPatient_PatientDataForJohnDoeLoads()
+        public void FindPatientButton_Entering1234567890AsSocSecPressingFindPatient_PatientDataForMrRobotLoads()
         {
 
             //Arrange
@@ -181,37 +182,38 @@ namespace UITest2
             
             //Act
             app.Tap("FindPatientButton");
-            var socSec = app.Query("SocSec").FirstOrDefault().Text;
+            //var socSec = app.Query("SocSec").FirstOrDefault().Text;
             var firstName = app.Query("FirstName").FirstOrDefault().Text;
             var lastName = app.Query("LastName").FirstOrDefault().Text;
+            Thread.Sleep(200);
 
             //Assert
-            Assert.That(socSec, Is.EqualTo("123346-1234"));
-            Assert.That(firstName, Is.EqualTo("John"));
-            Assert.That(lastName, Is.EqualTo("Doe"));
+            //Assert.That(socSec, Is.EqualTo("123346-1234"));
+            Assert.That(firstName, Is.EqualTo("Mr.Robot"));
+            Assert.That(lastName, Is.EqualTo("Anonymous"));
         }
 
 
-        [Test]
-        public void FindPatientButton_Entering2234567890AsSocSecPressingFindPatient_PatientDataForJimSmithLoads()
-        {
+        //[Test]
+        //public void FindPatientButton_Entering2234567890AsSocSecPressingFindPatient_PatientDataForJimSmithLoads()
+        //{
 
-            //Arrange
-            app.Tap("SocSecSearch");
-            app.EnterText("SocSecSearch", "234567-2345");
-            app.PressEnter();
+        //    //Arrange
+        //    app.Tap("SocSecSearch");
+        //    app.EnterText("SocSecSearch", "234567-2345");
+        //    app.PressEnter();
             
-            //Act
-            app.Tap("FindPatientButton");
-            var socSec = app.Query("SocSec").FirstOrDefault().Text;
-            var firstName = app.Query("FirstName").FirstOrDefault().Text;
-            var lastName = app.Query("LastName").FirstOrDefault().Text;
+        //    //Act
+        //    app.Tap("FindPatientButton");
+        //    var socSec = app.Query("SocSec").FirstOrDefault().Text;
+        //    var firstName = app.Query("FirstName").FirstOrDefault().Text;
+        //    var lastName = app.Query("LastName").FirstOrDefault().Text;
 
-            //Assert
-            Assert.That(socSec, Is.EqualTo("234567-2345"));
-            Assert.That(firstName, Is.EqualTo("Jim"));
-            Assert.That(lastName, Is.EqualTo("Smith"));
-        }
+        //    //Assert
+        //    Assert.That(socSec, Is.EqualTo("234567-2345"));
+        //    Assert.That(firstName, Is.EqualTo("Jim"));
+        //    Assert.That(lastName, Is.EqualTo("Smith"));
+        //}
 
         [Test]
         public void CancelButton_LoadPatientJimSmithTapCancel_AllEntriesClears()
@@ -219,7 +221,7 @@ namespace UITest2
 
             //Arrange
             app.Tap("SocSecSearch");
-            app.EnterText("SocSecSearch", "234567-2345");
+            app.EnterText("SocSecSearch", "123456-1234");
             app.PressEnter();
             app.Tap("FindPatientButton");
             
@@ -251,7 +253,7 @@ namespace UITest2
 
             //Arrange
             app.Tap("SocSecSearch");
-            app.EnterText("SocSecSearch", "234567-2345");
+            app.EnterText("SocSecSearch", "123456-1234");
             app.PressEnter();
             app.Tap("FindPatientButton");
 
@@ -268,7 +270,7 @@ namespace UITest2
         {
             //Arrange
             app.Tap("SocSecSearch");
-            app.EnterText("SocSecSearch", "234567-2345");
+            app.EnterText("SocSecSearch", "123456-1234");
             app.PressEnter();
             app.Tap("FindPatientButton");
 
