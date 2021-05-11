@@ -15,6 +15,7 @@ using Microcharts.Forms;
 using Microcharts;
 using SkiaSharp;
 using System.Threading;
+using System.Collections.Generic;
 
 namespace MobilePhoneCardiography.ViewModels
 {
@@ -45,7 +46,6 @@ namespace MobilePhoneCardiography.ViewModels
             set => SetProperty(ref _placement, value);
         }
 
-        public DTOs.Measurement MeasureDTO { get; set; }
         public ChartEntry[] ChartValuesMvm { get; set; }
         #endregion
         #region Constructor
@@ -63,14 +63,18 @@ namespace MobilePhoneCardiography.ViewModels
 
         #endregion
         #region Methods
+
+
+
         private async void OnNewRecordingClicked(object obj)
         {
             // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
             await Shell.Current.GoToAsync($"//{nameof(MeasureView)}");
         }
 
-            StartVisible = true;
-            StopVisible = false;
+        async Task ExecuteLoadMeasurementsCommand()
+        {
+            IsBusy = true;
 
             try
             {
@@ -107,27 +111,24 @@ namespace MobilePhoneCardiography.ViewModels
         }
 
 
-     
+
 
         private async void OnAddMeasurement(object obj)
         {
             await Shell.Current.GoToAsync(nameof(LoginSPView));
         }
 
-        private void StartRecordTask()
-        {
-            StartVisible = false;
-            StopVisible = true;
-            _recorderController.RecordAudio();
-        }
 
         /// <summary>
         /// Kalder RecordAudio() i BusinessLogic layer
         /// </summary>
-        private void StartRecordTask()
+        private async void StartRecordTask()
         {
             // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
             await Shell.Current.GoToAsync($"{nameof(PlacementInfoView)}");
+            StartVisible = false;
+            StopVisible = true;
+            _recorderController.RecordAudio();
         }
 
 
@@ -146,7 +147,7 @@ namespace MobilePhoneCardiography.ViewModels
             StopVisible = false;
             _recorderController.PlayRecording(MeasureDTO);
             ChartValuesMvm = _recorderController.ChartValues;
-            
+
             if (ChartValuesMvm != null)
             {
                 OnGraphReady(new GraphReadyEventArgs { ChartValues = ChartValuesMvm });
