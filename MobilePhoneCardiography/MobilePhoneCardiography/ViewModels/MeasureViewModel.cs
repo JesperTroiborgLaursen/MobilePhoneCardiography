@@ -65,7 +65,14 @@ namespace MobilePhoneCardiography.ViewModels
         #endregion
         #region Methods
 
+        async void OnItemSelected(Measurement measurement)
+        {
+            if (measurement == null)
+                return;
 
+            // This will push the ItemDetailPage onto the navigation stack
+            //await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={measurement.Id}");
+        }
 
         private async void OnNewRecordingClicked(object obj)
         {
