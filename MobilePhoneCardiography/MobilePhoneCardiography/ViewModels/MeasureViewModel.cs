@@ -24,6 +24,7 @@ namespace MobilePhoneCardiography.ViewModels
     {
         #region Attributter og dependencies
 
+        public ObservableCollection<Measurement> Measurements { get; }
         public event EventHandler<GraphReadyEventArgs> graphReadyEvent;
 
         private Measurement _selectedMeasurement;
