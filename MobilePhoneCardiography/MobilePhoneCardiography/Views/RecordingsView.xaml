@@ -17,7 +17,7 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="New Recording" Icon="newrecording.png"  AutomationId="NewRecButton" Command="{Binding NewRecordingCommand}" />
+        <ToolbarItem Text="New Recording" IconImageSource="newrecording.png"  AutomationId="NewRecButton" Command="{Binding NewRecordingCommand}" />
     </ContentPage.ToolbarItems>
 
     <RefreshView x:DataType="vm:RecordingsViewModel" Command="{Binding LoadMeasurementsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
