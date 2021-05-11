@@ -64,6 +64,11 @@ namespace MobilePhoneCardiography.ViewModels
             StartVisible = true;
             StopVisible = false;
 
+            Placement = new List<object>();
+            Placement.Add(PlacementOfDeviceEnum.URSB.ToString());
+            Placement.Add(PlacementOfDeviceEnum.ULSB.ToString());
+            Placement.Add(PlacementOfDeviceEnum.LLSB.ToString());
+            Placement.Add(PlacementOfDeviceEnum.Apex.ToString());
 
         }
 
