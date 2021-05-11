@@ -1,13 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MobilePhoneCardiography.Views.MeasureView"
              xmlns:vm="clr-namespace:MobilePhoneCardiography.ViewModels"
+             xmlns:local="clr-namespace:MobilePhoneCardiography.ViewModels"
              xmlns:models="clr-namespace:MobilePhoneCardiography.Models;assembly=MobilePhoneCardiography"
+              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="MobilePhoneCardiography.Views.MeasureView"
              Title="{Binding Title}">
-    
+   
+
+
     <ContentPage.BindingContext>
         <vm:MeasureViewModel />
+
     </ContentPage.BindingContext>
     
     <ContentPage.Resources>
@@ -35,10 +41,40 @@
                     <Picker Grid.ColumnSpan="2" Grid.Row="1" TitleColor="LightBlue"  Title="Placement of microphone" AutomationId="PlacementPicker" ItemsSource="{Binding Placement}"/>
                 </Grid>
             </StackLayout>
+            <Frame VerticalOptions="FillAndExpand" HeightRequest="400" WidthRequest="400">
+                <StackLayout>
+                    <Grid BackgroundColor="White" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="350*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
 
-            <Frame VerticalOptions="FillAndExpand">
+                       
+                            
+                        <Label Text="Phonocardiogram" 
+                               Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" FontSize="Title" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        <microcharts:ChartView x:Name="chartView" 
+                               Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" HeightRequest="350" WidthRequest="400" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label Text="[dB]" 
+                               Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Rotation="-90" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" HorizontalOptions="Start" VerticalOptions="Center" TextColor="Black" />
+                        <!--<Label Text="   -1.0  -0.5  0  0.5  1.0"--> 
+                               <!--Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="3" Rotation="-90" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" HorizontalOptions="Start" VerticalOptions="Center"/>-->
+                        <Label Text="0       1      2      3      4      5      6      7     8     9     10"
+                               Grid.Row="2" Grid.Column="2" HorizontalTextAlignment="Center" />
+                        <Label Text="Time [sec]" 
+                               Grid.Row="3" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="Black"/>
+                    </Grid>
 
+                </StackLayout>
             </Frame>
+
             <StackLayout>
                 <Label FontSize="Medium" HorizontalTextAlignment="Center" Text="Gain"/>
                 <Slider   Value="1.0" MinimumTrackColor="LightBlue" MaximumTrackColor="AliceBlue" Minimum="0.05" Maximum="2.0"/>

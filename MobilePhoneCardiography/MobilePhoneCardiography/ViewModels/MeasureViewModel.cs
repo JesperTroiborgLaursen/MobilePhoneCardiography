@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -11,13 +11,21 @@ using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Microcharts.Forms;
+using Microcharts;
+using SkiaSharp;
+using System.Threading;
 
 namespace MobilePhoneCardiography.ViewModels
 {
     public class MeasureViewModel : BaseViewModel
 
     {
+        #region Attributter og dependencies
 
+        public event EventHandler<GraphReadyEventArgs> graphReadyEvent;
+
+        private Measurement _selectedMeasurement;
 
         public DTOs.Measurement MeasureDTO { get; set; }
 
@@ -37,6 +45,13 @@ namespace MobilePhoneCardiography.ViewModels
             set => SetProperty(ref _placement, value);
         }
 
+        public DTOs.Measurement MeasureDTO { get; set; }
+        public ChartEntry[] ChartValuesMvm { get; set; }
+        #endregion
+        #region Constructor
+        /// <summary>
+        /// Class to show the graph view on the application
+        /// </summary>
         public MeasureViewModel()
         {
             Title = "Measure";
@@ -44,19 +59,60 @@ namespace MobilePhoneCardiography.ViewModels
             RecordAudioCommand = new Command(StartRecordTask);
             PlacementInfoCommand = new Command(OnPlacementInfoClicked);
             _recorderController = new RecorderController(HandleAnalyzeFinishedEvent);
+        }
+
+        #endregion
+        #region Methods
+        private async void OnNewRecordingClicked(object obj)
+        {
+            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
+            await Shell.Current.GoToAsync($"//{nameof(MeasureView)}");
+        }
 
             StartVisible = true;
             StopVisible = false;
 
-            Placement = new List<object>();
-            Placement.Add(PlacementOfDeviceEnum.URSB.ToString());
-            Placement.Add(PlacementOfDeviceEnum.ULSB.ToString());
-            Placement.Add(PlacementOfDeviceEnum.LLSB.ToString());
-            Placement.Add(PlacementOfDeviceEnum.Apex.ToString());
+            try
+            {
+                Measurements.Clear();
+                var measurements = await DataStoreUserMeasurement.GetItemsAsync(true);
+                foreach (var measurement in measurements)
+                {
+                    Measurements.Add(measurement);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+        public Measurement SelectedMeasurement
+        {
+            get => _selectedMeasurement;
+            set
+            {
+                SetProperty(ref _selectedMeasurement, value);
+                OnItemSelected(value);
+            }
+        }
+
+        public void OnAppearing()
+        {
+            IsBusy = true;
+            SelectedMeasurement = null;
         }
 
 
+     
 
+        private async void OnAddMeasurement(object obj)
+        {
+            await Shell.Current.GoToAsync(nameof(LoginSPView));
+        }
 
         private void StartRecordTask()
         {
@@ -65,12 +121,21 @@ namespace MobilePhoneCardiography.ViewModels
             _recorderController.RecordAudio();
         }
 
-        private async void OnPlacementInfoClicked(object obj)
+        /// <summary>
+        /// Kalder RecordAudio() i BusinessLogic layer
+        /// </summary>
+        private void StartRecordTask()
         {
             // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
             await Shell.Current.GoToAsync($"{nameof(PlacementInfoView)}");
         }
 
+
+        /// <summary>
+        /// Event der kaldes når optagelsen er færdig med at analysere for hjerte mislyde
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HandleAnalyzeFinishedEvent(object sender, AnalyzeFinishedEventArgs e)
         {
 
@@ -80,7 +145,18 @@ namespace MobilePhoneCardiography.ViewModels
             StartVisible = true;
             StopVisible = false;
             _recorderController.PlayRecording(MeasureDTO);
+            ChartValuesMvm = _recorderController.ChartValues;
+            
+            if (ChartValuesMvm != null)
+            {
+                OnGraphReady(new GraphReadyEventArgs { ChartValues = ChartValuesMvm });
+            }
         }
 
+        private void OnGraphReady(GraphReadyEventArgs e)
+        {
+            graphReadyEvent?.Invoke(this, e);
+        }
+        #endregion
     }
 }

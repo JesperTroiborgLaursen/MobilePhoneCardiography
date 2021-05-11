@@ -1,8 +1,12 @@
 ﻿using System;
+using System.IO;
+using System.Text;
 using NUnit.Framework;
 using BusinessLogic;
 using DataAccessLayer.Services.Interface;
+using DTOs;
 using EventArgss;
+using Microcharts;
 using NSubstitute;
 
 namespace BuisnessLogic.Test.Unit
@@ -16,6 +20,8 @@ namespace BuisnessLogic.Test.Unit
         private IAnalyzeLogic sub_analyse;
         private ISaveData sub_dataStorage;
         private EventHandler<AnalyzeFinishedEventArgs> handleAnalyzeFinishedEvent;
+        private RecordFinishedEventArgs finishedEvent;
+
         [SetUp]
         public void Setup()
         {
@@ -39,6 +45,7 @@ namespace BuisnessLogic.Test.Unit
                     Assert.That(UUT.IsRecording);
                 });
         }
+
         [Test]
         public void RecordAudio_TwoCall_ReceivedCallIsOne()
         {
@@ -52,5 +59,29 @@ namespace BuisnessLogic.Test.Unit
                     Assert.That(UUT.IsRecording);
                 });
         }
+
+        [Test]
+        public void PlayRecording_OneCall_soundModifyLogic_ReceivedOneCall()
+        {
+            //ARRANGE
+            Measurement dto = new Measurement(new DateTime(1, 1, 1));
+            UUT.PlayRecording(dto);
+
+            sub_soundModifyLogic.Received(1).PlayRecording(dto.HeartSound);
+        }
+
+        [Test]
+        public void ProcessStreamValuesReadToEnd_ReturnsChartEntry()
+        {
+            //ARRANGE
+            var test_Stream = new MemoryStream(Encoding.UTF8.GetBytes("whatever"));
+
+            //ACT
+            var result = UUT.ProcessStreamValues(test_Stream);
+
+            // Assert    
+            Assert.That(result, Is.TypeOf<ChartEntry[]>());
+        }
+        
     }
 }

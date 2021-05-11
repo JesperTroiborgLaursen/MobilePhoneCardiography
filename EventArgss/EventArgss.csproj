@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microcharts.Forms" Version="0.9.5.9" />
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.17.0" />
     <PackageReference Include="Microsoft.Azure.DocumentDB" Version="2.13.1" />
     <PackageReference Include="Microsoft.Azure.DocumentDB.Core" Version="2.13.1" />
@@ -14,6 +15,8 @@
     <PackageReference Include="Plugin.AudioRecorder" Version="1.1.0" />
 
     <PackageReference Include="System.Linq" Version="4.3.0" />
+
+    <PackageReference Include="Xamarin.Cognitive.Speech" Version="1.0.2" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
 

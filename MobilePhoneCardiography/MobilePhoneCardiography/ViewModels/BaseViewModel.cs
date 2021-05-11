@@ -9,7 +9,7 @@ using MobilePhoneCardiography.Services;
 using Xamarin.Forms;
 
 namespace MobilePhoneCardiography.ViewModels
-{
+{ 
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<User> DataStoreUser => DependencyService.Get<IDataStore<User>>();
