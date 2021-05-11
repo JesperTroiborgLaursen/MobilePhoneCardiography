@@ -17,7 +17,7 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Placement?" Icon="placement.png" AutomationId="PlacementInfoButton" Command="{Binding PlacementInfoCommand }" />
+        <ToolbarItem Text="Placement?" IconImageSource="placement.png" AutomationId="PlacementInfoButton" Command="{Binding PlacementInfoCommand }" />
     </ContentPage.ToolbarItems>
 
     <Frame BackgroundColor="AliceBlue">
@@ -44,7 +44,7 @@
                 <Slider   Value="1.0" MinimumTrackColor="LightBlue" MaximumTrackColor="AliceBlue" Minimum="0.05" Maximum="2.0"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Button Text="Recording" Image="record.png" IsVisible="{Binding StartVisible}" Command="{Binding RecordAudioCommand}"/>
+                <Button Text="Record" Image="record.png" IsVisible="{Binding StartVisible}" Command="{Binding RecordAudioCommand}"/>
                 <Button Text="Stop Recording" Image="stop.png" IsVisible="{Binding StopVisible}"/>
             </StackLayout>
         </StackLayout>
