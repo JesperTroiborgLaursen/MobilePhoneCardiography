@@ -127,19 +127,30 @@ namespace DataAccessLayer
             if (!await Initialize())
                 return todos;
             //TODO Denne her burde nok pakkes ind i en try-catch
-            var todoQuery = docClient.CreateDocumentQuery<JsonProfessionalUser>(
-                    UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
-                    new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
-                .Where(todo => todo.HealthProfID == iUser.Username).Where(todo => todo.UserPW == iUser.Password)
-                .AsDocumentQuery();
-
-            while (todoQuery.HasMoreResults)
+            try
             {
-                var queryResults = await todoQuery.ExecuteNextAsync<JsonProfessionalUser>();
-                todos.AddRange(queryResults);
+                var todoQuery = docClient.CreateDocumentQuery<JsonProfessionalUser>(
+                        UriFactory.CreateDocumentCollectionUri(databaseName, collectionName),
+                        new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
+                    .Where(todo => todo.HealthProfID == iUser.Username).Where(todo => todo.UserPW == iUser.Password)
+                    .AsDocumentQuery();
+                while (todoQuery.HasMoreResults)
+                {
+                    var queryResults = await todoQuery.ExecuteNextAsync<JsonProfessionalUser>();
+                    todos.AddRange(queryResults);
+                }
+                return todos;
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
 
-            return todos;
+            
+
+            
         }
 
         private IPatient iPatient;
