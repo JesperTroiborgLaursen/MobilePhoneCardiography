@@ -60,83 +60,31 @@ namespace MobilePhoneCardiography.ViewModels
             RecordAudioCommand = new Command(StartRecordTask);
             PlacementInfoCommand = new Command(OnPlacementInfoClicked);
             _recorderController = new RecorderController(HandleAnalyzeFinishedEvent);
+
+            StartVisible = true;
+            StopVisible = false;
+
+
         }
 
         #endregion
         #region Methods
 
-        async void OnItemSelected(Measurement measurement)
-        {
-            if (measurement == null)
-                return;
-
-            // This will push the ItemDetailPage onto the navigation stack
-            //await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={measurement.Id}");
-        }
-
-        private async void OnNewRecordingClicked(object obj)
-        {
-            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-            await Shell.Current.GoToAsync($"//{nameof(MeasureView)}");
-        }
-
-        async Task ExecuteLoadMeasurementsCommand()
-        {
-            IsBusy = true;
-
-            try
-            {
-                Measurements.Clear();
-                var measurements = await DataStoreUserMeasurement.GetItemsAsync(true);
-                foreach (var measurement in measurements)
-                {
-                    Measurements.Add(measurement);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-        }
-        public Measurement SelectedMeasurement
-        {
-            get => _selectedMeasurement;
-            set
-            {
-                SetProperty(ref _selectedMeasurement, value);
-                OnItemSelected(value);
-            }
-        }
-
-        public void OnAppearing()
-        {
-            IsBusy = true;
-            SelectedMeasurement = null;
-        }
-
-
-
-
-        private async void OnAddMeasurement(object obj)
-        {
-            await Shell.Current.GoToAsync(nameof(LoginSPView));
-        }
-
 
         /// <summary>
         /// Kalder RecordAudio() i BusinessLogic layer
         /// </summary>
-        private async void StartRecordTask()
+        private void StartRecordTask()
         {
-            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-            await Shell.Current.GoToAsync($"{nameof(PlacementInfoView)}");
             StartVisible = false;
             StopVisible = true;
             _recorderController.RecordAudio();
+        }
+
+        private async void OnPlacementInfoClicked(object obj)
+        {
+            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
+            await Shell.Current.GoToAsync($"//{nameof(PlacementInfoView)}");
         }
 
 
