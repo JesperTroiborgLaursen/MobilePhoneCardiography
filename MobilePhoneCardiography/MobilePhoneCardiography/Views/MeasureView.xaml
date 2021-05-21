@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:MobilePhoneCardiography.ViewModels"
              xmlns:local="clr-namespace:MobilePhoneCardiography.ViewModels"
-             xmlns:models="clr-namespace:MobilePhoneCardiography.Models;assembly=MobilePhoneCardiography"
-              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              x:Class="MobilePhoneCardiography.Views.MeasureView"
              Title="{Binding Title}">
@@ -31,14 +30,19 @@
             <StackLayout BackgroundColor="AliceBlue" Orientation="Vertical">
                 <Grid Column="2">
                     <StackLayout Grid.Column="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                        <Entry Text="Social Security Number" FontSize="Medium" IsEnabled="False" />
-                        <Label Text="{Binding StartTime}" FontSize="Small" IsEnabled="False"/>
+                        <Entry Text="Social Security No" FontSize="Medium" IsReadOnly="True"/>
+                        <Label Text="{Binding SocSec}" FontSize="Small" IsEnabled="False"/>
                     </StackLayout>
                     <StackLayout Grid.Column="1" HorizontalOptions="FillAndExpand">
-                        <Entry Text="Name" FontSize="Medium" IsEnabled="False"/>
-                        <Label Text="{Binding AmountOfSamples}" FontSize="Small" IsEnabled="False"/>
+                        <Entry Text="Name" FontSize="Medium" IsReadOnly="True"/>
+                        <Label Text="{Binding Name}" FontSize="Small" IsEnabled="False"/>
                     </StackLayout>
-                    <Picker Grid.ColumnSpan="2" Grid.Row="1" TitleColor="LightBlue"  Title="Placement of microphone" AutomationId="PlacementPicker" ItemsSource="{Binding Placement}"/>
+                    <Frame Padding="0" CornerRadius="2" Grid.ColumnSpan="2" Grid.Row="1" BackgroundColor="{StaticResource Primary}">
+                        <StackLayout Padding="0" Margin="0" Orientation="Horizontal" HorizontalOptions="Center">
+                            <Picker  TitleColor="White" Title="Placement of microphone" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" AutomationId="PlacementPicker" ItemsSource="{Binding Placement}"/>
+                            <Image Source="dropdown.png" Scale="0.6"/>
+                        </StackLayout>
+                    </Frame>
                 </Grid>
             </StackLayout>
             <Frame VerticalOptions="FillAndExpand" HeightRequest="400" WidthRequest="400">
