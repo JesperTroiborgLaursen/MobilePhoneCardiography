@@ -20,17 +20,12 @@ namespace MobilePhoneCardiography.ViewModels
         private string _username;
         private string _password;
         private bool _wrongPasswordLabelVisible;
-        private ControllerDatabase controllerDatabase;
-
-        //TODO SKAL FJERNES IGEN; KUN ITL AT TESTE DATABASE
-
-
+        
         public event EventHandler<UserChangedEventArgs> UserChangedEvent;
         
         public LoginSPViewModel()
         {
-            controllerDatabase = new ControllerDatabase(new CosmosDBService(EnumDatabase.Professionel, DateTime.Now));
-
+            
             LoginCommand = new Command(OnLogin, ValidateLoginNotBlank);
             ForgotPWCommand = new Command(OnForgotPW);
             this.PropertyChanged +=

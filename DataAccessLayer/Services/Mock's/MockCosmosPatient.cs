@@ -16,8 +16,9 @@ namespace DataAccessLayer.Services
 
             patients = new List<Patient>()
             {
-                new Patient{ SocSec = "13dbda484804b782740cc36f5f220b59dc152dd28bf084e84c24582907aa82b4", FirstName = "Mr.Robot", LastName= "Anonymous" },
-                new Patient{ SocSec = "6500ef5bcd77cf851c726609bf08f60eed665edb8c6a822d099179889fe82bb1", FirstName = "Jim", LastName= "Smith" }
+                new Patient{ SocSec = "78fbe9c93e7e2079e274922b680975a80901ac2c4273e1274d6d37ad71c0c369", FirstName = "Mr.Robot", LastName= "Anonymous" },
+                new Patient{ SocSec = "6500ef5bcd77cf851c726609bf08f60eed665edb8c6a822d099179889fe82bb1", FirstName = "Jim", LastName= "Smith" },
+                new Patient{ SocSec = "9e8601ac10c50d92bc1746f5c89c0fccea68c7e32b38af49fae6d148e747ca2f", FirstName = "Anders", LastName= "Salty" }
             };
         }
 
