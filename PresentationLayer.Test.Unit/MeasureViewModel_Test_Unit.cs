@@ -4,6 +4,8 @@ namespace PresentationLayer.Test.Unit
 {
     public class MeasureViewModel_Test_Unit
     {
+        
+
         [SetUp]
         public void Setup()
         {
@@ -11,9 +13,18 @@ namespace PresentationLayer.Test.Unit
         }
 
         [Test]
-        public void HandleAnalyzeFinished_Call()
+        public void HandleAnalyzeFinished_CallEvent_EventRaisesNewEvent()
         {
+            //ARRANGE
+
+
+            //ACT
+            fakeRfidReader.RFIDDetectedEvent += Raise.EventWith(new RFIDDetectedEventArgs() { RFID = rfid });
+            
+            //ASSERT
             Assert.Pass();
+
+
         }
     }
 }
