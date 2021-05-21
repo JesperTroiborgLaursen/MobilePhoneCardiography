@@ -12,7 +12,7 @@ using MobilePhoneCardiography.Services.DataStore;
 using MobilePhoneCardiography.Views;
 using Xamarin.Forms;
 
-namespace MobilePhoneCardiography.ViewModels    
+namespace MobilePhoneCardiography.ViewModels
 {
     public class FindPatientViewModel : BaseViewModel
     {
@@ -29,7 +29,7 @@ namespace MobilePhoneCardiography.ViewModels
         public bool IsProUser { get; set; }
         public FindPatientViewModel()
         {
-            controllerDatabase = new ControllerDatabase(new CosmosDBService(EnumDatabase.Patient,DateTime.Now));
+            controllerDatabase = new ControllerDatabase(new CosmosDBService(EnumDatabase.Patient, DateTime.Now));
             FindPatientCommand = new Command(OnSearch, ValidateBlankEntry);
             CancelCommand = new Command(Cancel);
             ConfirmCommand = new Command(Confirm);
@@ -116,8 +116,8 @@ namespace MobilePhoneCardiography.ViewModels
         }
 
         public Command FindPatientCommand { get; }
-        public Command ConfirmCommand{ get; }
-        public Command CancelCommand{ get; }
+        public Command ConfirmCommand { get; }
+        public Command CancelCommand { get; }
 
 
 
@@ -160,20 +160,29 @@ namespace MobilePhoneCardiography.ViewModels
 
             };
 
-            //todo har en ide om at det er bedre at oprette databasen hver gang.
-            //var validatePatient = await new ControllerDatabase(new CosmosDBService(EnumDatabase.Patient, DateTime.Now)).ValidatePatient(newPatient);
-            var validatePatient = await new ControllerDatabase(new MockCosmosPatient()).ValidatePatient(newPatient);
-            //var validatePatient = await controllerDatabase.ValidatePatient(newPatient);
-
-            if (validatePatient == true)
+            try
             {
-                SocSec = SocSecSearch;
-                FirstName = newPatient.FirstName;
-                LastName = newPatient.LastName;
+                //todo har en ide om at det er bedre at oprette databasen hver gang.
+                //var validatePatient = await new ControllerDatabase(new CosmosDBService(EnumDatabase.Patient, DateTime.Now)).ValidatePatient(newPatient);
+                var validatePatient = await new ControllerDatabase(new MockCosmosPatient()).ValidatePatient(newPatient);
+                if (validatePatient == true)
+                {
+                    SocSec = SocSecSearch;
+                    FirstName = newPatient.FirstName;
+                    LastName = newPatient.LastName;
 
-                //await DataStoreUser.AddItemAsync(newUser);
+                    //await DataStoreUser.AddItemAsync(newUser);
+
+                }
 
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            //var validatePatient = await controllerDatabase.ValidatePatient(newPatient);
+
             // This will pop the current page off the navigation stack
             //TODO DENNE SKAL IKKE VISES; ELLERS KAN MAN IKKE TJEKKE OM DET ER DEN KORREKTE PATIENT
 

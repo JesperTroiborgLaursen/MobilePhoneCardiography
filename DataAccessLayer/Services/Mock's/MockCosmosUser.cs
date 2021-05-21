@@ -16,7 +16,7 @@ namespace DataAccessLayer.Services
             {
                 //User test test with Sha256 only
                 new User { Id = Guid.NewGuid().ToString(), Username = "test", Password="9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08" },
-                new User { Id = Guid.NewGuid().ToString(), Username = "Second item", Password="This is an item description." },
+                new User { Id = Guid.NewGuid().ToString(), Username = "testSalty", Password="918a2a938707ee26f4dd971386887965acaec2b815d0762958e100b401a9b53d" },
                 new User { Id = Guid.NewGuid().ToString(), Username = "Third item", Password="This is an item description." },
                 new User { Id = Guid.NewGuid().ToString(), Username = "Fourth item", Password="This is an item description." },
                 new User { Id = Guid.NewGuid().ToString(), Username = "Fifth item", Password="This is an item description." },
