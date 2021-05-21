@@ -167,7 +167,7 @@ namespace MobilePhoneCardiography.ViewModels
 
             if (validatePatient == true)
             {
-                SocSec = newPatient.SocSec;
+                SocSec = SocSecSearch;
                 FirstName = newPatient.FirstName;
                 LastName = newPatient.LastName;
 
