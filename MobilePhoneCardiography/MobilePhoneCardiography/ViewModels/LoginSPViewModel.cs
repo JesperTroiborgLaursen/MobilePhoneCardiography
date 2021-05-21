@@ -6,6 +6,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Input;
 using DataAccessLayer;
+using DataAccessLayer.Services;
 using DTOs;
 using EventArgss;
 using MobilePhoneCardiography.Services.DataStore;
@@ -88,12 +89,16 @@ namespace MobilePhoneCardiography.ViewModels
             //TODO Appen craasher hvis logn er forkert
             try
             {
-                var validateLogin = await new ControllerDatabase(new CosmosDBService(EnumDatabase.Professionel, DateTime.Now)).ValidateLogin(newUser);
+                //todo real
+               // var validateLogin = await new ControllerDatabase(new CosmosDBService(EnumDatabase.Professionel, DateTime.Now)).ValidateLogin(newUser);
+               //Mock 
+               var validateLogin = await new ControllerDatabase(new MockCosmosUser()).ValidateLogin(newUser);
+
                 if (validateLogin)
                 {
                     OnUserChange(new UserChangedEventArgs() { CurrentUser = newUser });
                     // This will pop the current page off the navigation stack
-                    await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
+                    await Shell.Current.GoToAsync($"//{nameof(FindPatientView)}");
                     WrongPasswordLabelVisible = false;
                     Username = "";
                     Password = "";

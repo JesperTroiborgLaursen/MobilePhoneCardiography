@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobilePhoneCardiography.Views.LoginSPView"
              Shell.PresentationMode="ModalAnimated"
-             Title="New Item"
+             Title="Login Healthcare Professional"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:viewModels="clr-namespace:MobilePhoneCardiography.ViewModels;assembly=MobilePhoneCardiography"
              ios:Page.UseSafeArea="true">

@@ -12,7 +12,6 @@ namespace MobilePhoneCardiography.Models.Json
     {
 
         public event PropertyChangedEventHandler PropertyChanged;
-
         string _patientID;
         [JsonProperty("patientID")]
         public string PatientId
