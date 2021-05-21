@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using DataAccessLayer;
@@ -14,6 +15,9 @@ namespace MobilePhoneCardiography.Services.DataStore
     public class ControllerDatabase : IControllerDatabase
     {
         private ICosmosDBService cosmosDbService;
+        private ICosmosDBService MockUser;
+        private ICosmosDBService MockPatient;
+
         public ControllerDatabase(ICosmosDBService cosmosDb)
         {
             this.cosmosDbService = cosmosDb;
@@ -109,6 +113,8 @@ namespace MobilePhoneCardiography.Services.DataStore
             }
 
             var todos = await cosmosDbService.GetLogin(user);
+        
+
             //TODO Denne linje er under test
             if (todos != null && todos.Count != 0 )
             {
@@ -127,6 +133,14 @@ namespace MobilePhoneCardiography.Services.DataStore
 
             return false;
         }
+
+        //private async Task< List<JsonProfessionalUser>> GetProfessionalUsersReal(IUser user)
+        //{
+        //   var todos=  await cosmosDbService.GetLogin(user);
+        //   return todos;
+
+        //}
+     
 
         public async Task<bool> ValidatePatient(IPatient patient)
         {
