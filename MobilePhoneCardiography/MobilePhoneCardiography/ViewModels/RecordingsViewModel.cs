@@ -17,7 +17,7 @@ namespace MobilePhoneCardiography.ViewModels
     public class RecordingsViewModel : BaseViewModel
     {
         private Measurement _selectedMeasurement;
-        private RecorderController _recorderController;
+        private IRecorderController _recorderController;
 
         public Patient SelectedPatient { get; set; }
 
@@ -42,7 +42,7 @@ namespace MobilePhoneCardiography.ViewModels
 
             SelectedPatient = new Patient() {Id = "123346-1234"};
 
-            _recorderController = new RecorderController(HandleAnalyzeFinishedEvent);
+            _recorderController = App.IoCContainer.GetInstance<IRecorderController>();
         }
 
 

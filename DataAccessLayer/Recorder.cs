@@ -25,24 +25,29 @@ namespace DataAccessLayer
         #endregion
         #region Ctor
 
-        public Recorder(EventHandler<RecordFinishedEventArgs> recordFinishedEventHandler, IAudioRecorderService audioRecorderService,
+        //public Recorder(EventHandler<RecordFinishedEventArgs> recordFinishedEventHandler, IAudioRecorderService audioRecorderService,
+        //    ITimeProvider timeProvider)
+        //{
+        //    RecordFinishedEvent += recordFinishedEventHandler;
+
+        //    _recorder = audioRecorderService ?? new ExtendedAudioRecorderService(HandleRecorderIsFinished);
+        //    _timeProvider = timeProvider ?? new RealTimeProvider();
+        //}
+        public Recorder(IAudioRecorderService audioRecorderService,
             ITimeProvider timeProvider)
         {
-            RecordFinishedEvent += recordFinishedEventHandler;
 
             _recorder = audioRecorderService ?? new ExtendedAudioRecorderService(HandleRecorderIsFinished);
             _timeProvider = timeProvider ?? new RealTimeProvider();
         }
+        //Til test
+        //public Recorder(EventHandler<RecordFinishedEventArgs> recordFinishedEventHandler)
+        //{
+        //    RecordFinishedEvent += recordFinishedEventHandler;
 
-        public Recorder(EventHandler<RecordFinishedEventArgs> recordFinishedEventHandler)
-        {
-            RecordFinishedEvent += recordFinishedEventHandler;
-
-            _recorder = new ExtendedAudioRecorderService(HandleRecorderIsFinished);
-            _timeProvider = new RealTimeProvider();
-
-
-        }
+        //    _recorder = new ExtendedAudioRecorderService(HandleRecorderIsFinished);
+        //    _timeProvider = new RealTimeProvider();
+        //}
         #endregion
         #region Metoder
 

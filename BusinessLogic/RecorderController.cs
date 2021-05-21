@@ -11,18 +11,20 @@ using SkiaSharp;
 
 //temp added
 using MobilePhoneCardiography.Services.DataStore;
+using MobilePhoneCardiography;
 
 namespace BusinessLogic
 {
 
     public class RecorderController : IRecorderController
     {
+        
         #region Props
         /// <summary>
         /// Håndterer kaldene til og fra recorderen
         /// </summary>
         //RecorderControllerens opgave er at udskrive vigtige meddelelser ifbm. recording!!!!!!!!!!!
-  
+
         private bool _isRecording; //Todo Få knapper på UI til at være inaktive når der optages (Fx.)
         private Measurement _measureDTO;
 
@@ -49,21 +51,23 @@ namespace BusinessLogic
         #endregion
         #region Ctor
 
-        public RecorderController(EventHandler<AnalyzeFinishedEventArgs> handleAnalyzeFinishedEvent)
-        {
-            _recorderLogic = new Recorder(HandleRecordingFinishedEvent);
-            _soundModifyLogic = new SoundModifyLogic(null);
-            _analyse = new AnalyzeLogic(handleAnalyzeFinishedEvent);
-            _dataStorage = new FakeStorage(); //ligger som internal class
-            _graphFeatures = new GraphFeatures();
-            IsRecording = false;
-        }
+        //Til test
+        //public RecorderController(EventHandler<AnalyzeFinishedEventArgs> handleAnalyzeFinishedEvent)
+        //{
+        //    _recorderLogic = new Recorder(HandleRecordingFinishedEvent);
+        //    _soundModifyLogic = new SoundModifyLogic(null);
+        //    _analyse = new AnalyzeLogic(handleAnalyzeFinishedEvent);
+        //    _dataStorage = new FakeStorage(); //ligger som internal class
+        //    _graphFeatures = new GraphFeatures();
+        //    IsRecording = false;
+        //}
 
-        public RecorderController(EventHandler<AnalyzeFinishedEventArgs> handleAnalyzeFinishedEvent, IRecorder recorder, ISoundModifyLogic soundModifyLogic, IAnalyzeLogic analyzeLogic, ISaveData saveData)
+        public RecorderController( IRecorder recorder, ISoundModifyLogic soundModifyLogic, IAnalyzeLogic analyzeLogic, ISaveData saveData)
         {
-            _recorderLogic = recorder ?? new Recorder(HandleRecordingFinishedEvent);
+            _recorderLogic = recorder;
+            
             _soundModifyLogic = soundModifyLogic ?? new SoundModifyLogic(null);
-            _analyse = analyzeLogic ?? new AnalyzeLogic(handleAnalyzeFinishedEvent);
+            _analyse = analyzeLogic ?? new AnalyzeLogic();
             _dataStorage = saveData ?? new FakeStorage();
             _graphFeatures = new GraphFeatures();
         }
@@ -181,7 +185,7 @@ namespace BusinessLogic
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void HandleRecordingFinishedEvent(object sender, RecordFinishedEventArgs e)
+        public void HandleRecordingFinishedEvent(object sender, RecordFinishedEventArgs e)
         {
             IsRecording = false;
             _measureDTO = e.measureDTO;
@@ -193,7 +197,7 @@ namespace BusinessLogic
         #endregion
     }
 
-    internal class FakeStorage : ISaveData
+    public class FakeStorage : ISaveData
     {
         public void SaveToStorage(Measurement elementToStorage)
         {

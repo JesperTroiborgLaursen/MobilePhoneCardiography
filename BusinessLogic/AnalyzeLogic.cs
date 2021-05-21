@@ -8,10 +8,10 @@ namespace BusinessLogic
     public class AnalyzeLogic : IAnalyzeLogic
     {
         private Measurement analysisObject;
-        public AnalyzeLogic(EventHandler<AnalyzeFinishedEventArgs> handleAnalyzeFinishedEvent)
-        {
-            AnalyzeFinishedEvent += handleAnalyzeFinishedEvent;
-        }
+        //public AnalyzeLogic(EventHandler<AnalyzeFinishedEventArgs> handleAnalyzeFinishedEvent)
+        //{
+        //    AnalyzeFinishedEvent += handleAnalyzeFinishedEvent;
+        //}
         #region Event
         public event EventHandler<AnalyzeFinishedEventArgs> AnalyzeFinishedEvent;
         protected virtual void OnAnalyzeFinished(AnalyzeFinishedEventArgs e)

@@ -16,6 +16,8 @@ using Microcharts;
 using SkiaSharp;
 using System.Threading;
 using System.Collections.Generic;
+using DataAccessLayer;
+using DataAccessLayer.Services.Interface;
 
 namespace MobilePhoneCardiography.ViewModels
 {
@@ -61,7 +63,15 @@ namespace MobilePhoneCardiography.ViewModels
             OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://aka.ms/xamarin-quickstart"));
             RecordAudioCommand = new Command(StartRecordTask);
             PlacementInfoCommand = new Command(OnPlacementInfoClicked);
-            _recorderController = new RecorderController(HandleAnalyzeFinishedEvent);
+
+            var analyzeLogic = App.IoCContainer.GetInstance<AnalyzeLogic>();
+            analyzeLogic.AnalyzeFinishedEvent += HandleAnalyzeFinishedEvent;
+
+            var rec = App.IoCContainer.GetInstance<IRecorder>();
+            _recorderController = App.IoCContainer.GetInstance<RecorderController>();
+            rec.RecordFinishedEvent += _recorderController.HandleRecordingFinishedEvent;
+
+
 
             StartVisible = true;
             StopVisible = false;
