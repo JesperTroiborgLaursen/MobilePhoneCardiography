@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using DataAccessLayer.Services.Interface;
 using DTOs;
 using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Views;
@@ -12,7 +13,7 @@ using Xamarin.Forms;
 
 namespace MobilePhoneCardiography.ViewModels
 {
-    public class RecordingsViewModel : BaseViewModel
+    public class RecordingsViewModel : BaseViewModel, IRecordinsViewModel
     {
         private Measurement _selectedMeasurement;
 
@@ -22,7 +23,7 @@ namespace MobilePhoneCardiography.ViewModels
         public Command LoadMeasurementsCommand { get; }
         public Command AddMeasurementCommand { get; }
         public Command<Measurement> MeasurementTapped { get; }
-        
+
 
         public RecordingsViewModel()
         {

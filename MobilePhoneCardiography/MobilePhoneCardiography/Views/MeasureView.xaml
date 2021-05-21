@@ -12,7 +12,6 @@
 
     <ContentPage.BindingContext>
         <vm:MeasureViewModel />
-
     </ContentPage.BindingContext>
     
     <ContentPage.Resources>

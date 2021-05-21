@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using DataAccessLayer.Services.Interface;
 using MobilePhoneCardiography.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,7 +13,8 @@ namespace MobilePhoneCardiography.Views
         public RecordingsView()
         {
             InitializeComponent();
-            BindingContext = _viewModel = new RecordingsViewModel();
+            BindingContext = App.IoCContainer.GetInstance<IRecordinsViewModel>();
+            _viewModel = new RecordingsViewModel();
         }
 
         protected override void OnAppearing()

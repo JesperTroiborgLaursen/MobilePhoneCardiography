@@ -16,6 +16,7 @@ using Microcharts;
 using SkiaSharp;
 using System.Threading;
 using System.Collections.Generic;
+using DataAccessLayer.Services.Interface;
 
 namespace MobilePhoneCardiography.ViewModels
 {
@@ -42,6 +43,7 @@ namespace MobilePhoneCardiography.ViewModels
 
         public bool StartVisible { get; set; }
         public bool StopVisible { get; set; }
+        private IRecordinsViewModel recordingsViewModel;
 
         public List<object> Placement
         {
@@ -71,6 +73,8 @@ namespace MobilePhoneCardiography.ViewModels
             Placement.Add(PlacementOfDeviceEnum.ULSB.ToString());
             Placement.Add(PlacementOfDeviceEnum.LLSB.ToString());
             Placement.Add(PlacementOfDeviceEnum.Apex.ToString());
+
+            recordingsViewModel = App.IoCContainer.GetInstance<IRecordinsViewModel>();
 
         }
 
@@ -104,6 +108,7 @@ namespace MobilePhoneCardiography.ViewModels
         {
 
             MeasureDTO = e.DTO;
+            recordingsViewModel.Measurements.Add(MeasureDTO);
             //Todo Denne linje skal væk når vi har introduceret RecordingsViewet
             //da den på nuværende tidspunkt blot afspiller lyden med det samme
             StartVisible = true;

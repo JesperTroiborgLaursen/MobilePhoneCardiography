@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using DataAccessLayer.Services;
@@ -15,6 +16,7 @@ namespace MobilePhoneCardiography.ViewModels
         public IDataStore<User> DataStoreUser => DependencyService.Get<IDataStore<User>>();
         public IDataStore<Patient> DataStorePatient => DependencyService.Get<IDataStore<Patient>>();
         public IDataStore<Measurement> DataStoreUserMeasurement => DependencyService.Get<IDataStore<Measurement>>();
+        public ObservableCollection<Measurement> Measurements { get; }
 
         bool isBusy = false;
         public bool IsBusy
