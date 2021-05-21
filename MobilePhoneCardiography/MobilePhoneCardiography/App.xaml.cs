@@ -1,6 +1,7 @@
 ﻿using MobilePhoneCardiography.Services;
 using MobilePhoneCardiography.Views;
 using System;
+using BusinessLogic;
 using DataAccessLayer.Services;
 using EventArgss;
 using Xamarin.Forms;
@@ -15,6 +16,7 @@ namespace MobilePhoneCardiography
             DependencyService.Register<MockDataStoreUser>();
             DependencyService.Register<MockDataStorePatient>();
             DependencyService.Register<MockDataStoreMeasurement>();
+            DependencyService.Register<RecorderController>();
             MainPage = new AppShell();
 
 

@@ -3,7 +3,9 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using BusinessLogic;
 using DTOs;
+using EventArgss;
 using MobilePhoneCardiography.Models;
 using MobilePhoneCardiography.Views;
 using MvvmHelpers;
@@ -15,6 +17,7 @@ namespace MobilePhoneCardiography.ViewModels
     public class RecordingsViewModel : BaseViewModel
     {
         private Measurement _selectedMeasurement;
+        private RecorderController _recorderController;
 
         public Patient SelectedPatient { get; set; }
 
@@ -38,6 +41,8 @@ namespace MobilePhoneCardiography.ViewModels
             AddMeasurementCommand = new Command(OnAddMeasurement);
 
             SelectedPatient = new Patient() {Id = "123346-1234"};
+
+            _recorderController = new RecorderController(HandleAnalyzeFinishedEvent);
         }
 
 
@@ -107,5 +112,13 @@ namespace MobilePhoneCardiography.ViewModels
             //await Shell.Current.GoToAsync($"{nameof(MeasurementDetailView)}?{nameof(MeasurementDetailViewModel.ItemId)}={measurement.Id}");
             await Shell.Current.GoToAsync($"{nameof(MeasurementDetailView)}?{nameof(MeasurementDetailViewModel.ItemId)}={measurement.Id}");
         }
+
+        private void HandleAnalyzeFinishedEvent(object sender, AnalyzeFinishedEventArgs e)
+        {
+            MeasureDTO = e.DTO;
+            Measurements.Add(MeasureDTO);
+        }
+
+        public Measurement MeasureDTO { get; set; }
     }
 }
