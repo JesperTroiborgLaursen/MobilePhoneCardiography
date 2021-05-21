@@ -93,7 +93,7 @@ namespace MobilePhoneCardiography.ViewModels
                 {
                     OnUserChange(new UserChangedEventArgs() { CurrentUser = newUser });
                     // This will pop the current page off the navigation stack
-                    await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
+                    await Shell.Current.GoToAsync($"//{nameof(FindPatientView)}");
                     WrongPasswordLabelVisible = false;
                     Username = "";
                     Password = "";

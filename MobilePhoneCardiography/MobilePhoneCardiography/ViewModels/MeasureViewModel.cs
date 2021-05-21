@@ -89,7 +89,7 @@ namespace MobilePhoneCardiography.ViewModels
         private async void OnPlacementInfoClicked(object obj)
         {
             // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-            await Shell.Current.GoToAsync($"//{nameof(PlacementInfoView)}");
+            await Shell.Current.GoToAsync($"{nameof(PlacementInfoView)}");
         }
 
 
