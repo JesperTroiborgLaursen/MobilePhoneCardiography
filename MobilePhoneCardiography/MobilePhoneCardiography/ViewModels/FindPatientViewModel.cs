@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using DataAccessLayer;
+using DataAccessLayer.Services;
 using DTOs;
 using EventArgss;
 using MobilePhoneCardiography.Services.DataStore;
@@ -160,7 +161,8 @@ namespace MobilePhoneCardiography.ViewModels
             };
 
             //todo har en ide om at det er bedre at oprette databasen hver gang.
-            var validatePatient = await new ControllerDatabase(new CosmosDBService(EnumDatabase.Patient, DateTime.Now)).ValidatePatient(newPatient);
+            //var validatePatient = await new ControllerDatabase(new CosmosDBService(EnumDatabase.Patient, DateTime.Now)).ValidatePatient(newPatient);
+            var validatePatient = await new ControllerDatabase(new MockCosmosPatient()).ValidatePatient(newPatient);
             //var validatePatient = await controllerDatabase.ValidatePatient(newPatient);
 
             if (validatePatient == true)
