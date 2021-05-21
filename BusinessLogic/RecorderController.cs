@@ -100,7 +100,8 @@ namespace BusinessLogic
             ChartEntry[] entries = new ChartEntry[downSampledRecording.Length + 1]; //+ amount of extra entry points manually inserted
 
             int i = 0;
-            entries[i] = new Microcharts.ChartEntry(120) { Label = "Indikator", ValueLabel = "120", Color = SKColor.Parse("#f00a0a") }; //Extra indicator point so we know the approximately value of the amplitudes
+            float indikator = Convert.ToSingle(20 * Math.Log10(Math.Abs(32)));
+            entries[i] = new Microcharts.ChartEntry(indikator) { Label = "Indikator", ValueLabel = "30", Color = SKColor.Parse("#f00a0a") }; //Extra indicator point so we know the approximately value of the amplitudes
             i++;
             foreach (var bytes in downSampledRecording)
             {
