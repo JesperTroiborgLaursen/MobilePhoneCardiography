@@ -18,12 +18,12 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <StackLayout Grid.Column="0" Grid.Row="0" Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                        <Entry Text="Date" FontSize ="Medium" IsEnabled="False" />
-                        <Label Text="{Binding StartTime}" AutomationId="StartTimeLabel" FontSize="Small" IsEnabled="False"/>
+                        <Entry Text="Date" FontSize ="Medium" IsReadOnly="True"/>
+                        <Label Text="{Binding StartTime}" AutomationId="StartTimeLabel" FontSize="Small" />
                     </StackLayout>
                     <StackLayout Grid.Column="1" Grid.Row="0" HorizontalOptions="FillAndExpand">
-                        <Entry Text="Placement" FontSize="Medium" IsEnabled="False"/>
-                        <Label Text="{Binding PlacementOfDevice}" AutomationId="PlacementLabel" FontSize="Small" IsEnabled="False"/>
+                        <Entry Text="Placement" FontSize="Medium" IsReadOnly="True"/>
+                        <Label Text="{Binding PlacementOfDevice}" AutomationId="PlacementLabel" FontSize="Small" />
                     </StackLayout>
                 </Grid>
                 <Grid>
@@ -31,12 +31,12 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <StackLayout Grid.Column="0" Grid.Row="0" HorizontalOptions="FillAndExpand">
-                        <Entry Text="Risk" FontSize="Medium" IsEnabled="False"/>
-                        <Label Text="{Binding ProbabilityPercentage}" AutomationId="ProbLabel" FontSize="Small" IsEnabled="False"/>
+                        <Entry Text="Risk" FontSize="Medium" IsReadOnly="True"/>
+                        <Label Text="{Binding ProbabilityPercentage}" AutomationId="ProbLabel" FontSize="Small" />
                     </StackLayout>
                     <StackLayout Grid.Column="1" Grid.Row="0" HorizontalOptions="FillAndExpand">
-                        <Entry Text="Employee ID" FontSize="Medium" IsEnabled="False" />
-                        <Label Text="{Binding HealthProffesionalID}" AutomationId="EmployeeIdLabel" FontSize="Small" IsEnabled="False"/>
+                        <Entry Text="Employee ID" FontSize="Medium" IsReadOnly="True" />
+                        <Label Text="{Binding HealthProffesionalID}" AutomationId="EmployeeIdLabel" FontSize="Small"/>
                     </StackLayout>
                 </Grid>
             </StackLayout>

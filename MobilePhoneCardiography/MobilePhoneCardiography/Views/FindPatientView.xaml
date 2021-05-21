@@ -21,7 +21,7 @@
             <StackLayout VerticalOptions="Center">
                 
                 <Label Text="Social Security Number" FontSize="Medium" />
-                <Entry Text="{Binding SocSec, Mode=OneWay}" TextColor="Black" FontSize="Medium" IsEnabled="False" AutomationId="SocSec"/>
+                <Entry Text="{Binding SocSec, Mode=OneWay}" FontSize="Medium" IsEnabled="False" AutomationId="SocSec"/>
                 <Label Text="First Name" FontSize="Medium" />
                 <Entry Text="{Binding FirstName, Mode=OneWay}" FontSize="Medium" IsEnabled="False" AutomationId="FirstName"/>
                 <Label Text="Last Name" FontSize="Medium" />

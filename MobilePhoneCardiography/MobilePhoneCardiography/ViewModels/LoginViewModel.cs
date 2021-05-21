@@ -1,4 +1,9 @@
 ﻿using MobilePhoneCardiography.Views;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using MobilePhoneCardiography.Models;
+using MobilePhoneCardiography.Services.DataStore;
 using Xamarin.Forms;
 
 namespace MobilePhoneCardiography.ViewModels
@@ -21,7 +26,7 @@ namespace MobilePhoneCardiography.ViewModels
 
 
             //// Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-            await Shell.Current.GoToAsync($"//{nameof(MeasureView)}");
+            await Shell.Current.GoToAsync($"//{nameof(RecordingsView)}");
 
 
 
@@ -34,7 +39,6 @@ namespace MobilePhoneCardiography.ViewModels
           
                 // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
                 await Shell.Current.GoToAsync($"//{nameof(LoginSPView)}");
-
         }
 
 
