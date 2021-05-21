@@ -142,7 +142,7 @@ namespace MobilePhoneCardiography.Services.DataStore
 
             string PatientSocSec = patient.SocSec;
             for (int i = 0; i < 3; i++)
-            1{
+            {
 
                 string SocSecSalt = PatientSocSec + new Salt().GetSalt(i);
                 using (SHA256 sha256 = SHA256.Create())

@@ -8,8 +8,6 @@ namespace MobilePhoneCardiography.Services.DataStore
     {
         public string GetHash(HashAlgorithm hashAlgorithm, string input)
         {
-
-
             byte[] data = hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
             var sBuilder = new StringBuilder();
             for (int i = 0; i < data.Length; i++)
@@ -17,14 +15,6 @@ namespace MobilePhoneCardiography.Services.DataStore
                 sBuilder.Append(data[i].ToString("x2"));
             }
             return sBuilder.ToString();
-
-
         }
-    }
-
-    public interface ISecurity
-    {
-        public string GetHash(HashAlgorithm hashAlgorithm, string input);
-
     }
 } 
