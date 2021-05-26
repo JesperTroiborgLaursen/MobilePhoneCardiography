@@ -59,7 +59,7 @@ namespace MobilePhoneCardiography.ViewModels
         {
             Title = "Measure";
             OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://aka.ms/xamarin-quickstart"));
-            RecordAudioCommand = new Command(StartRecordTask);
+            RecordAudioCommand = new Command(StartRecordTask, ValidatePlacementNotBlank);
             PlacementInfoCommand = new Command(OnPlacementInfoClicked);
             _recorderController = new RecorderController(HandleAnalyzeFinishedEvent);
 
@@ -86,6 +86,16 @@ namespace MobilePhoneCardiography.ViewModels
             StartVisible = false;
             StopVisible = true;
             _recorderController.RecordAudio();
+        }
+
+        private bool ValidatePlacementNotBlank()
+        {
+            if (Placement != null)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private async void OnPlacementInfoClicked(object obj)

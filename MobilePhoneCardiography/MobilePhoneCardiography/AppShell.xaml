@@ -83,12 +83,12 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
     
-    <FlyoutItem Title="Login"  FlyoutItemIsVisible="False">
+    <ShellItem Title="Login"  FlyoutItemIsVisible="False">
         <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
-    </FlyoutItem>
-    <FlyoutItem Title="Healthcare Professional Login" FlyoutItemIsVisible="False">
+    </ShellItem>
+    <ShellItem Title="Healthcare Professional Login" FlyoutItemIsVisible="False">
         <ShellContent Route="LoginSPView" AutomationId="HealthUserLoginTab" ContentTemplate="{DataTemplate local:LoginSPView}" />
-    </FlyoutItem>
+    </ShellItem>
 
     <FlyoutItem Title="Measurement" Icon="measurements.png">
 
