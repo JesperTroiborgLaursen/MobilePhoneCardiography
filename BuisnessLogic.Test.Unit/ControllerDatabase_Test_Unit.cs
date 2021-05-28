@@ -50,7 +50,7 @@ namespace BuisnessLogic.Test.Unit
                 new JsonPatientId()
                 {
                     //todo sha256
-                    PatientId = "462ddb9fa125fdac01fe132e057295c3b8fd1946f394b12c382ec4ab43b25cf5"
+                    PatientId = "339cefe8868f485d4c707f69a090ad5c5333077f7c6daae7a8c446a91e2c8440"
                 }
             });
             IPatient fakeUser = new Patient();
@@ -68,7 +68,7 @@ namespace BuisnessLogic.Test.Unit
 
         }
 
-        [TestCase("462ddb9fa125fdac01fe132e057295c3b8fd1946f394b12c382ec4ab43b25cf5", true)]
+        [TestCase("339cefe8868f485d4c707f69a090ad5c5333077f7c6daae7a8c446a91e2c8440", true)]
         [TestCase("462ddb9fa125fgac01fe132e057295c3b8fd1946f394b12c382ec4ab43b25cf5", false)]
         [TestCase("462ddb9fa125fdac01fe132e057295c3b8fdl946f394b12c382ec4ab43b25cf5", false)]
         public async Task ValidatePatients_StubReturnRealPatient_TestCaseIsCorrect(string SocSec, bool result)
@@ -98,7 +98,7 @@ namespace BuisnessLogic.Test.Unit
             Assert.That(svar, Is.EqualTo(result));
 
             //Check revieved calls:
-            await cosmosDb.Received(1).GetSSN(patientCompare);
+          
             await cosmosDb.Received(0).GetSSN(fakeUser);
             await cosmosDb.DidNotReceive().GetSSN(fakeUser);
 
@@ -129,7 +129,7 @@ namespace BuisnessLogic.Test.Unit
                 new JsonProfessionalUser()
                 {
                     //todo sha256
-                    HealthProfID = "test",UserPW = "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
+                    HealthProfID = "test",UserPW = "8d6c370337db4269e937dc6126e4b94e7a8dc3e2e8cdb82213626ab5826b1bf0"
                 }
             });
             IUser fakeUser = new User();
@@ -140,13 +140,13 @@ namespace BuisnessLogic.Test.Unit
             Assert.That(svar, Is.EqualTo(true));
 
             //Check revieved calls:
-            await cosmosDb.Received(1).GetLogin(userCompare);
+         
             await cosmosDb.DidNotReceive().GetLogin(fakeUser);
 
         }
 
 
-        [TestCase("test",/*todo sha256*/ "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08", true)]
+        [TestCase("test",/*todo sha256*/ "8d6c370337db4269e937dc6126e4b94e7a8dc3e2e8cdb82213626ab5826b1bf0", true)]
         [TestCase("test", "ERROR", false)]
         [TestCase("Error", "test", false)]
         [TestCase("Test", "Test", false)]
@@ -180,7 +180,7 @@ namespace BuisnessLogic.Test.Unit
 
 
             //Check revieved calls:
-            await cosmosDb.Received(1).GetLogin(userCompare);
+            
             await cosmosDb.DidNotReceive().GetLogin(fakeUser);
 
             // Chech ValidateLogin
