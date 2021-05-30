@@ -103,7 +103,6 @@ namespace UITest2
             app.PressEnter();
 
             app.Tap("LoginButton");
-            //TODO Appen crasher når der hentes forkert data fra DB
 
             var loginResult = app.WaitForElement("WrongLabel");
 
